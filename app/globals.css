@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* ============================= */
+/* ANOX DESIGN SYSTEM v1.0 */
+/* ============================= */
+
+:root {
+
+  /* Brand */
+  --color-primary: #00E5FF;
+  --color-primary-hover: #32EEFF;
+
+  /* Background */
+  --background: #07090D;
+  --background-secondary: #0F131A;
+  --background-tertiary: #171C24;
+
+  /* Text */
+  --foreground: #F8FAFC;
+  --foreground-secondary: #AAB4C5;
+
+  /* Borders */
+  --border: rgba(255,255,255,.08);
+
+  /* Effects */
+  --glow: rgba(0,229,255,.35);
+
+  /* Radius */
+  --radius: 18px;
+
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+
+  background:var(--background);
+
+  color:var(--foreground);
+
+  font-family:var(--font-geist-sans);
+
+  overflow-x:hidden;
+
+}
+
+/* Selection */
+
+::selection{
+
+  background:var(--color-primary);
+
+  color:black;
+
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+
+  width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+  background:#0A0D12;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+  background:var(--color-primary);
+
+  border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+  background:#59F3FF;
+
+}
+
+/* Links */
+
+a{
+
+  text-decoration:none;
+
+  color:inherit;
+
+}
+
+/* Images */
+
+img{
+
+  max-width:100%;
+
+  display:block;
+
+}
+
+/* Container */
+
+.container{
+
+  width:min(1280px,92%);
+
+  margin:auto;
+
+}
