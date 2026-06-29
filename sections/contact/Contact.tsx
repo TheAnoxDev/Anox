@@ -34,7 +34,7 @@ export default function Contact() {
 
             <div className="mt-10 space-y-5">
               <p className="text-zinc-300">
-                📧 hello@anox.dev
+                📧 anoxdev@gmail.com
               </p>
 
               <p className="text-zinc-300">
