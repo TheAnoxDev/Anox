@@ -1,60 +1,214 @@
 "use client";
 
 import { motion } from "framer-motion";
-import GlassCard from "@/components/ui/GlassCard";
+
+import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
+import GlassCard from "@/components/ui/GlassCard";
+
+import {
+  Brain,
+  Shield,
+  Code2,
+} from "lucide-react";
 
 export default function Technology() {
-  const items = [
-    {
-      title: "Artificial Intelligence",
-      description:
-        "Building intelligent systems powered by modern AI technologies.",
-    },
-    {
-      title: "Cyber Security",
-      description:
-        "Advanced security solutions to protect digital infrastructure.",
-    },
-    {
-      title: "Software Engineering",
-      description:
-        "Scalable applications with modern architecture and performance.",
-    },
-    {
-      title: "Cloud Computing",
-      description:
-        "Reliable cloud infrastructure and deployment solutions.",
-    },
-  ];
-
   return (
-    <motion.section
+    <section
       id="technology"
-      className="border-t border-white/10 py-40"
+      className="relative py-32"
     >
-      <div className="mx-auto max-w-7xl px-6">
+      <Container>
 
         <SectionTitle
-          badge="Technology"
-          title="What We Build"
+          badge="TECHNOLOGY"
+          title="Our Expertise"
+          description="ANOX develops cutting-edge technologies that empower businesses and shape the digital future."
         />
 
-        <div className="mt-16 grid gap-8 md:grid-cols-2">
-          {items.map((item) => (
-            <GlassCard key={item.title}>
-              <h3 className="text-2xl font-bold text-white">
-                {item.title}
+        <div className="mt-20 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+          {/* AI */}
+
+          <motion.div
+            initial={{ opacity:0, y:40 }}
+            whileInView={{ opacity:1, y:0 }}
+            viewport={{ once:true }}
+            transition={{ duration:.6 }}
+          >
+
+            <GlassCard className="h-full p-8">
+
+              <Brain
+                size={46}
+                className="text-cyan-400"
+              />
+
+              <h3 className="mt-8 text-2xl font-bold text-white">
+
+                Artificial Intelligence
+
               </h3>
 
               <p className="mt-5 leading-8 text-zinc-400">
-                {item.description}
+
+                Intelligent systems, machine learning,
+                automation and AI-driven solutions.
+
               </p>
+
             </GlassCard>
-          ))}
+
+          </motion.div>
+
+          {/* Security */}
+
+          <motion.div
+            initial={{ opacity:0, y:40 }}
+            whileInView={{ opacity:1, y:0 }}
+            viewport={{ once:true }}
+            transition={{ duration:.6, delay:.15 }}
+          >
+
+            <GlassCard className="h-full p-8">
+
+              <Shield
+                size={46}
+                className="text-cyan-400"
+              />
+
+              <h3 className="mt-8 text-2xl font-bold text-white">
+
+                Cyber Security
+
+              </h3>
+
+              <p className="mt-5 leading-8 text-zinc-400">
+
+                Secure infrastructure, ethical hacking,
+                protection and digital resilience.
+
+              </p>
+
+            </GlassCard>
+
+          </motion.div>
+
+          {/* Software */}
+
+          <motion.div
+            initial={{ opacity:0, y:40 }}
+            whileInView={{ opacity:1, y:0 }}
+            viewport={{ once:true }}
+            transition={{ duration:.6, delay:.3 }}
+          >
+
+            <GlassCard className="h-full p-8">
+
+              <Code2
+                size={46}
+                className="text-cyan-400"
+              />
+
+              <h3 className="mt-8 text-2xl font-bold text-white">
+
+                Software Engineering
+
+              </h3>
+
+              <p className="mt-5 leading-8 text-zinc-400">
+
+                Modern scalable applications with
+                performance-focused architecture.
+
+              </p>
+
+            </GlassCard>
+
+          </motion.div>
+
+                    {/* Cloud */}
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: .6, delay: .45 }}
+          >
+
+            <GlassCard className="h-full p-8">
+
+              <div className="text-5xl">☁️</div>
+
+              <h3 className="mt-8 text-2xl font-bold text-white">
+                Cloud Computing
+              </h3>
+
+              <p className="mt-5 leading-8 text-zinc-400">
+                Reliable cloud infrastructure, scalable deployment
+                and enterprise hosting solutions.
+              </p>
+
+            </GlassCard>
+
+          </motion.div>
+
+          {/* Automation */}
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: .6, delay: .6 }}
+          >
+
+            <GlassCard className="h-full p-8">
+
+              <div className="text-5xl">⚙️</div>
+
+              <h3 className="mt-8 text-2xl font-bold text-white">
+                Automation
+              </h3>
+
+              <p className="mt-5 leading-8 text-zinc-400">
+                Smart workflows, business automation and AI-powered
+                productivity systems.
+              </p>
+
+            </GlassCard>
+
+          </motion.div>
+
+          {/* Web */}
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: .6, delay: .75 }}
+          >
+
+            <GlassCard className="h-full p-8">
+
+              <div className="text-5xl">🌐</div>
+
+              <h3 className="mt-8 text-2xl font-bold text-white">
+                Web Technologies
+              </h3>
+
+              <p className="mt-5 leading-8 text-zinc-400">
+                Modern web platforms built with Next.js, React,
+                TypeScript and scalable architectures.
+              </p>
+
+            </GlassCard>
+
+          </motion.div>
+
         </div>
 
-      </div>
-    </motion.section>
+      </Container>
+
+    </section>
   );
 }

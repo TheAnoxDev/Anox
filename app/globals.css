@@ -1,36 +1,27 @@
 @import "tailwindcss";
 
-/* ============================= */
-/* ANOX DESIGN SYSTEM v1.0 */
-/* ============================= */
+/* ==========================================
+   ANOX Design System v2
+========================================== */
 
-:root {
+:root{
+  --background:#06080d;
+  --background-secondary:#0d1117;
 
-  /* Brand */
-  --color-primary: #00E5FF;
-  --color-primary-hover: #32EEFF;
+  --foreground:#ffffff;
+  --foreground-secondary:#9ca3af;
 
-  /* Background */
-  --background: #07090D;
-  --background-secondary: #0F131A;
-  --background-tertiary: #171C24;
+  --primary:#22d3ee;
+  --primary-light:#67e8f9;
 
-  /* Text */
-  --foreground: #F8FAFC;
-  --foreground-secondary: #AAB4C5;
+  --border:rgba(255,255,255,.08);
 
-  /* Borders */
-  --border: rgba(255,255,255,.08);
-
-  /* Effects */
-  --glow: rgba(0,229,255,.35);
-
-  /* Radius */
-  --radius: 18px;
-
+  --radius:20px;
 }
 
-*{
+*,
+*::before,
+*::after{
   margin:0;
   padding:0;
   box-sizing:border-box;
@@ -38,9 +29,12 @@
 
 html{
   scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;
 }
 
 body{
+
+  min-height:100vh;
 
   background:var(--background);
 
@@ -50,47 +44,46 @@ body{
 
   overflow-x:hidden;
 
-}
+  text-rendering:optimizeLegibility;
 
-/* Selection */
+  -webkit-font-smoothing:antialiased;
 
-::selection{
-
-  background:var(--color-primary);
-
-  color:black;
+  -moz-osx-font-smoothing:grayscale;
 
 }
 
-/* Scrollbar */
+section{
 
-::-webkit-scrollbar{
+  position:relative;
 
-  width:8px;
+  width:100%;
 
-}
-
-::-webkit-scrollbar-track{
-
-  background:#0A0D12;
+  overflow:hidden;
 
 }
 
-::-webkit-scrollbar-thumb{
+img,
+svg,
+video,
+canvas{
 
-  background:var(--color-primary);
+  display:block;
 
-  border-radius:20px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-  background:#59F3FF;
+  max-width:100%;
 
 }
 
-/* Links */
+button{
+
+  border:none;
+
+  outline:none;
+
+  background:none;
+
+  cursor:pointer;
+
+}
 
 a{
 
@@ -100,22 +93,80 @@ a{
 
 }
 
-/* Images */
+::selection{
 
-img{
+  background:var(--primary);
 
-  max-width:100%;
-
-  display:block;
+  color:black;
 
 }
 
-/* Container */
+/* Scrollbar */
 
-.container{
+::-webkit-scrollbar{
 
-  width:min(1280px,92%);
+  width:10px;
 
-  margin:auto;
+}
+
+::-webkit-scrollbar-track{
+
+  background:#09090b;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+  background:var(--primary);
+
+  border-radius:999px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+  background:var(--primary-light);
+
+}
+
+/* Headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+
+  line-height:1;
+
+  font-weight:800;
+
+}
+
+/* Paragraph */
+
+p{
+
+  color:var(--foreground-secondary);
+
+}
+
+/* Utilities */
+
+.glass{
+
+  background:rgba(255,255,255,.05);
+
+  border:1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(24px);
+
+}
+
+.glow{
+
+  box-shadow:
+  0 0 80px rgba(34,211,238,.18);
 
 }

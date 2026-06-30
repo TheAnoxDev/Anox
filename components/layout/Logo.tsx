@@ -1,24 +1,33 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Logo() {
   return (
     <Link
       href="/"
-      className="group flex items-center gap-3"
+      className="group inline-flex items-center gap-3"
     >
-      <div className="h-10 w-10 rounded-xl border border-cyan-400/30 bg-cyan-400/10 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-cyan-300">
-        <span className="font-black text-cyan-300 text-lg">
-          A
-        </span>
-      </div>
+      <Image
+        src="/logo.png"
+        alt="ANOX Logo"
+        width={46}
+        height={46}
+        priority
+        className="
+          transition-all
+          duration-500
+          group-hover:scale-110
+          group-hover:drop-shadow-[0_0_20px_rgba(34,211,238,.55)]
+        "
+      />
 
-      <div>
-        <h1 className="text-xl font-black tracking-[0.35em] text-white">
+      <div className="leading-none">
+        <h2 className="text-xl font-black tracking-[0.25em] text-white">
           ANOX
-        </h1>
+        </h2>
 
-        <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-500">
-          Engineering The Future
+        <p className="mt-1 text-[10px] uppercase tracking-[0.35em] text-zinc-500">
+          Future Technology
         </p>
       </div>
     </Link>

@@ -1,38 +1,195 @@
+"use client";
+
+import Link from "next/link";
+import Container from "@/components/ui/Container";
+import Logo from "@/components/layout/Logo";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 py-10">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 md:flex-row">
+    <footer className="relative border-t border-white/10 py-20">
 
-        <div>
-          <h2 className="text-2xl font-black text-white">
-            ANOX<span className="text-cyan-400">.</span>
-          </h2>
+      <Container>
 
-          <p className="mt-2 text-sm text-zinc-500">
-            Engineering the Future.
+        <div className="grid gap-14 lg:grid-cols-4">
+
+          {/* Logo */}
+
+          <div>
+
+            <Logo />
+
+            <p className="mt-8 max-w-sm leading-8 text-zinc-400">
+
+              Engineering the future through artificial
+              intelligence, cybersecurity and next-generation
+              software.
+
+            </p>
+
+          </div>
+
+          {/* Company */}
+
+          <div>
+
+            <h3 className="text-lg font-bold text-white">
+              Company
+            </h3>
+
+            <div className="mt-6 flex flex-col gap-4">
+
+              <Link
+                href="#about"
+                className="text-zinc-400 transition hover:text-cyan-400"
+              >
+                About
+              </Link>
+
+              <Link
+                href="#technology"
+                className="text-zinc-400 transition hover:text-cyan-400"
+              >
+                Technology
+              </Link>
+
+              <Link
+                href="#projects"
+                className="text-zinc-400 transition hover:text-cyan-400"
+              >
+                Projects
+              </Link>
+
+            </div>
+
+          </div>
+
+          {/* Resources */}
+
+          <div>
+
+            <h3 className="text-lg font-bold text-white">
+              Resources
+            </h3>
+
+            <div className="mt-6 flex flex-col gap-4">
+
+              <Link
+                href="#contact"
+                className="text-zinc-400 transition hover:text-cyan-400"
+              >
+                Contact
+              </Link>
+
+              <Link
+                href="/"
+                className="text-zinc-400 transition hover:text-cyan-400"
+              >
+                Privacy
+
+              </Link>
+
+              <Link
+                href="/"
+                className="text-zinc-400 transition hover:text-cyan-400"
+              >
+                Terms
+
+              </Link>
+
+            </div>
+
+          </div>
+
+          {/* Social */}
+
+          <div>
+
+            <h3 className="text-lg font-bold text-white">
+
+              Follow
+
+            </h3>
+
+            <div className="mt-6 flex flex-col gap-4">
+
+              <a
+                href="https://github.com/TheAnoxDev"
+                target="_blank"
+                className="text-zinc-400 transition hover:text-cyan-400"
+              >
+                GitHub
+              </a>
+
+              <a
+                href="#"
+                className="text-zinc-400 transition hover:text-cyan-400"
+              >
+                LinkedIn
+              </a>
+
+              <a
+                href="#"
+                className="text-zinc-400 transition hover:text-cyan-400"
+              >
+                X (Twitter)
+              </a>
+
+            </div>
+
+          </div>
+                  </div>
+
+        {/* Bottom */}
+
+        <div className="mt-20 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-10 md:flex-row">
+
+          <p className="text-sm text-zinc-500">
+            © {new Date().getFullYear()} ANOX. All rights reserved.
           </p>
+
+          <a
+            href="#hero"
+            className="
+              rounded-full
+              border
+              border-white/10
+              bg-white/5
+              px-6
+              py-3
+              text-sm
+              text-white
+              backdrop-blur-xl
+              transition-all
+              duration-300
+              hover:-translate-y-1
+              hover:border-cyan-400/40
+              hover:text-cyan-400
+            "
+          >
+            ↑ Back to Top
+          </a>
+
         </div>
 
-        <div className="flex gap-8 text-zinc-400">
-          <a href="#" className="hover:text-cyan-400 transition">
-            GitHub
-          </a>
+        {/* Glow */}
 
-          <a href="#" className="hover:text-cyan-400 transition">
-            LinkedIn
-          </a>
+        <div
+          className="
+            pointer-events-none
+            absolute
+            bottom-0
+            left-1/2
+            h-[350px]
+            w-[350px]
+            -translate-x-1/2
+            rounded-full
+            bg-cyan-400/10
+            blur-[140px]
+          "
+        />
 
-          <a href="#" className="hover:text-cyan-400 transition">
-            X
-          </a>
-        </div>
+      </Container>
 
-        <p className="text-sm text-zinc-600">
-          © 2026 ANOX
-        </p>
-
-      </div>
     </footer>
   );
 }

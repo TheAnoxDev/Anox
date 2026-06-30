@@ -1,3 +1,5 @@
+import Heading from "./Heading";
+
 interface SectionTitleProps {
   badge: string;
   title: string;
@@ -11,19 +13,45 @@ export default function SectionTitle({
 }: SectionTitleProps) {
   return (
     <div className="max-w-3xl">
-      <span className="font-semibold uppercase tracking-[0.3em] text-cyan-400">
+
+      <span
+        className="
+          inline-flex
+          items-center
+          rounded-full
+          border
+          border-cyan-400/20
+          bg-cyan-400/10
+          px-4
+          py-2
+          text-xs
+          font-semibold
+          uppercase
+          tracking-[0.35em]
+          text-cyan-400
+        "
+      >
         {badge}
       </span>
 
-      <h2 className="mt-5 text-4xl md:text-5xl font-black text-white">
+      <Heading className="mt-6">
         {title}
-      </h2>
+      </Heading>
 
       {description && (
-        <p className="mt-6 text-lg leading-8 text-zinc-400">
+        <p
+          className="
+            mt-7
+            text-base
+            md:text-xl
+            leading-8
+            text-zinc-400
+          "
+        >
           {description}
         </p>
       )}
+
     </div>
   );
 }

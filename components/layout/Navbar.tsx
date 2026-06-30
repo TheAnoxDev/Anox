@@ -1,95 +1,212 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
+import clsx from "clsx";
+import { Menu, X } from "lucide-react";
 
-import Container from "@/components/ui/Container";
-import Button from "@/components/ui/Button";
 import Logo from "./Logo";
 
-const navItems = [
-  { title: "About", href: "#about" },
-  { title: "Technology", href: "#technology" },
-  { title: "Projects", href: "#projects" },
-  { title: "Contact", href: "#contact" },
+const links = [
+  {
+    name: "About",
+    href: "#about",
+  },
+  {
+    name: "Technology",
+    href: "#technology",
+  },
+  {
+    name: "Projects",
+    href: "#projects",
+  },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+
   const [scrolled, setScrolled] = useState(false);
 
-useEffect(() => {
-  const handleScroll = () => {
-    setScrolled(window.scrollY > 20);
-  };
+  const [active, setActive] = useState("#hero");
 
-  window.addEventListener("scroll", handleScroll);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
 
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
+      const sections = [
+        "hero",
+        "about",
+        "technology",
+        "projects",
+        "contact",
+      ];
+
+      for (const id of sections) {
+        const section = document.getElementById(id);
+
+        if (!section) continue;
+
+        const top = section.offsetTop - 120;
+
+        const bottom = top + section.offsetHeight;
+
+        if (
+          window.scrollY >= top &&
+          window.scrollY < bottom
+        ) {
+          setActive(`#${id}`);
+        }
+      }
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () =>
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
+  }, []);
+
   return (
-    <motion.header
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{
-        duration: 0.8,
-        ease: "easeOut",
-      }}
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-  scrolled
-    ? "border-b border-cyan-400/10 bg-black/80 backdrop-blur-2xl shadow-2xl shadow-cyan-500/5"
-    : "bg-transparent"
-}`}
+    <header
+      className={clsx(
+        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+
+        scrolled
+          ? "border-b border-white/10 bg-black/45 backdrop-blur-3xl"
+          : "bg-transparent"
+      )}
     >
-      <Container>
-        <div className="flex h-16 md:h-20 items-center justify-between">
-          <Logo />
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
 
-          <nav className="hidden items-center gap-8 md:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.title}
-                href={item.href}
-                className="text-sm text-zinc-400 transition hover:text-cyan-300"
-              >
-                {item.title}
-              </Link>
-            ))}
-          </nav>
+        <Logo />
+                {/* Desktop Navigation */}
 
-          <div className="hidden md:block">
-            <Button>Start</Button>
-          </div>
+        <nav className="hidden items-center gap-2 md:flex">
+
+          {links.map((link) => (
+
+            <a
+              key={link.name}
+              href={link.href}
+              className={clsx(
+                "rounded-xl px-5 py-2 text-sm font-medium transition-all duration-300",
+
+                active === link.href
+                  ? "bg-cyan-400/10 text-cyan-400"
+                  : "text-zinc-300 hover:bg-white/5 hover:text-white"
+              )}
+            >
+              {link.name}
+            </a>
+
+          ))}
+
+        </nav>
+
+        {/* Right Side */}
+
+        <div className="flex items-center gap-4">
+
+          <a
+            href="#contact"
+            className="
+              hidden
+              rounded-xl
+              border
+              border-cyan-400/30
+              bg-cyan-400/10
+              px-5
+              py-2
+              text-sm
+              font-semibold
+              text-cyan-300
+              transition-all
+              duration-300
+              hover:bg-cyan-400
+              hover:text-black
+              md:inline-flex
+            "
+          >
+            Contact
+          </a>
 
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden text-white"
+            className="
+              rounded-xl
+              p-2
+              text-white
+              transition
+              hover:bg-white/10
+              md:hidden
+            "
           >
-            <Menu size={28} />
+            {open ? <X size={26} /> : <Menu size={26} />}
           </button>
+
         </div>
 
-        {open && (
-          <div className="border-t border-white/10 py-6 md:hidden">
-            <div className="flex flex-col gap-6">
-              {navItems.map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="text-zinc-300 transition hover:text-cyan-300"
-                >
-                  {item.title}
-                </Link>
-              ))}
+      </div>
+            {/* Mobile Menu */}
 
-              <Button>Start</Button>
-            </div>
-          </div>
+      <div
+        className={clsx(
+          "overflow-hidden transition-all duration-500 md:hidden",
+          open ? "max-h-96" : "max-h-0"
         )}
-      </Container>
-    </motion.header>
+      >
+
+        <div className="border-t border-white/10 bg-black/90 backdrop-blur-3xl">
+
+          {links.map((link) => (
+
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className={clsx(
+                "block px-6 py-5 text-sm font-medium transition-all",
+
+                active === link.href
+                  ? "bg-cyan-400/10 text-cyan-400"
+                  : "text-zinc-300 hover:bg-white/5 hover:text-white"
+              )}
+            >
+              {link.name}
+            </a>
+
+          ))}
+
+          <a
+            href="#contact"
+            onClick={() => setOpen(false)}
+            className="
+              m-4
+              flex
+              justify-center
+              rounded-xl
+              border
+              border-cyan-400/30
+              bg-cyan-400/10
+              px-5
+              py-3
+              font-semibold
+              text-cyan-300
+              transition-all
+              hover:bg-cyan-400
+              hover:text-black
+            "
+          >
+            Contact
+          </a>
+
+        </div>
+
+      </div>
+
+    </header>
   );
 }

@@ -1,21 +1,24 @@
-import { ReactNode } from "react";
-import clsx from "clsx";
-
-type HeadingProps = {
-  children: ReactNode;
+interface HeadingProps {
+  children: React.ReactNode;
   className?: string;
-};
+}
 
 export default function Heading({
   children,
-  className,
+  className = "",
 }: HeadingProps) {
   return (
     <h2
-      className={clsx(
-        "text-4xl md:text-6xl font-bold tracking-tight text-white",
-        className
-      )}
+      className={`
+        text-4xl
+        sm:text-5xl
+        lg:text-6xl
+        font-black
+        tracking-tight
+        leading-none
+        text-white
+        ${className}
+      `}
     >
       {children}
     </h2>
