@@ -4,39 +4,50 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-import Container from "@/components/ui/Container";
-import SectionTitle from "@/components/ui/SectionTitle";
-import GlassCard from "@/components/ui/GlassCard";
-import Button from "@/components/ui/Button";
+/* =========================
+   TYPES
+========================= */
+type Project = {
+  title: string;
+  desc: string;
+  image: string;
+  tags: string[];
+};
 
-const projects = [
+/* =========================
+   DATA
+========================= */
+const projects: Project[] = [
   {
     title: "ANOX Intelligence",
-    desc: "Autonomous AI system for next-gen digital intelligence.",
+    desc: "Autonomous AI system for next-generation digital intelligence and automation.",
     image: "/images/projects/anox-intelligence.jpg",
     tags: ["AI", "Next.js"],
   },
   {
     title: "ANOX Shield",
-    desc: "Enterprise cyber defense and cloud protection system.",
+    desc: "Enterprise cybersecurity platform for cloud protection and infrastructure security.",
     image: "/images/projects/anox-shield.jpg",
     tags: ["Security", "Cloud"],
   },
   {
     title: "ANOX Future Systems",
-    desc: "Smart infrastructure powered by robotics and AI automation.",
+    desc: "Smart city infrastructure powered by AI, robotics and automation systems.",
     image: "/images/projects/anox-future-systems.jpg",
     tags: ["AI", "IoT", "Robotics"],
   },
 ];
 
+/* =========================
+   COMPONENT
+========================= */
 export default function Projects() {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<Project | null>(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
-  // 🎯 Mouse tracker (light system)
+  /* 🌌 Mouse light effect */
   useEffect(() => {
-    const move = (e) => {
+    const move = (e: MouseEvent) => {
       setMouse({ x: e.clientX, y: e.clientY });
     };
     window.addEventListener("mousemove", move);
@@ -46,102 +57,94 @@ export default function Projects() {
   return (
     <section className="relative py-32 overflow-hidden">
 
-      {/* 🌌 dynamic light following mouse */}
+      {/* 🌠 LIGHT FOLLOW CURSOR */}
       <div
         className="pointer-events-none fixed inset-0 z-0"
         style={{
-          background: `radial-gradient(600px at ${mouse.x}px ${mouse.y}px, rgba(34,211,238,0.10), transparent 80%)`,
+          background: `radial-gradient(600px at ${mouse.x}px ${mouse.y}px, rgba(34,211,238,0.12), transparent 80%)`,
         }}
       />
 
-      {/* background orbs */}
+      {/* BACKGROUND GLOWS */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-10 left-20 h-72 w-72 bg-cyan-500/10 blur-3xl rounded-full" />
-        <div className="absolute bottom-10 right-20 h-72 w-72 bg-violet-500/10 blur-3xl rounded-full" />
+        <div className="absolute top-10 left-20 w-72 h-72 bg-cyan-500/10 blur-3xl rounded-full" />
+        <div className="absolute bottom-10 right-20 w-72 h-72 bg-violet-500/10 blur-3xl rounded-full" />
       </div>
 
-      <Container>
+      {/* TITLE */}
+      <div className="text-center mb-16">
+        <h2 className="text-4xl font-bold text-white">
+          What We're Building
+        </h2>
+        <p className="text-zinc-400 mt-3">
+          Advanced AI systems under ANOX ecosystem
+        </p>
+      </div>
 
-        <SectionTitle
-          badge="PROJECTS"
-          title="What We're Building"
-          description="Advanced AI systems shaping the future of digital infrastructure."
-        />
+      {/* GRID */}
+      <div className="max-w-6xl mx-auto px-6 grid gap-10 lg:grid-cols-3">
 
-        {/* GRID */}
-        <div className="mt-20 grid gap-10 lg:grid-cols-3">
+        {projects.map((p: Project, i: number) => (
+          <motion.div
+            key={i}
+            onClick={() => setSelected(p)}
+            whileHover={{ scale: 1.04 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="cursor-pointer"
+          >
 
-          {projects.map((p, i) => (
-            <motion.div
-              key={i}
-              onClick={() => setSelected(p)}
-              whileHover={{
-                scale: 1.03,
-                rotateX: 4,
-                rotateY: -4,
-              }}
-              transition={{ type: "spring", stiffness: 200 }}
-              className="cursor-pointer perspective"
-            >
+            {/* CARD */}
+            <div className="rounded-2xl overflow-hidden bg-black/40 border border-white/10">
 
-              <GlassCard className="overflow-hidden p-0 group relative">
+              {/* IMAGE */}
+              <div className="relative h-64 overflow-hidden">
 
-                {/* IMAGE */}
-                <div className="relative h-64 overflow-hidden">
+                <Image
+                  src={p.image}
+                  alt={p.title}
+                  fill
+                  className="object-cover transition-transform duration-700 hover:scale-110"
+                />
 
-                  <Image
-                    src={p.image}
-                    alt={p.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              </div>
 
-                  {/* cinematic overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              {/* CONTENT */}
+              <div className="p-6">
 
-                  {/* glow pulse */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-cyan-400/10 blur-xl" />
+                {/* TAGS */}
+                <div className="flex flex-wrap gap-2">
+                  {p.tags.map((t: string, i: number) => (
+                    <span
+                      key={i}
+                      className="px-3 py-1 text-xs rounded-full bg-cyan-500/10 text-cyan-300"
+                    >
+                      {t}
+                    </span>
+                  ))}
                 </div>
 
-                {/* CONTENT */}
-                <div className="p-8">
+                {/* TITLE */}
+                <h3 className="text-2xl font-bold text-white mt-4">
+                  {p.title}
+                </h3>
 
-                  <div className="flex flex-wrap gap-2">
-                    {p.tags.map((t, i) => (
-                      <span
-                        key={i}
-                        className="rounded-full bg-cyan-400/10 px-3 py-1 text-xs text-cyan-300"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                {/* DESC */}
+                <p className="text-zinc-400 mt-3 text-sm leading-6">
+                  {p.desc}
+                </p>
 
-                  <h3 className="mt-6 text-3xl font-bold text-white">
-                    {p.title}
-                  </h3>
+              </div>
 
-                  <p className="mt-5 text-zinc-400 leading-7">
-                    {p.desc}
-                  </p>
+            </div>
 
-                  <div className="mt-8">
-                    <Button>Open Case</Button>
-                  </div>
+          </motion.div>
+        ))}
 
-                </div>
+      </div>
 
-              </GlassCard>
-
-            </motion.div>
-          ))}
-
-        </div>
-      </Container>
-
-      {/* 💀 ULTRA MODAL */}
+      {/* 💀 MODAL */}
       <AnimatePresence>
-
         {selected && (
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center"
@@ -150,65 +153,66 @@ export default function Projects() {
             exit={{ opacity: 0 }}
           >
 
-            {/* blur world */}
+            {/* BACKDROP */}
             <div
-              className="absolute inset-0 bg-black/80 backdrop-blur-3xl"
+              className="absolute inset-0 bg-black/80 backdrop-blur-2xl"
               onClick={() => setSelected(null)}
             />
 
-            {/* modal */}
+            {/* MODAL */}
             <motion.div
-              initial={{ scale: 0.6, rotateX: 15, opacity: 0 }}
-              animate={{ scale: 1, rotateX: 0, opacity: 1 }}
-              exit={{ scale: 0.6, opacity: 0 }}
-              transition={{ duration: 0.35 }}
-              className="relative z-10 w-[92%] max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-black/60"
+              initial={{ scale: 0.7, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.7, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative z-10 w-[92%] max-w-5xl rounded-3xl overflow-hidden border border-white/10 bg-black/60"
             >
 
-              {/* HERO IMAGE */}
-              <div className="relative h-[450px] overflow-hidden">
+              {/* IMAGE HERO */}
+              <div className="relative h-[420px]">
 
-                <Image
-                  src={selected.image}
-                  alt={selected.title}
-                  fill
-                  className="object-cover scale-105"
-                />
+                {selected?.image && (
+                  <Image
+                    src={selected.image}
+                    alt={selected.title}
+                    fill
+                    className="object-cover"
+                  />
+                )}
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-
-                {/* floating light */}
-                <div className="absolute inset-0 bg-cyan-500/10 blur-2xl animate-pulse" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
               </div>
 
               {/* CONTENT */}
-              <div className="p-10">
+              <div className="p-8">
 
-                <h2 className="text-4xl font-bold text-white">
-                  {selected.title}
+                <h2 className="text-3xl font-bold text-white">
+                  {selected?.title}
                 </h2>
 
-                <p className="mt-5 text-zinc-400 leading-8">
-                  {selected.desc}
+                <p className="text-zinc-400 mt-4 leading-7">
+                  {selected?.desc}
                 </p>
 
-                <div className="mt-6 flex gap-2 flex-wrap">
-                  {selected.tags.map((t, i) => (
+                {/* TAGS */}
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {selected?.tags?.map((t: string, i: number) => (
                     <span
                       key={i}
-                      className="rounded-full bg-cyan-400/10 px-3 py-1 text-xs text-cyan-300"
+                      className="px-3 py-1 text-xs rounded-full bg-cyan-500/10 text-cyan-300"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="mt-10 flex justify-end">
+                {/* CLOSE */}
+                <div className="mt-8 flex justify-end">
                   <button
                     onClick={() => setSelected(null)}
-                    className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white transition"
+                    className="px-6 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition"
                   >
-                    Close Reality
+                    Close Experience
                   </button>
                 </div>
 
@@ -218,7 +222,6 @@ export default function Projects() {
 
           </motion.div>
         )}
-
       </AnimatePresence>
 
     </section>
