@@ -121,7 +121,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="#"
+                href="https://www.linkedin.com/in/anox-dev-34933941b "
                 className="text-zinc-400 transition hover:text-cyan-400"
               >
                 LinkedIn
