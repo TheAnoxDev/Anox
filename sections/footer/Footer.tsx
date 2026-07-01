@@ -110,7 +110,7 @@ export default function Footer() {
 
             </h3>
 
-            <div className="h-screen">
+            <div>
 
               <a
                 href="https://github.com/TheAnoxDev"
