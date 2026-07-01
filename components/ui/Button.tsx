@@ -38,7 +38,7 @@ export default function Button({
       : `
         border-white/10
         bg-white/5
-        backdrop-blur-xl
+        backdrop-blur-sm
         text-white
         hover:border-cyan-400/40
         hover:bg-white/10

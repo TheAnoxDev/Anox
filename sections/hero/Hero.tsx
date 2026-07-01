@@ -1,8 +1,8 @@
 "use client";
-
+import { useLang } from "@/components/LangContext";
 import { motion } from "framer-motion";
 import CountUp from "react-countup";
-
+import { useTranslation } from "@/hooks/useTranslation";
 import Globe from "@/components/3d/Globe";
 
 import Container from "@/components/ui/Container";
@@ -14,6 +14,7 @@ import FloatingOrbs from "@/components/effects/FloatingOrbs";
 
 
 export default function Hero() {
+  const { t } = useTranslation();
   return (
     <section
     className="
@@ -27,9 +28,10 @@ pt-[clamp(6rem,10vw,10rem)]
 pb-[clamp(4rem,8vw,8rem)]
 "
     >
+
       <GridBackground />
       <Aurora />
-      <FloatingOrbs />
+      
 
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div
@@ -42,8 +44,7 @@ pb-[clamp(4rem,8vw,8rem)]
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
-          bg-cyan-400/15
-          blur-[250px]
+          bg-cyan-400/10 blur-[180px]
           flex items-center justify-center
         "
         />
@@ -62,7 +63,7 @@ pb-[clamp(4rem,8vw,8rem)]
 
       <Container>
 
-        <div className="grid items-center gap-32 lg:grid-cols-2 lg:gap-40">
+        <div className="grid items-center grid-cols-2 gap-20 lg:gap-32">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
@@ -97,7 +98,7 @@ pb-[clamp(4rem,8vw,8rem)]
                   text-cyan-300
                 "
               >
-                ENGINEERING THE FUTURE
+                 {t.hero.badge}
               </span>
 
             </motion.div>
@@ -110,7 +111,7 @@ pb-[clamp(4rem,8vw,8rem)]
               }}
               className="
                 mt-[clamp(2.5rem,5vw,5rem)]
-                text-6xl
+                text-4xl md:text-6xl
                 font-black
                 leading-[0.88]
                 tracking-tight
@@ -130,7 +131,10 @@ pb-[clamp(4rem,8vw,8rem)]
                   text-transparent
                 "
               >
+                
                 ANOX
+              
+                
               </span>
 
               <span
@@ -144,11 +148,11 @@ pb-[clamp(4rem,8vw,8rem)]
                   lg:text-4xl
                 "
               >
-                Engineering Intelligence
+                {t.hero.title}
               </span>
 
               <span className="block text-cyan-400">
-                Beyond Human Limits.
+                {t.hero.subtitle}
               </span>
 
             </motion.h1>
@@ -170,7 +174,7 @@ pb-[clamp(4rem,8vw,8rem)]
               "
             >
 
-              ANOX creates next-generation
+              {t.hero.description}
 
               <span className="font-semibold text-white">
                 {" "}Artificial Intelligence{" "}
@@ -182,9 +186,7 @@ pb-[clamp(4rem,8vw,8rem)]
                 {" "}Cybersecurity{" "}
               </span>
 
-              platforms, cloud infrastructure, autonomous software,
-              and digital technologies engineered for the future.
-
+            
             </motion.p>
 
             <motion.div
@@ -202,11 +204,11 @@ pb-[clamp(4rem,8vw,8rem)]
             >
 
               <Button>
-                Explore ANOX
+                {t.hero.explore}
               </Button>
 
               <Button variant="secondary">
-                Learn More
+                {t.hero.learnMore}
               </Button>
 
             </motion.div>
@@ -226,9 +228,9 @@ pb-[clamp(4rem,8vw,8rem)]
               "
             >
 
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-2xl">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:bg-white/10 hover:border-white/20">
 
-                <h2 className="text-5xl font-black text-white">
+                <h2 className="text-4xl md:text-6xl font-black text-white">
                   <CountUp end={12} duration={2.5} />+
                 </h2>
 
@@ -238,9 +240,9 @@ pb-[clamp(4rem,8vw,8rem)]
 
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-2xl">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:bg-white/10 hover:border-white/20">
 
-                <h2 className="text-5xl font-black text-cyan-400">
+                <h2 className="text-4xl md:text-6xl font-black text-cyan-400">
                   AI
                 </h2>
 
@@ -250,9 +252,8 @@ pb-[clamp(4rem,8vw,8rem)]
 
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-2xl">
-
-                <h2 className="text-5xl font-black text-white">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:bg-white/10 hover:border-white/20">
+                <h2 className="text-4xl md:text-6xl font-black text-white">
                   <CountUp end={100} duration={3} />%
                 </h2>
 
@@ -272,7 +273,7 @@ pb-[clamp(4rem,8vw,8rem)]
                 repeat: Infinity,
                 duration: 2,
               }}
-              className="h-screen"
+              className="absolute bottom-10 left-1/2 -translate-x-1/2"
             >
 
               <div className="flex h-16 w-9 justify-center rounded-full border border-cyan-400/30">
@@ -301,7 +302,7 @@ pb-[clamp(4rem,8vw,8rem)]
             initial={{
               opacity: 0,
               x: 120,
-              scale: .8,
+              scale: 0.9,
             }}
             animate={{
               opacity: 1,

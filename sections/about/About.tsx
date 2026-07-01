@@ -1,5 +1,5 @@
 "use client";
-
+import { useTranslation } from "@/hooks/useTranslation";
 import { motion } from "framer-motion";
 
 import Container from "@/components/ui/Container";
@@ -7,6 +7,7 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import GlassCard from "@/components/ui/GlassCard";
 
 export default function About() {
+  const { t } = useTranslation();
   return (
     <section
     className="h-screen"
@@ -16,10 +17,10 @@ export default function About() {
       <Container>
 
         <SectionTitle
-          badge="ABOUT"
-          title="Building Tomorrow."
-          description="ANOX is creating the next generation of software, artificial intelligence, cybersecurity and digital infrastructure."
-        />
+  badge={t.about.badge}
+  title={t.about.title}
+  description={t.about.description}
+/>
 
         <div className="mt-20 grid gap-8 lg:grid-cols-2">
 
@@ -37,13 +38,11 @@ export default function About() {
               </div>
 
               <h3 className="text-3xl font-bold text-white">
-                Our Mission
+                {t.about.visionTitle}
               </h3>
 
               <p className="mt-6 leading-8 text-zinc-400">
-                We build modern software, intelligent systems and
-                secure digital products that help businesses grow
-                faster and prepare for the future.
+                {t.about.missionDescription}
               </p>
 
             </GlassCard>
@@ -63,14 +62,11 @@ export default function About() {
               </div>
 
               <h3 className="text-3xl font-bold text-white">
-                Our Vision
+                {t.about.missionTitle}
               </h3>
 
               <p className="mt-6 leading-8 text-zinc-400">
-                To become one of the world's leading technology
-                companies by creating intelligent products,
-                powerful software and innovative digital
-                ecosystems.
+                {t.about.visionDescription}
               </p>
 
               <div className="mt-10 space-y-5">
@@ -80,7 +76,7 @@ export default function About() {
                   <div className="h-3 w-3 rounded-full bg-cyan-400" />
 
                   <span className="text-zinc-300">
-                    Artificial Intelligence
+                   {t.about.ai}
                   </span>
 
                 </div>
@@ -90,7 +86,7 @@ export default function About() {
                   <div className="h-3 w-3 rounded-full bg-cyan-400" />
 
                   <span className="text-zinc-300">
-                    Cyber Security
+                    {t.about.cyber}
                   </span>
 
                 </div>
@@ -100,7 +96,7 @@ export default function About() {
                   <div className="h-3 w-3 rounded-full bg-cyan-400" />
 
                   <span className="text-zinc-300">
-                    Future Software
+                    {t.about.software}
                   </span>
 
                 </div>

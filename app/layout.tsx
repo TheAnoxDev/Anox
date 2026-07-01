@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import AppWrapper from "@/components/AppWrapper";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { LangProvider } from "@/components/LangContext";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -86,9 +87,11 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body className="bg-[#06080d] text-white antialiased">
-  <AppWrapper>
-    {children}
-  </AppWrapper>
+  <LangProvider>
+    <AppWrapper>
+      {children}
+    </AppWrapper>
+  </LangProvider>
 </body>
     </html>
   );

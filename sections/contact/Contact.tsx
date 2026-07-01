@@ -1,5 +1,5 @@
 "use client";
-
+import { useTranslation } from "@/hooks/useTranslation";
 import { motion } from "framer-motion";
 import { useForm, ValidationError } from "@formspree/react";
 import Container from "@/components/ui/Container";
@@ -9,6 +9,7 @@ import Button from "@/components/ui/Button";
 
 export default function Contact() {
   const [state, handleSubmit] = useForm("xgojlpjq");
+  const { t } = useTranslation();
   return (
     <section
       id="contact"
@@ -16,12 +17,11 @@ export default function Contact() {
     >
       <Container>
 
-        <SectionTitle
-          badge="CONTACT"
-          title="Let's Build Together"
-          description="Have an idea or want to collaborate? We'd love to hear from you."
-        />
-
+       <SectionTitle
+  badge={t.contact.badge}
+  title={t.contact.title}
+  description={t.contact.description}
+/>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -41,17 +41,13 @@ export default function Contact() {
 
                 <h3 className="text-3xl font-bold text-white">
 
-                  Start a Conversation
+                  {t.contact.conversation}
 
                 </h3>
 
                 <p className="mt-6 leading-8 text-zinc-400">
 
-                  Whether you're looking for AI solutions,
-                  software development, cybersecurity or
-                  innovative digital products, ANOX is ready
-                  to help build the future.
-
+                  {t.contact.conversationDescription}
                 </p>
 
                 <div className="mt-10 space-y-5">
@@ -60,7 +56,7 @@ export default function Contact() {
 
                     <p className="text-zinc-500 text-sm">
 
-                      Email
+                      {t.contact.email}
 
                     </p>
 
@@ -76,13 +72,13 @@ export default function Contact() {
 
                     <p className="text-zinc-500 text-sm">
 
-                      Location
+                      {t.contact.location}
 
                     </p>
 
                     <p className="mt-1 text-lg text-white">
 
-                      Global • Remote First
+                      {t.contact.locationValue}
 
                     </p>
 
@@ -100,14 +96,14 @@ export default function Contact() {
                   
   name="name"
   type="text"
-  placeholder="Your Name"
+  placeholder={t.contact.namePlaceholder}
                   className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-white outline-none transition focus:border-cyan-400"
                 />
 
                 <input
   name="email"
   type="email"
-  placeholder="Email Address"
+  placeholder={t.contact.emailPlaceholder}
   required
                   className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-white outline-none transition focus:border-cyan-400"
                 />
@@ -121,7 +117,7 @@ errors={state.errors}
   name="message"
   required
                   rows={6}
-                  placeholder="Tell us about your project..."
+                  placeholder="placeholder={t.contact.messagePlaceholder}"
                   className="w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-white outline-none transition focus:border-cyan-400"
                 />
 <ValidationError
@@ -134,13 +130,13 @@ type="submit"
 className="w-full"
 disabled={state.submitting}
 >
-{state.submitting ? "Sending..." : "Send Message"}
+{state.submitting ? t.contact.sending : t.contact.send}
 </Button>
 {state.succeeded && (
 
 <p className="mt-6 text-green-400">
 
-✅ Message sent successfully.
+{t.contact.success}
 
 </p>
 

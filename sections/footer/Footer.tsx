@@ -1,10 +1,11 @@
 "use client";
-
+import { useTranslation } from "@/hooks/useTranslation";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Logo from "@/components/layout/Logo";
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="relative border-t border-white/10 py-20">
 
@@ -19,11 +20,7 @@ export default function Footer() {
             <Logo />
 
             <p className="mt-8 max-w-sm leading-8 text-zinc-400">
-
-              Engineering the future through artificial
-              intelligence, cybersecurity and next-generation
-              software.
-
+{t.footer.description}
             </p>
 
           </div>
@@ -33,7 +30,7 @@ export default function Footer() {
           <div>
 
             <h3 className="text-lg font-bold text-white">
-              Company
+              {t.footer.company}
             </h3>
 
             <div className="mt-6 flex flex-col gap-4">
@@ -42,21 +39,21 @@ export default function Footer() {
                 href="#about"
                 className="text-zinc-400 transition hover:text-cyan-400"
               >
-                About
+               {t.footer.about}
               </Link>
 
               <Link
                 href="#technology"
                 className="text-zinc-400 transition hover:text-cyan-400"
               >
-                Technology
+                {t.footer.technology}
               </Link>
 
               <Link
                 href="#projects"
                 className="text-zinc-400 transition hover:text-cyan-400"
               >
-                Projects
+               {t.footer.projects} 
               </Link>
 
             </div>
@@ -68,7 +65,7 @@ export default function Footer() {
           <div>
 
             <h3 className="text-lg font-bold text-white">
-              Resources
+              {t.footer.resources}
             </h3>
 
             <div className="mt-6 flex flex-col gap-4">
@@ -77,14 +74,14 @@ export default function Footer() {
                 href="#contact"
                 className="text-zinc-400 transition hover:text-cyan-400"
               >
-                Contact
+                {t.footer.contact}
               </Link>
 
               <Link
                 href="/"
                 className="text-zinc-400 transition hover:text-cyan-400"
               >
-                Privacy
+                {t.footer.privacy}
 
               </Link>
 
@@ -92,7 +89,7 @@ export default function Footer() {
                 href="/"
                 className="text-zinc-400 transition hover:text-cyan-400"
               >
-                Terms
+                {t.footer.terms}
 
               </Link>
 
@@ -106,7 +103,7 @@ export default function Footer() {
 
             <h3 className="text-lg font-bold text-white">
 
-              Follow
+              {t.footer.follow}
 
             </h3>
 
@@ -161,7 +158,7 @@ export default function Footer() {
         <div className="mt-20 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-10 md:flex-row">
 
           <p className="text-sm text-zinc-500">
-            © {new Date().getFullYear()} ANOX. All rights reserved.
+            © {new Date().getFullYear()} ANOX. {t.footer.copyright}
           </p>
 
           <a
@@ -175,7 +172,7 @@ export default function Footer() {
               py-3
               text-sm
               text-white
-              backdrop-blur-xl
+              backdrop-blur-sm
               transition-all
               duration-300
               hover:-translate-y-1
@@ -183,7 +180,7 @@ export default function Footer() {
               hover:text-cyan-400
             "
           >
-            ↑ Back to Top
+            ↑ {t.footer.backToTop}
           </a>
 
         </div>

@@ -1,5 +1,5 @@
 "use client";
-
+import { useTranslation } from "@/hooks/useTranslation";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -17,54 +17,38 @@ type Project = {
 /* =========================
    DATA
 ========================= */
-const projects: Project[] = [
-  {
-    title: "ANOX Intelligence",
-    desc: "Autonomous AI system for next-generation digital intelligence and automation.",
-    image: "/images/projects/anox-intelligence.jpg",
-    tags: ["AI", "Next.js"],
-  },
-  {
-    title: "ANOX Shield",
-    desc: "Enterprise cybersecurity platform for cloud protection and infrastructure security.",
-    image: "/images/projects/anox-shield.jpg",
-    tags: ["Security", "Cloud"],
-  },
-  {
-    title: "ANOX Future Systems",
-    desc: "Smart city infrastructure powered by AI, robotics and automation systems.",
-    image: "/images/projects/anox-future-systems.jpg",
-    tags: ["AI", "IoT", "Robotics"],
-  },
-];
 
 /* =========================
    COMPONENT
 ========================= */
 export default function Projects() {
+  const { t } = useTranslation();
+  const projects: Project[] = [
+  {
+    title: t.projects.intelligence.title,
+    desc: t.projects.intelligence.desc,
+    image: "/images/projects/anox-intelligence.jpg",
+    tags: ["AI", "Next.js"],
+  },
+  {
+    title: t.projects.shield.title,
+    desc: t.projects.shield.desc,
+    image: "/images/projects/anox-shield.jpg",
+    tags: ["Security", "Cloud"],
+  },
+  {
+    title: t.projects.future.title,
+    desc: t.projects.future.desc,
+    image: "/images/projects/anox-future-systems.jpg",
+    tags: ["AI", "IoT", "Robotics"],
+  },
+];
   const [selected, setSelected] = useState<Project | null>(null);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
-  /* 🌌 Mouse light effect */
-  useEffect(() => {
-    const move = (e: MouseEvent) => {
-      setMouse({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
-  }, []);
 
   return (
     <section className="relative py-32 overflow-hidden">
-
-      {/* 🌠 LIGHT FOLLOW CURSOR */}
-      <div
-        className="pointer-events-none fixed inset-0 z-0"
-        style={{
-          background: `radial-gradient(600px at ${mouse.x}px ${mouse.y}px, rgba(34,211,238,0.12), transparent 80%)`,
-        }}
-      />
-
+      
       {/* BACKGROUND GLOWS */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-10 left-20 w-72 h-72 bg-cyan-500/10 blur-3xl rounded-full" />
@@ -74,10 +58,10 @@ export default function Projects() {
       {/* TITLE */}
       <div className="text-center mb-16">
         <h2 className="text-4xl font-bold text-white">
-          What We're Building
+          {t.projects.title}
         </h2>
         <p className="text-zinc-400 mt-3">
-          Advanced AI systems under ANOX ecosystem
+          {t.projects.subtitle}
         </p>
       </div>
 
@@ -103,7 +87,7 @@ export default function Projects() {
                   src={p.image}
                   alt={p.title}
                   fill
-                  className="object-cover transition-transform duration-700 hover:scale-110"
+                  className="object-cover transition-transform duration-300 hover:scale-110"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -212,7 +196,7 @@ export default function Projects() {
                     onClick={() => setSelected(null)}
                     className="px-6 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition"
                   >
-                    Close Experience
+                    {t.projects.close}
                   </button>
                 </div>
 

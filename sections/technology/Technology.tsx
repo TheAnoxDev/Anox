@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
+import { useTranslation } from "@/hooks/useTranslation";
 import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
 import GlassCard from "@/components/ui/GlassCard";
@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 export default function Technology() {
+  const { t } = useTranslation();
   return (
     <section
       id="technology"
@@ -46,15 +47,13 @@ export default function Technology() {
 
               <h3 className="mt-8 text-2xl font-bold text-white">
 
-                Artificial Intelligence
+                {t.technology.aiTitle}
 
               </h3>
 
               <p className="mt-5 leading-8 text-zinc-400">
 
-                Intelligent systems, machine learning,
-                automation and AI-driven solutions.
-
+                {t.technology.aiDesc}
               </p>
 
             </GlassCard>
@@ -79,14 +78,13 @@ export default function Technology() {
 
               <h3 className="mt-8 text-2xl font-bold text-white">
 
-                Cyber Security
+                {t.technology.cyberTitle}
 
               </h3>
 
               <p className="mt-5 leading-8 text-zinc-400">
 
-                Secure infrastructure, ethical hacking,
-                protection and digital resilience.
+                {t.technology.cyberDesc}
 
               </p>
 
@@ -112,15 +110,13 @@ export default function Technology() {
 
               <h3 className="mt-8 text-2xl font-bold text-white">
 
-                Software Engineering
+                {t.technology.softwareTitle}
 
               </h3>
 
               <p className="mt-5 leading-8 text-zinc-400">
 
-                Modern scalable applications with
-                performance-focused architecture.
-
+                {t.technology.softwareDesc}
               </p>
 
             </GlassCard>
@@ -141,12 +137,11 @@ export default function Technology() {
               <div className="text-5xl">☁️</div>
 
               <h3 className="mt-8 text-2xl font-bold text-white">
-                Cloud Computing
+                {t.technology.cloudTitle}
               </h3>
 
               <p className="mt-5 leading-8 text-zinc-400">
-                Reliable cloud infrastructure, scalable deployment
-                and enterprise hosting solutions.
+               {t.technology.cloudDesc}
               </p>
 
             </GlassCard>
@@ -167,12 +162,11 @@ export default function Technology() {
               <div className="text-5xl">⚙️</div>
 
               <h3 className="mt-8 text-2xl font-bold text-white">
-                Automation
+                {t.technology.automationTitle}
               </h3>
 
               <p className="mt-5 leading-8 text-zinc-400">
-                Smart workflows, business automation and AI-powered
-                productivity systems.
+               {t.technology.automationDesc}
               </p>
 
             </GlassCard>
@@ -193,12 +187,11 @@ export default function Technology() {
               <div className="text-5xl">🌐</div>
 
               <h3 className="mt-8 text-2xl font-bold text-white">
-                Web Technologies
+                {t.technology.webTitle}
               </h3>
 
               <p className="mt-5 leading-8 text-zinc-400">
-                Modern web platforms built with Next.js, React,
-                TypeScript and scalable architectures.
+                {t.technology.webDesc}
               </p>
 
             </GlassCard>

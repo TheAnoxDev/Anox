@@ -1,25 +1,12 @@
 "use client";
-
+import { useTranslation } from "@/hooks/useTranslation";
+import { useLang } from "@/components/LangContext";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { Menu, X } from "lucide-react";
 
 import Logo from "./Logo";
 
-const links = [
-  {
-    name: "About",
-    href: "#about",
-  },
-  {
-    name: "Technology",
-    href: "#technology",
-  },
-  {
-    name: "Projects",
-    href: "#projects",
-  },
-];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -27,7 +14,22 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   const [active, setActive] = useState("#hero");
-
+const { lang, setLang } = useLang();
+const { t } = useTranslation();
+const links = [
+  {
+    name: t.navbar.about,
+    href: "#about",
+  },
+  {
+    name: t.navbar.technology,
+    href: "#technology",
+  },
+  {
+    name: t.navbar.projects,
+    href: "#projects",
+  },
+];
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -75,7 +77,7 @@ export default function Navbar() {
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
 
         scrolled
-          ? "border-b border-white/10 bg-black/45 backdrop-blur-3xl"
+          ? "border-b border-white/5 bg-black/30 backdrop-blur-md"
           : "bg-transparent"
       )}
     >
@@ -95,7 +97,7 @@ export default function Navbar() {
                 "rounded-xl px-5 py-2 text-sm font-medium transition-all duration-300",
 
                 active === link.href
-                  ? "bg-cyan-400/10 text-cyan-400"
+                  ? "bg-cyan-400/5 text-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.15)]"
                   : "text-zinc-300 hover:bg-white/5 hover:text-white"
               )}
             >
@@ -130,8 +132,14 @@ export default function Navbar() {
               md:inline-flex
             "
           >
-            Contact
+            {t.navbar.contact}
           </a>
+          <button
+  onClick={() => setLang(lang === "en" ? "fa" : "en")}
+  className="rounded-lg px-3 py-2 text-sm font-medium text-zinc-300 transition hover:bg-white/10 hover:text-white"
+>
+  {lang === "en" ? "FA" : "EN"}
+</button>
 
           <button
             onClick={() => setOpen(!open)}
@@ -159,7 +167,7 @@ export default function Navbar() {
         )}
       >
 
-        <div className="border-t border-white/10 bg-black/90 backdrop-blur-3xl">
+        <div className="border-t border-white/5 bg-black/90 backdrop-blur-3xl">
 
           {links.map((link) => (
 
@@ -171,7 +179,7 @@ export default function Navbar() {
                 "block px-6 py-5 text-sm font-medium transition-all",
 
                 active === link.href
-                  ? "bg-cyan-400/10 text-cyan-400"
+                  ? ""
                   : "text-zinc-300 hover:bg-white/5 hover:text-white"
               )}
             >
@@ -200,7 +208,7 @@ export default function Navbar() {
               hover:text-black
             "
           >
-            Contact
+            {t.navbar.contact}
           </a>
 
         </div>
