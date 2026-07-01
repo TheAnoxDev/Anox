@@ -89,6 +89,7 @@ export default function RootLayout({
   <AppWrapper>
     {children}
   </AppWrapper>
+  className="scroll-smooth"
 </body>
     </html>
   );

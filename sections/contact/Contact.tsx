@@ -12,7 +12,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative py-32"
+      className="h-screen"
     >
       <Container>
 

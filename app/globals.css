@@ -170,3 +170,12 @@ p{
   0 0 80px rgba(34,211,238,.18);
 
 }
+html, body {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+}
+
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}

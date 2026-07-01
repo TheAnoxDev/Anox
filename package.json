@@ -10,15 +10,22 @@
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@react-three/postprocessing": "^3.0.4",
     "@studio-freight/lenis": "^1.0.42",
     "@tabler/icons-react": "^3.44.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.42.0",
     "lucide-react": "^1.21.0",
+    "maath": "^0.10.8",
     "next": "16.2.9",
+    "postprocessing": "^6.39.2",
     "react": "19.2.4",
     "react-countup": "^6.5.3",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "three": "^0.185.0",
+    "three-stdlib": "^2.36.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

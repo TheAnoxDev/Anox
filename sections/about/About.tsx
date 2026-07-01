@@ -9,8 +9,9 @@ import GlassCard from "@/components/ui/GlassCard";
 export default function About() {
   return (
     <section
+    className="h-screen"
       id="about"
-      className="relative overflow-hidden py-32"
+    
     >
       <Container>
 
