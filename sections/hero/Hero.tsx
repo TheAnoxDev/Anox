@@ -62,8 +62,7 @@ pb-[clamp(4rem,8vw,8rem)]
 
       <Container>
 
-        <div className="grid items-center gap-20 lg:grid-cols-2">
-
+        <div className="grid items-center gap-32 lg:grid-cols-2 lg:gap-40">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
@@ -116,7 +115,7 @@ pb-[clamp(4rem,8vw,8rem)]
                 leading-[0.88]
                 tracking-tight
                 sm:text-7xl
-                lg:text-[8rem]
+                lg:text-[6.2rem]
               "
             >
 
@@ -163,7 +162,7 @@ pb-[clamp(4rem,8vw,8rem)]
               }}
               className="
                 mt-[clamp(2.5rem,5vw,5rem)]
-                max-w-2xl
+                max-w-xl lg:max-w-2xl
                 text-lg
                 leading-9
                 text-zinc-400
@@ -313,9 +312,8 @@ pb-[clamp(4rem,8vw,8rem)]
               duration: 1.2,
               delay: .5,
             }}
-            className="
-              flex items-center justify-center w-full lg:w-auto
-            "
+            className="flex items-center justify-center w-full lg:w-auto lg:pl-24"
+            
           >
 
             <Globe />

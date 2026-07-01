@@ -10,7 +10,7 @@ export default function Footer() {
 
       <Container>
 
-        <div className="h-screen">
+        <div className="grid gap-14 lg:grid-cols-4">
 
           {/* Logo */}
 
@@ -36,7 +36,7 @@ export default function Footer() {
               Company
             </h3>
 
-            <div className="h-screen">
+            <div className="mt-6 flex flex-col gap-4">
 
               <Link
                 href="#about"
@@ -71,7 +71,7 @@ export default function Footer() {
               Resources
             </h3>
 
-            <div className="h-screen">
+            <div className="mt-6 flex flex-col gap-4">
 
               <Link
                 href="#contact"
@@ -110,7 +110,7 @@ export default function Footer() {
 
             </h3>
 
-            <div>
+            <div className="mt-6 flex flex-col gap-4">
 
               <a
                 href="https://github.com/TheAnoxDev"
@@ -202,7 +202,6 @@ export default function Footer() {
             rounded-full
             bg-cyan-400/10
             blur-[140px]
-            
           "
         />
 
