@@ -1,37 +1,54 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { login } from "@/services/auth";
+import { register } from "@/services/auth";
+
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  User,
+} from "lucide-react";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
 
-const [loading, setLoading] = useState(false);
-const [error, setError] = useState("");
-const handleLogin = async (e: React.FormEvent) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+ const handleRegister = async (
+  e: React.FormEvent<HTMLFormElement>
+) => {
   e.preventDefault();
 
   setLoading(true);
   setError("");
 
   try {
-const data = await login({
-  email,
-  password,
-});
-    console.log(data);
-    router.push("/dashboard")
+    await register({
+      name,
+      email,
+      password,
+    });
 
-    // بعداً اینجا redirect می‌کنیم
+    setName("");
+    setEmail("");
+    setPassword("");
+
+    router.push("/login");
   } catch (err) {
     const message =
-      err instanceof Error ? err.message : "Login failed";
+      err instanceof Error
+        ? err.message
+        : "Register failed";
 
     setError(message);
   } finally {
@@ -40,10 +57,7 @@ const data = await login({
 };
 
   return (
-    
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#04070b] px-6">
-
-      {/* Background Glow */}
 
       <div className="absolute inset-0">
 
@@ -54,8 +68,6 @@ const data = await login({
         <div className="absolute bottom-20 right-20 h-80 w-80 rounded-full bg-blue-500/10 blur-[150px]" />
 
       </div>
-
-      {/* Grid */}
 
       <div className="absolute inset-0 opacity-[0.04] [background-image:radial-gradient(white_1px,transparent_1px)] [background-size:22px_22px]" />
 
@@ -87,8 +99,6 @@ const data = await login({
         "
       >
 
-        {/* Logo */}
-
         <div className="flex justify-center">
 
           <div
@@ -110,19 +120,61 @@ const data = await login({
 
         </div>
 
-        {/* Title */}
-
         <h1 className="mt-8 text-center text-4xl font-black text-white">
-          Welcome Back
+          Create Account
         </h1>
 
         <p className="mt-3 text-center text-zinc-400">
-          Sign in to continue to ANOX
+          Join ANOX today
         </p>
 
-        {/* Form */}
+        <form
+          onSubmit={handleRegister}
+          className="mt-10 space-y-6"
+        >
+                    {/* Full Name */}
 
-        <form onSubmit={handleLogin} className="mt-10 space-y-6">
+          <div>
+
+            <label className="mb-2 block text-sm text-zinc-300">
+              Full Name
+            </label>
+
+            <div className="relative">
+
+              <User
+                size={18}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400"
+              />
+
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                type="text"
+                placeholder="Arsham Omidvar"
+                className="
+                  w-full
+                  rounded-xl
+                  border
+                  border-white/10
+                  bg-black/30
+                  py-3
+                  pl-12
+                  pr-4
+                  text-white
+                  outline-none
+                  transition-all
+                  duration-300
+                  placeholder:text-zinc-500
+                  focus:border-cyan-400
+                  focus:bg-black/40
+                "
+              />
+
+            </div>
+
+          </div>
 
           {/* Email */}
 
@@ -140,9 +192,9 @@ const data = await login({
               />
 
               <input
-              value={email}
-onChange={(e) => setEmail(e.target.value)}
-required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
                 type="email"
                 placeholder="name@example.com"
                 className="
@@ -184,9 +236,9 @@ required
               />
 
               <input
-              value={password}
-onChange={(e) => setPassword(e.target.value)}
-required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 className="
@@ -210,7 +262,9 @@ required
 
               <button
                 type="button"
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={() =>
+                  setShowPassword(!showPassword)
+                }
                 className="
                   absolute
                   right-4
@@ -231,56 +285,16 @@ required
             </div>
 
           </div>
-                    {/* Remember + Forgot */}
 
-          <div className="flex items-center justify-between">
-
-            <label className="flex items-center gap-2 text-sm text-zinc-400">
-
-              <input
-                type="checkbox"
-                className="
-                  h-4
-                  w-4
-                  rounded
-                  border-white/20
-                  bg-black/30
-                  accent-cyan-400
-                "
-              />
-
-              Remember me
-
-            </label>
-
-            <Link
-              href="/forgot-password"
-              className="
-                text-sm
-                text-cyan-400
-                transition
-                hover:text-cyan-300
-              "
-            >
-              Forgot password?
-            </Link>
-
-          </div>
-
-          {/* Sign In Button */}
           {error && (
-  <p className="text-sm text-red-400 text-center">
-    {error}
-  </p>
-)}
+            <p className="text-center text-sm text-red-400">
+              {error}
+            </p>
+          )}
 
           <motion.button
-            whileHover={{
-              scale: 1.02,
-            }}
-            whileTap={{
-              scale: 0.98,
-            }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={loading}
             className="
@@ -296,13 +310,13 @@ required
               transition
             "
           >
-            {loading ? "Signing In..." : "Sign In"}
-            
+            {loading
+              ? "Creating Account..."
+              : "Create Account"}
           </motion.button>
 
         </form>
-
-        {/* Divider */}
+                {/* Divider */}
 
         <div className="my-8 flex items-center gap-4">
 
@@ -321,6 +335,7 @@ required
         <div className="grid grid-cols-2 gap-4">
 
           <button
+            type="button"
             className="
               rounded-xl
               border
@@ -337,6 +352,7 @@ required
           </button>
 
           <button
+            type="button"
             className="
               rounded-xl
               border
@@ -358,10 +374,10 @@ required
 
         <p className="mt-8 text-center text-sm text-zinc-400">
 
-          Don't have an account?{" "}
+          Already have an account?{" "}
 
           <Link
-            href="/register"
+            href="/login"
             className="
               font-semibold
               text-cyan-400
@@ -369,7 +385,7 @@ required
               hover:text-cyan-300
             "
           >
-            Create one
+            Sign In
           </Link>
 
         </p>
@@ -377,5 +393,7 @@ required
       </motion.div>
 
     </main>
+
   );
+
 }
