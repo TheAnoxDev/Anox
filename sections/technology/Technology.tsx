@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
+
 import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
 import GlassCard from "@/components/ui/GlassCard";
@@ -10,198 +11,251 @@ import {
   Brain,
   Shield,
   Code2,
+  Cloud,
+  Cpu,
+  Globe,
 } from "lucide-react";
 
+
+const containerVariants: Variants = {
+  hidden: {},
+
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+
+const cardVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+    scale: 0.96,
+  },
+
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
+
+
+const iconClass =
+  "text-cyan-400 drop-shadow-[0_0_18px_rgba(34,211,238,0.45)]";
+
+
 export default function Technology() {
+
   const { t } = useTranslation();
+
+
+  const technologies = [
+    {
+      icon: Brain,
+      title: t.technology.aiTitle,
+      desc: t.technology.aiDesc,
+    },
+
+    {
+      icon: Shield,
+      title: t.technology.cyberTitle,
+      desc: t.technology.cyberDesc,
+    },
+
+    {
+      icon: Code2,
+      title: t.technology.softwareTitle,
+      desc: t.technology.softwareDesc,
+    },
+
+    {
+      icon: Cloud,
+      title: t.technology.cloudTitle,
+      desc: t.technology.cloudDesc,
+    },
+
+    {
+      icon: Cpu,
+      title: t.technology.automationTitle,
+      desc: t.technology.automationDesc,
+    },
+
+    {
+      icon: Globe,
+      title: t.technology.webTitle,
+      desc: t.technology.webDesc,
+    },
+  ];
+
+
   return (
+
     <section
       id="technology"
-      className="relative py-32"
+      className="
+      relative
+      overflow-hidden
+      py-32
+      "
     >
+
+
+      {/* Background Glow */}
+
+      <div
+        className="
+        absolute
+        left-1/2
+        top-1/2
+        -z-10
+        h-[500px]
+        w-[500px]
+        -translate-x-1/2
+        -translate-y-1/2
+        rounded-full
+        bg-cyan-500/10
+        blur-[140px]
+        "
+      />
+
+
       <Container>
+
 
         <SectionTitle
           badge="TECHNOLOGY"
-          title="Our Expertise"
-          description="ANOX develops cutting-edge technologies that empower businesses and shape the digital future."
+          title={t.technology.title ?? "Our Expertise"}
+          description={t.technology.description}
         />
 
-        <div className="mt-20 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 
-          {/* AI */}
 
-          <motion.div
-            initial={{ opacity:0, y:40 }}
-            whileInView={{ opacity:1, y:0 }}
-            viewport={{ once:true }}
-            transition={{ duration:.6 }}
-          >
+        <motion.div
 
-            <GlassCard className="h-full p-8">
+          variants={containerVariants}
 
-              <Brain
-                size={46}
-                className="text-cyan-400"
-              />
+          initial="hidden"
 
-              <h3 className="mt-8 text-2xl font-bold text-white">
+          whileInView="show"
 
-                {t.technology.aiTitle}
+          viewport={{
+            once:true,
+            margin:"-100px"
+          }}
 
-              </h3>
+          className="
+          mt-20
+          grid
+          gap-8
+          md:grid-cols-2
+          lg:grid-cols-3
+          "
 
-              <p className="mt-5 leading-8 text-zinc-400">
+        >
 
-                {t.technology.aiDesc}
-              </p>
 
-            </GlassCard>
+          {technologies.map((item)=>{
 
-          </motion.div>
 
-          {/* Security */}
+            const Icon = item.icon;
 
-          <motion.div
-            initial={{ opacity:0, y:40 }}
-            whileInView={{ opacity:1, y:0 }}
-            viewport={{ once:true }}
-            transition={{ duration:.6, delay:.15 }}
-          >
 
-            <GlassCard className="h-full p-8">
+            return (
 
-              <Shield
-                size={46}
-                className="text-cyan-400"
-              />
+              <motion.article
 
-              <h3 className="mt-8 text-2xl font-bold text-white">
+                key={item.title}
 
-                {t.technology.cyberTitle}
+                variants={cardVariants}
 
-              </h3>
+              >
 
-              <p className="mt-5 leading-8 text-zinc-400">
+                <GlassCard
 
-                {t.technology.cyberDesc}
+                  className="
+                  group
+                  h-full
+                  p-8
+                  transition-all
+                  duration-300
+                  hover:-translate-y-2
+                  hover:border-cyan-400/30
+                  hover:bg-white/[0.06]
+                  "
 
-              </p>
+                >
 
-            </GlassCard>
 
-          </motion.div>
+                  <Icon
 
-          {/* Software */}
+                    size={46}
 
-          <motion.div
-            initial={{ opacity:0, y:40 }}
-            whileInView={{ opacity:1, y:0 }}
-            viewport={{ once:true }}
-            transition={{ duration:.6, delay:.3 }}
-          >
+                    className={iconClass}
 
-            <GlassCard className="h-full p-8">
+                  />
 
-              <Code2
-                size={46}
-                className="text-cyan-400"
-              />
 
-              <h3 className="mt-8 text-2xl font-bold text-white">
+                  <h3
 
-                {t.technology.softwareTitle}
+                    className="
+                    mt-8
+                    text-2xl
+                    font-bold
+                    text-white
+                    transition
+                    group-hover:text-cyan-300
+                    "
 
-              </h3>
+                  >
 
-              <p className="mt-5 leading-8 text-zinc-400">
+                    {item.title}
 
-                {t.technology.softwareDesc}
-              </p>
+                  </h3>
 
-            </GlassCard>
 
-          </motion.div>
 
-                    {/* Cloud */}
+                  <p
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: .6, delay: .45 }}
-          >
+                    className="
+                    mt-5
+                    leading-8
+                    text-zinc-400
+                    "
 
-            <GlassCard className="h-full p-8">
+                  >
 
-              <div className="text-5xl">☁️</div>
+                    {item.desc}
 
-              <h3 className="mt-8 text-2xl font-bold text-white">
-                {t.technology.cloudTitle}
-              </h3>
+                  </p>
 
-              <p className="mt-5 leading-8 text-zinc-400">
-               {t.technology.cloudDesc}
-              </p>
 
-            </GlassCard>
+                </GlassCard>
 
-          </motion.div>
 
-          {/* Automation */}
+              </motion.article>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: .6, delay: .6 }}
-          >
+            );
 
-            <GlassCard className="h-full p-8">
 
-              <div className="text-5xl">⚙️</div>
+          })}
 
-              <h3 className="mt-8 text-2xl font-bold text-white">
-                {t.technology.automationTitle}
-              </h3>
 
-              <p className="mt-5 leading-8 text-zinc-400">
-               {t.technology.automationDesc}
-              </p>
+        </motion.div>
 
-            </GlassCard>
-
-          </motion.div>
-
-          {/* Web */}
-
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: .6, delay: .75 }}
-          >
-
-            <GlassCard className="h-full p-8">
-
-              <div className="text-5xl">🌐</div>
-
-              <h3 className="mt-8 text-2xl font-bold text-white">
-                {t.technology.webTitle}
-              </h3>
-
-              <p className="mt-5 leading-8 text-zinc-400">
-                {t.technology.webDesc}
-              </p>
-
-            </GlassCard>
-
-          </motion.div>
-
-        </div>
 
       </Container>
 
+
     </section>
+
   );
+
 }

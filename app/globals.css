@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
 /* ==========================================
-   ANOX Design System v2
+   ANOX Design System v3
 ========================================== */
 
+
 :root{
+
   --background:#06080d;
   --background-secondary:#0d1117;
 
@@ -17,20 +19,34 @@
   --border:rgba(255,255,255,.08);
 
   --radius:20px;
+
 }
+
+
+
+/* RESET */
 
 *,
 *::before,
 *::after{
+
   margin:0;
   padding:0;
   box-sizing:border-box;
+
 }
 
+
+
 html{
+
   scroll-behavior:smooth;
+
   -webkit-text-size-adjust:100%;
+
 }
+
+
 
 body{
 
@@ -52,6 +68,10 @@ body{
 
 }
 
+
+
+/* Sections */
+
 section{
 
   position:relative;
@@ -61,6 +81,10 @@ section{
   overflow:hidden;
 
 }
+
+
+
+/* Media */
 
 img,
 svg,
@@ -72,6 +96,10 @@ canvas{
   max-width:100%;
 
 }
+
+
+
+/* Buttons */
 
 button{
 
@@ -85,6 +113,10 @@ button{
 
 }
 
+
+
+/* Links */
+
 a{
 
   text-decoration:none;
@@ -93,13 +125,19 @@ a{
 
 }
 
+
+
+/* Selection */
+
 ::selection{
 
   background:var(--primary);
 
-  color:black;
+  color:#000;
 
 }
+
+
 
 /* Scrollbar */
 
@@ -109,11 +147,13 @@ a{
 
 }
 
+
 ::-webkit-scrollbar-track{
 
   background:#09090b;
 
 }
+
 
 ::-webkit-scrollbar-thumb{
 
@@ -123,13 +163,17 @@ a{
 
 }
 
+
 ::-webkit-scrollbar-thumb:hover{
 
   background:var(--primary-light);
 
 }
 
-/* Headings */
+
+
+/* Typography */
+
 
 h1,
 h2,
@@ -144,7 +188,6 @@ h6{
 
 }
 
-/* Paragraph */
 
 p{
 
@@ -152,30 +195,145 @@ p{
 
 }
 
-/* Utilities */
+
+
+/* Glass */
 
 .glass{
 
-  background:rgba(255,255,255,.05);
+  background:
+  rgba(255,255,255,.05);
 
-  border:1px solid rgba(255,255,255,.08);
+  border:
 
-  backdrop-filter:blur(24px);
+  1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:
+
+  blur(24px);
 
 }
+
+
+
+/* Glow */
 
 .glow{
 
   box-shadow:
+
   0 0 80px rgba(34,211,238,.18);
 
 }
-html, body {
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
+
+
+
+/* ==========================================
+   ANOX Motion System
+========================================== */
+
+
+@keyframes fadeUp{
+
+  from{
+
+    opacity:0;
+
+    transform:
+    translateY(30px);
+
+  }
+
+
+  to{
+
+    opacity:1;
+
+    transform:
+    translateY(0);
+
+  }
+
 }
 
-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+
+
+@keyframes fadeIn{
+
+  from{
+
+    opacity:0;
+
+  }
+
+
+  to{
+
+    opacity:1;
+
+  }
+
+}
+
+
+
+@keyframes glow{
+
+
+  0%,
+  100%{
+
+    opacity:.5;
+
+    transform:
+    scale(1);
+
+  }
+
+
+  50%{
+
+    opacity:1;
+
+    transform:
+    scale(1.08);
+
+  }
+
+}
+
+
+
+/* ==========================================
+   Three.js Optimization
+========================================== */
+
+
+canvas{
+
+  touch-action:none;
+
+  user-select:none;
+
+}
+
+
+
+
+/* Accessibility */
+
+@media (prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+
+    animation-duration:.01ms !important;
+
+    animation-iteration-count:1 !important;
+
+    scroll-behavior:auto !important;
+
+  }
+
 }

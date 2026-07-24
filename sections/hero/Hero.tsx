@@ -1,330 +1,760 @@
 "use client";
-import { useLang } from "@/components/LangContext";
-import { motion } from "framer-motion";
-import CountUp from "react-countup";
-import { useTranslation } from "@/hooks/useTranslation";
-import Globe from "@/components/3d/Globe";
 
+import dynamic from "next/dynamic";
 import Container from "@/components/ui/Container";
-import Button from "@/components/ui/Button";
-
-import Aurora from "@/components/effects/Aurora";
-import GridBackground from "@/components/effects/GridBackground";
-import FloatingOrbs from "@/components/effects/FloatingOrbs";
+import { cn } from "@/lib/cn";
 
 
-export default function Hero() {
-  const { t } = useTranslation();
-  return (
-    <section
-    className="
-relative
-flex
-min-h-screen
-items-center
-overflow-hidden
-bg-[#04070b]
-pt-[clamp(6rem,10vw,10rem)]
-pb-[clamp(4rem,8vw,8rem)]
-"
-    >
 
-      <GridBackground />
-      <Aurora />
-      
+const HeroGlobe = dynamic(
+  () => import("@/components/3d/Globe"),
+  {
+    ssr: false,
 
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div
-          className="
-          absolute
-          left-1/2
-          top-1/2
-          h-[1200px]
-          w-[1200px]
-          -translate-x-1/2
-          -translate-y-1/2
-          rounded-full
-          bg-cyan-400/10 blur-[180px]
-          flex items-center justify-center
-        "
-        />
-      </div>
+    loading: () => (
 
       <div
+
         className="
-        pointer-events-none
-        absolute
-        inset-0
-        opacity-[0.025]
-        [background-image:radial-gradient(white_1px,transparent_1px)]
-        [background-size:24px_24px]
-      "
-      />
+        flex
+        flex-col
+        items-center
+        justify-center
 
-      <Container>
+        rounded-full
 
-        <div className="grid items-center grid-cols-2 gap-20 lg:gap-32">
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
+        border
+        border-cyan-400/20
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: .2 }}
-              className="
-                inline-flex
-                items-center
-                gap-3
-                rounded-full
-                border
-                border-cyan-400/20
-                bg-white/5
-                px-5
-                py-3
-                backdrop-blur-3xl
-              "
-            >
+        bg-cyan-400/5
 
-              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse"/>
+        animate-pulse
 
-              <span
-                className="
-                  text-xs
-                  uppercase
-                  tracking-[0.35em]
-                  text-cyan-300
-                "
-              >
-                 {t.hero.badge}
-              </span>
+        w-[320px]
+        h-[320px]
 
-            </motion.div>
-                        <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: .35,
-                duration: .9,
-              }}
-              className="
-                mt-[clamp(2.5rem,5vw,5rem)]
-                text-4xl md:text-6xl
-                font-black
-                leading-[0.88]
-                tracking-tight
-                sm:text-7xl
-                lg:text-[6.2rem]
-              "
-            >
+        sm:w-[420px]
+        sm:h-[420px]
 
-              <span
-                className="
-                  block
-                  bg-gradient-to-r
-                  from-white
-                  via-cyan-100
-                  to-cyan-400
-                  bg-clip-text
-                  text-transparent
-                "
-              >
-                
-                ANOX
-              
-                
-              </span>
+        lg:w-[520px]
+        lg:h-[520px]
+        "
 
-              <span
-                className="
-                  mt-3
-                  block
-                  text-2xl
-                  font-semibold
-                  text-white
-                  sm:text-3xl
-                  lg:text-4xl
-                "
-              >
-                {t.hero.title}
-              </span>
+      >
 
-              <span className="block text-cyan-400">
-                {t.hero.subtitle}
-              </span>
+        <span
 
-            </motion.h1>
+          className="
+          font-mono
+          text-xs
+          tracking-[0.35em]
+          text-cyan-400/80
+          "
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: .55,
-                duration: .9,
-              }}
-              className="
-                mt-[clamp(2.5rem,5vw,5rem)]
-                max-w-xl lg:max-w-2xl
-                text-lg
-                leading-9
-                text-zinc-400
-                md:text-xl
-              "
-            >
+        >
 
-              {t.hero.description}
+          BOOTING ANOX CORE
 
-              <span className="font-semibold text-white">
-                {" "}Artificial Intelligence{" "}
-              </span>
+        </span>
 
-              systems,
 
-              <span className="font-semibold text-white">
-                {" "}Cybersecurity{" "}
-              </span>
+        <span
 
-            
-            </motion.p>
+          className="
+          mt-3
+          text-[10px]
+          tracking-widest
+          text-zinc-500
+          "
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: .8,
-              }}
-              className="
-                mt-[clamp(2.5rem,5vw,5rem)]
-                flex
-                flex-wrap
-                gap-5
-              "
-            >
+        >
 
-              <Button>
-                {t.hero.explore}
-              </Button>
+          ESTABLISHING AI NETWORK
 
-              <Button variant="secondary">
-                {t.hero.learnMore}
-              </Button>
+        </span>
 
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 1,
-                duration: .8,
-              }}
-              className="
-                mt-[clamp(2.5rem,5vw,5rem)]
-                grid
-                gap-6
-                sm:grid-cols-3
-              "
-            >
+      </div>
 
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:bg-white/10 hover:border-white/20">
+    )
+  }
+);
 
-                <h2 className="text-4xl md:text-6xl font-black text-white">
-                  <CountUp end={12} duration={2.5} />+
-                </h2>
 
-                <p className="mt-2 text-sm uppercase tracking-[0.25em] text-zinc-500">
-                  Core Technologies
-                </p>
 
-              </div>
 
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:bg-white/10 hover:border-white/20">
 
-                <h2 className="text-4xl md:text-6xl font-black text-cyan-400">
-                  AI
-                </h2>
+interface HeroProps {
 
-                <p className="mt-2 text-sm uppercase tracking-[0.25em] text-zinc-500">
-                  AI First
-                </p>
+  locale?: "en" | "fa";
 
-              </div>
+}
 
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:bg-white/10 hover:border-white/20">
-                <h2 className="text-4xl md:text-6xl font-black text-white">
-                  <CountUp end={100} duration={3} />%
-                </h2>
 
-                <p className="mt-2 text-sm uppercase tracking-[0.25em] text-zinc-500">
-                  Innovation
-                </p>
 
-              </div>
 
-            </motion.div>
 
-            <motion.div
-              animate={{
-                y: [0, 12, 0],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 2,
-              }}
-              className="absolute bottom-10 left-1/2 -translate-x-1/2"
-            >
+export default function Hero({
 
-              <div className="flex h-16 w-9 justify-center rounded-full border border-cyan-400/30">
+  locale="en"
 
-                <motion.div
-                  animate={{
-                    y: [0, 22, 0],
-                    opacity: [1, .3, 1],
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 2,
-                  }}
-                  className="mt-2 h-4 w-1 rounded-full bg-cyan-400"
-                />
+}:HeroProps){
 
-              </div>
 
-            </motion.div>
+const rtl = locale==="fa";
 
-          </motion.div>
 
-          {/* RIGHT */}
 
-          <motion.div
-            initial={{
-              opacity: 0,
-              x: 120,
-              scale: 0.9,
-            }}
-            animate={{
-              opacity: 1,
-              x: 0,
-              scale: 1,
-            }}
-            transition={{
-              duration: 1.2,
-              delay: .5,
-            }}
-            className="flex items-center justify-center w-full lg:w-auto lg:pl-24"
-            
-          >
+const content = {
 
-            <Globe />
+en:{
 
-          </motion.div>
+badge:"Autonomous AI & Cybersecurity",
 
-        </div>
+title:"ANOX",
 
-      </Container>
+subtitle:"Next-Gen Enterprise",
 
-    </section>
-  );
+highlight:"Security Intelligence",
+
+description:
+"ANOX engineers autonomous AI systems and enterprise cybersecurity platforms designed for resilient digital infrastructure.",
+
+
+primary:"Explore Platform",
+
+secondary:"Security Architecture",
+
+
+stats:[
+
+["Zero-Trust","Core Principle"],
+
+["Autonomous","AI Engine"],
+
+["Real-Time","Security Processing"]
+
+]
+
+
+},
+
+
+
+fa:{
+
+badge:"هوش مصنوعی خودمختار و امنیت سایبری",
+
+title:"ANOX",
+
+subtitle:"سازمان نسل بعدی",
+
+highlight:"هوش امنیت سایبری",
+
+description:
+"ANOX سیستم‌های هوش مصنوعی خودمختار و پلتفرم‌های امنیت سایبری سازمانی را برای زیرساخت‌های دیجیتال مقاوم مهندسی می‌کند.",
+
+
+primary:"بررسی پلتفرم",
+
+secondary:"معماری امنیت",
+
+
+stats:[
+
+["اعتماد صفر","اصل بنیادین"],
+
+["خودمختار","موتور هوش مصنوعی"],
+
+["در لحظه","پردازش امنیتی"]
+
+]
+
+
+}
+
+
+}[locale];
+
+
+
+
+
+return (
+
+
+<section
+
+dir={rtl?"rtl":"ltr"}
+
+className={cn(
+
+"relative isolate overflow-hidden",
+
+"min-h-[100dvh]",
+
+"flex items-center",
+
+"bg-[#04070b]",
+
+"py-24 lg:py-32"
+
+)}
+
+>
+
+
+
+
+{/* Background Grid */}
+
+<div
+
+aria-hidden
+
+className="
+
+absolute
+
+inset-0
+
+opacity-[0.035]
+
+-z-10
+
+[background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)]
+
+[background-size:4rem_4rem]
+
+"
+
+/>
+
+
+
+
+
+{/* AI Glow */}
+
+<div
+
+aria-hidden
+
+className="
+
+pointer-events-none
+
+absolute
+
+left-1/2
+
+top-1/2
+
+-translate-x-1/2
+
+-translate-y-1/2
+
+w-[700px]
+
+h-[700px]
+
+rounded-full
+
+bg-cyan-500/10
+
+blur-[120px]
+
+-z-10
+
+"
+
+/>
+
+
+
+
+
+
+<Container>
+
+
+<div
+
+className="
+
+grid
+
+grid-cols-1
+
+lg:grid-cols-[1fr_auto]
+
+items-center
+
+gap-16
+
+xl:gap-24
+
+"
+
+>
+
+
+
+
+{/* TEXT */}
+
+
+<div
+
+className="
+
+max-w-3xl
+
+animate-[fadeUp_.8s_ease-out]
+
+"
+
+>
+
+
+<div
+
+className="
+
+inline-flex
+
+items-center
+
+gap-3
+
+rounded-full
+
+border
+
+border-cyan-400/20
+
+bg-white/[0.03]
+
+px-4
+
+py-2
+
+"
+
+>
+
+<span
+
+className="
+
+w-2
+
+h-2
+
+rounded-full
+
+bg-cyan-400
+
+animate-pulse
+
+"
+
+/>
+
+
+<span
+
+className="
+
+text-xs
+
+uppercase
+
+tracking-[0.3em]
+
+text-cyan-300
+
+"
+
+>
+
+{content.badge}
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+<h1
+
+className="
+
+mt-8
+
+text-5xl
+
+sm:text-7xl
+
+lg:text-[88px]
+
+font-black
+
+leading-[0.9]
+
+tracking-tight
+
+"
+
+>
+
+
+<span
+
+className="
+
+block
+
+text-white
+
+"
+
+>
+
+{content.title}
+
+</span>
+
+
+
+<span
+
+className="
+
+block
+
+text-3xl
+
+sm:text-5xl
+
+text-zinc-200
+
+"
+
+>
+
+{content.subtitle}
+
+</span>
+
+
+
+
+<span
+
+className="
+
+block
+
+text-cyan-400
+
+"
+
+>
+
+{content.highlight}
+
+</span>
+
+
+
+</h1>
+
+
+
+
+
+
+
+<p
+
+className="
+
+mt-7
+
+max-w-xl
+
+text-lg
+
+sm:text-xl
+
+leading-relaxed
+
+text-zinc-400
+
+"
+
+>
+
+{content.description}
+
+</p>
+
+
+
+
+
+
+
+{/* CTA */}
+
+
+<div
+
+className="
+
+mt-9
+
+flex
+
+flex-wrap
+
+gap-4
+
+"
+
+>
+
+
+<a
+
+href="/platform"
+
+className="
+
+rounded-xl
+
+bg-cyan-500
+
+px-7
+
+py-3.5
+
+font-bold
+
+text-black
+
+transition
+
+hover:bg-cyan-400
+
+hover:shadow-[0_0_30px_rgba(6,182,212,.35)]
+
+"
+
+>
+
+{content.primary}
+
+</a>
+
+
+
+
+<a
+
+href="/architecture"
+
+className="
+
+rounded-xl
+
+border
+
+border-white/15
+
+bg-white/[0.03]
+
+px-7
+
+py-3.5
+
+font-semibold
+
+text-white
+
+transition
+
+hover:bg-white/10
+
+"
+
+>
+
+{content.secondary}
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+{/* Stats */}
+
+
+<div
+
+className="
+
+mt-12
+
+grid
+
+grid-cols-1
+
+sm:grid-cols-3
+
+gap-4
+
+"
+
+>
+
+
+{content.stats.map(([value,label])=>(
+
+
+<div
+
+key={value}
+
+className="
+
+rounded-xl
+
+border
+
+border-white/10
+
+bg-white/[0.02]
+
+p-4
+
+"
+
+>
+
+
+<div
+
+className="
+
+text-2xl
+
+font-black
+
+text-cyan-400
+
+"
+
+>
+
+{value}
+
+</div>
+
+
+<div
+
+className="
+
+mt-1
+
+text-[11px]
+
+uppercase
+
+tracking-widest
+
+text-zinc-500
+
+"
+
+>
+
+{label}
+
+</div>
+
+
+
+</div>
+
+
+))}
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+{/* GLOBE */}
+
+
+<div
+
+className="
+
+flex
+
+justify-center
+
+animate-[fadeIn_1.2s_ease-out]
+
+"
+
+>
+
+
+<HeroGlobe/>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</Container>
+
+
+</section>
+
+
+);
+
+
 }

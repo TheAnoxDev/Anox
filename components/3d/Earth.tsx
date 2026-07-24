@@ -5,127 +5,225 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
+import Core from "./Core";
+import Atmosphere from "./Atmosphere";
 import Network from "./Network";
+import HoloGrid from "./HoloGrid";
+
 
 export default function Earth() {
-  const meshRef = useRef<THREE.Group>(null);
 
-  useFrame(() => {
-    if (!meshRef.current) return;
-    meshRef.current.rotation.y += 0.0015;
+
+  const group =
+    useRef<THREE.Group>(null);
+
+
+  const ring1 =
+    useRef<THREE.Mesh>(null);
+
+
+  const ring2 =
+    useRef<THREE.Mesh>(null);
+
+
+
+  useFrame((_, delta)=>{
+
+
+    if(group.current){
+
+      group.current.rotation.y +=
+        delta * 0.15;
+
+    }
+
+
+    if(ring1.current){
+
+      ring1.current.rotation.z +=
+        delta * 0.35;
+
+    }
+
+
+    if(ring2.current){
+
+      ring2.current.rotation.x +=
+        delta * 0.2;
+
+    }
+
+
   });
 
+
+
   return (
+
     <Float
-      speed={1.2}
-      rotationIntensity={0.25}
-      floatIntensity={0.25}
+
+      speed={1}
+
+      rotationIntensity={0.12}
+
+      floatIntensity={0.2}
+
     >
-      <group ref={meshRef}>
-                {/* Core Sphere */}
 
-        <mesh>
-          <sphereGeometry args={[1.45, 256, 256]} />
 
-          <meshStandardMaterial
-            color="#050b10"
-            metalness={1}
-            roughness={0.12}
-            emissive="#00d9ff"
-            emissiveIntensity={1.2}
+      <group ref={group}>
+
+
+
+        {/* Main AI Core */}
+
+        <Core />
+
+
+
+        {/* Energy Atmosphere */}
+
+        <Atmosphere />
+
+
+
+        {/* Holographic Grid */}
+
+        <HoloGrid />
+
+
+
+        {/* Orbital Ring 01 */}
+
+
+        <mesh
+
+          ref={ring1}
+
+          rotation={[
+            Math.PI / 2,
+            0,
+            0
+          ]}
+
+        >
+
+          <torusGeometry
+
+            args={[
+              1.7,
+              0.01,
+              24,
+              160
+            ]}
+
           />
-        </mesh>
 
-        {/* Inner Glow Layer */}
-
-        <mesh scale={1.03}>
-          <sphereGeometry args={[1.45, 128, 128]} />
 
           <meshBasicMaterial
+
             color="#22d3ee"
+
             transparent
-            opacity={0.08}
+
+            opacity={0.65}
+
           />
+
         </mesh>
 
-        {/* Atmosphere Layer */}
 
-        <mesh scale={1.08}>
-          <sphereGeometry args={[1.45, 128, 128]} />
+
+
+        {/* Orbital Ring 02 */}
+
+
+        <mesh
+
+          ref={ring2}
+
+          rotation={[
+            0.8,
+            0.4,
+            0.7
+          ]}
+
+        >
+
+
+          <torusGeometry
+
+            args={[
+              1.9,
+              0.008,
+              24,
+              160
+            ]}
+
+          />
+
 
           <meshBasicMaterial
+
             color="#00d9ff"
+
             transparent
-            opacity={0.05}
-            side={THREE.BackSide}
-          />
-        </mesh>
 
-        {/* Holographic Ring 1 */}
-
-        <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[1.65, 0.01, 32, 400]} />
-
-          <meshBasicMaterial
-            color="#22d3ee"
-            transparent
-            opacity={0.7}
-          />
-        </mesh>
-
-        {/* Holographic Ring 2 (Tilted) */}
-
-        <mesh rotation={[0.8, 0.3, 0.6]}>
-          <torusGeometry args={[1.85, 0.008, 32, 400]} />
-
-          <meshBasicMaterial
-            color="#00d9ff"
-            transparent
             opacity={0.35}
+
           />
+
+
         </mesh>
 
-        {/* Energy Core Pulse */}
 
-        <mesh scale={1.12}>
-          <sphereGeometry args={[1.45, 64, 64]} />
 
-          <meshBasicMaterial
-            color="#00f5ff"
-            transparent
-            opacity={0.03}
-          />
-        </mesh>
-                {/* Final Outer Glow Shell */}
 
-        <mesh scale={1.2}>
-          <sphereGeometry args={[1.45, 64, 64]} />
-
-          <meshBasicMaterial
-            color="#00d9ff"
-            transparent
-            opacity={0.02}
-          />
-        </mesh>
-
-        {/* Subtle Energy Dust Layer */}
+        {/* Energy Dust */}
 
         <points>
-          <sphereGeometry args={[2.2, 64, 64]} />
+
+
+          <sphereGeometry
+
+            args={[
+              2.25,
+              48,
+              48
+            ]}
+
+          />
+
 
           <pointsMaterial
+
             color="#22d3ee"
-            size={0.015}
+
+            size={0.012}
+
             transparent
-            opacity={0.35}
+
+            opacity={0.3}
+
           />
+
+
         </points>
 
-        {/* Network Layer */}
+
+
+
+
+        {/* Cyber Intelligence Network */}
 
         <Network />
 
+
       </group>
+
+
     </Float>
+
   );
+
 }

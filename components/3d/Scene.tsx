@@ -1,114 +1,258 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
-import Earth from "./Earth";
+import {
+  EffectComposer,
+  Bloom,
+  Noise,
+  Vignette,
+} from "@react-three/postprocessing";
 
 import {
-  PerspectiveCamera,
   OrbitControls,
-  Stars,
   Sparkles,
 } from "@react-three/drei";
 
+import Stars from "./Stars";
+
+import Earth from "./Earth";
+
+
 
 export default function Scene() {
-  return (
-    <Canvas
-  dpr={[1, 2]}
-  camera={{ position: [0, 0, 5], fov: 45 }}
-  style={{ width: "100%", height: "100%" }}
-  gl={{ antialias: true, alpha: true }}
+
+
+return (
+
+<Canvas
+
+dpr={[1,1.75]}
+
+camera={{
+position:[0,0,5],
+fov:45
+}}
+
+gl={{
+antialias:true,
+alpha:true,
+powerPreference:"high-performance"
+}}
+
 >
-      {/* Camera */}
 
-      <PerspectiveCamera
-        makeDefault
-        position={[0, 0, 5]}
-        fov={45}
-      />
 
-      <color
-        attach="background"
-        args={["#04070b"]}
-      />
 
-      {/* Lights */}
 
-      <ambientLight intensity={0.25} />
 
-      <directionalLight
-        position={[4, 5, 5]}
-        intensity={3}
-      />
+{/* Space Background */}
 
-      <pointLight
-        position={[0, 0, 5]}
-        intensity={35}
-        color="#22d3ee"
-      />
 
-      <pointLight
-        position={[-5, -2, -4]}
-        intensity={10}
-        color="#0044ff"
-      />
+<color
 
-      <pointLight
-        position={[5, 2, -5]}
-        intensity={10}
-        color="#44ffff"
-      />
+attach="background"
 
-      {/* Stars */}
+args={[
+"#04070b"
+]}
 
-      <Stars
-        radius={250}
-        depth={120}
-        count={9000}
-        factor={6}
-        saturation={0}
-        fade
-        speed={0.4}
-      />
+/>
 
-      {/* Space Dust */}
 
-      <Sparkles
-        count={350}
-        size={3}
-        scale={[15, 15, 15]}
-        speed={0.35}
-        color="#22d3ee"
-      />
 
-      {/* Earth */}
 
-      <group rotation={[0.15, 0.4, 0]}>
-        <Earth />
-      </group>
 
-      {/* Bloom */}
+{/* Lighting */}
 
-      <EffectComposer>
 
-        <Bloom
-          intensity={2.4}
-          luminanceThreshold={0}
-          luminanceSmoothing={0.9}
-        />
+<ambientLight
 
-      </EffectComposer>
+intensity={0.15}
 
-      {/* Controls */}
+/>
 
-      <OrbitControls
-        enableZoom={false}
-        enablePan={false}
-        autoRotate
-        autoRotateSpeed={0.35}
-      />
 
-    </Canvas>
-  );
+
+<directionalLight
+
+position={[
+4,
+5,
+5
+]}
+
+intensity={1.8}
+
+/>
+
+
+
+<pointLight
+
+position={[
+0,
+0,
+4
+]}
+
+intensity={12}
+
+distance={8}
+
+color="#22d3ee"
+
+/>
+
+
+
+<pointLight
+
+position={[
+-4,
+-2,
+-5
+]}
+
+intensity={5}
+
+color="#0066ff"
+
+/>
+
+
+
+
+
+{/* Stars */}
+
+
+<Stars />
+
+
+
+
+{/* Cyber Particles */}
+
+
+<Sparkles
+
+count={250}
+
+size={2}
+
+scale={[
+12,
+12,
+12
+]}
+
+speed={0.25}
+
+color="#22d3ee"
+
+/>
+
+
+
+
+
+
+
+{/* Main Globe */}
+
+
+<group
+
+rotation={[
+0.15,
+0.4,
+0
+]}
+
+>
+
+<Earth />
+
+</group>
+
+
+
+
+
+
+
+{/* Cinematic Effects */}
+
+
+<EffectComposer>
+
+
+<Bloom
+
+intensity={1.35}
+
+luminanceThreshold={0.25}
+
+luminanceSmoothing={0.8}
+
+/>
+
+
+
+<Noise
+
+opacity={0.025}
+
+/>
+
+
+
+<Vignette
+
+eskil={false}
+
+offset={0.25}
+
+darkness={0.8}
+
+/>
+
+
+
+</EffectComposer>
+
+
+
+
+
+
+
+{/* Controls */}
+
+
+<OrbitControls
+
+enableZoom={false}
+
+enablePan={false}
+
+enableRotate={true}
+
+autoRotate
+
+autoRotateSpeed={0.25}
+
+minPolarAngle={1.1}
+
+maxPolarAngle={2.1}
+
+/>
+
+
+
+</Canvas>
+
+
+);
+
 }
