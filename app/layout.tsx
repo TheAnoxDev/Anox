@@ -15,17 +15,25 @@ import AuthProvider from "@/components/AuthProvider";
 
 
 const geistSans = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
-  display: "swap",
+
+  subsets:["latin"],
+
+  variable:"--font-geist",
+
+  display:"swap",
+
 });
 
 
 
 const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
-  display: "swap",
+
+  subsets:["latin"],
+
+  variable:"--font-geist-mono",
+
+  display:"swap",
+
 });
 
 
@@ -37,26 +45,31 @@ const vazirmatn = localFont({
   src:[
 
     {
-      path:"/fonts/vazirmatn/Vazirmatn-Regular.woff2",
+      path:"../fonts/vazirmatn/Vazirmatn-Regular.woff2",
       weight:"400",
+      style:"normal",
     },
 
     {
-      path:"/fonts/vazirmatn/Vazirmatn-Medium.woff2",
+      path:"../fonts/vazirmatn/Vazirmatn-Medium.woff2",
       weight:"500",
+      style:"normal",
     },
 
     {
-      path:"/fonts/vazirmatn/Vazirmatn-Bold.woff2",
+      path:"../fonts/vazirmatn/Vazirmatn-Bold.woff2",
       weight:"700",
+      style:"normal",
     },
 
     {
-      path:"/fonts/vazirmatn/Vazirmatn-Black.woff2",
+      path:"../fonts/vazirmatn/Vazirmatn-Black.woff2",
       weight:"900",
+      style:"normal",
     },
 
   ],
+
 
   variable:"--font-vazir",
 
@@ -69,12 +82,12 @@ const vazirmatn = localFont({
 
 
 
+export const metadata:Metadata = {
 
-export const metadata: Metadata = {
-
-  metadataBase: new URL(
+  metadataBase:new URL(
     "https://anox-three.vercel.app"
   ),
+
 
   title:{
     default:"ANOX",
@@ -138,8 +151,8 @@ export const metadata: Metadata = {
     icon:"/favicon.ico",
   },
 
-
 };
+
 
 
 
@@ -177,7 +190,6 @@ ${vazirmatn.variable}
 
 <body>
 
-
 <AuthProvider>
 
 <LangProvider>
@@ -193,7 +205,6 @@ ${vazirmatn.variable}
 
 
 </html>
-
 
 );
 
