@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 import {
   Geist,
   Geist_Mono,
-  Vazirmatn,
 } from "next/font/google";
+
+import localFont from "next/font/local";
 
 import "./globals.css";
 
@@ -29,19 +30,41 @@ const geistMono = Geist_Mono({
 
 
 
-const vazirmatn = Vazirmatn({
-  subsets: ["arabic"],
-  variable: "--font-vazir",
-  weight: [
-    "400",
-    "500",
-    "600",
-    "700",
-    "800",
-    "900",
+
+
+const vazirmatn = localFont({
+
+  src:[
+
+    {
+      path:"/fonts/vazirmatn/Vazirmatn-Regular.woff2",
+      weight:"400",
+    },
+
+    {
+      path:"/fonts/vazirmatn/Vazirmatn-Medium.woff2",
+      weight:"500",
+    },
+
+    {
+      path:"/fonts/vazirmatn/Vazirmatn-Bold.woff2",
+      weight:"700",
+    },
+
+    {
+      path:"/fonts/vazirmatn/Vazirmatn-Black.woff2",
+      weight:"900",
+    },
+
   ],
-  display: "swap",
+
+  variable:"--font-vazir",
+
+  display:"swap",
+
 });
+
+
 
 
 
@@ -53,18 +76,17 @@ export const metadata: Metadata = {
     "https://anox-three.vercel.app"
   ),
 
-
-  title: {
-    default: "ANOX",
-    template: "%s | ANOX",
+  title:{
+    default:"ANOX",
+    template:"%s | ANOX",
   },
 
 
   description:
-    "ANOX builds next-generation software, artificial intelligence, cybersecurity, cloud infrastructure and digital products.",
+  "ANOX builds next-generation software, artificial intelligence, cybersecurity, cloud infrastructure and digital products.",
 
 
-  keywords: [
+  keywords:[
     "ANOX",
     "Artificial Intelligence",
     "Cyber Security",
@@ -98,10 +120,10 @@ export const metadata: Metadata = {
     title:"ANOX",
 
     description:
-      "Engineering the future through software, AI and digital innovation.",
+    "Engineering the future through software, AI and digital innovation.",
 
     url:
-      "https://anox-three.vercel.app",
+    "https://anox-three.vercel.app",
 
     siteName:"ANOX",
 
@@ -116,6 +138,7 @@ export const metadata: Metadata = {
     icon:"/favicon.ico",
   },
 
+
 };
 
 
@@ -126,28 +149,28 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
 
-  children,
+children,
 
 }:{
 
-  children:React.ReactNode;
+children:React.ReactNode;
 
-}) {
+}){
 
 
 return (
 
 <html
 
-  lang="en"
+lang="en"
 
-  suppressHydrationWarning
+suppressHydrationWarning
 
-  className={`
-    ${geistSans.variable}
-    ${geistMono.variable}
-    ${vazirmatn.variable}
-  `}
+className={`
+${geistSans.variable}
+${geistMono.variable}
+${vazirmatn.variable}
+`}
 
 >
 
@@ -157,15 +180,11 @@ return (
 
 <AuthProvider>
 
-
 <LangProvider>
-
 
 {children}
 
-
 </LangProvider>
-
 
 </AuthProvider>
 
@@ -174,6 +193,7 @@ return (
 
 
 </html>
+
 
 );
 
