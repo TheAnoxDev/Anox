@@ -1,0 +1,13 @@
+{
+  "navbar": {
+    "home": "Home",
+    "platform": "Platform",
+    "shop": "Shop",
+    "contact": "Contact"
+  },
+
+  "hero": {
+    "title": "Engineering The Future",
+    "description": "AI, Software and Cybersecurity solutions."
+  }
+}

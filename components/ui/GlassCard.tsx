@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import clsx from "clsx";
+import type { ReactNode } from "react";
+import { cn } from "@/lib/cn";
 
 interface GlassCardProps {
   children: ReactNode;
@@ -12,7 +12,7 @@ export default function GlassCard({
 }: GlassCardProps) {
   return (
     <div
-      className={clsx(
+      className={cn(
         `
         group
         relative
@@ -23,24 +23,33 @@ export default function GlassCard({
         border
         border-white/10
 
-        bg-white/[0.04]
+        bg-white/[0.035]
 
-        backdrop-blur-2xl
-
-        p-8
+        backdrop-blur-xl
 
         transition-all
-        duration-500
+        duration-300
 
-        hover:-translate-y-2
-        hover:border-cyan-400/40
+        hover:-translate-y-1
+
+        hover:border-cyan-400/30
+
         hover:bg-white/[0.06]
-        hover:shadow-[0_25px_80px_rgba(34,211,238,.18)]
-      `,
+
+        before:absolute
+        before:inset-0
+        before:bg-[radial-gradient(circle_at_top,rgba(34,211,238,.12),transparent_50%)]
+        before:opacity-0
+        before:transition-opacity
+
+        group-hover:before:opacity-100
+        `,
         className
       )}
     >
-      {children}
+      <div className="relative z-10">
+        {children}
+      </div>
     </div>
   );
 }

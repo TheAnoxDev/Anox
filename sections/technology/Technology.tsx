@@ -1,11 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
-import { useTranslation } from "@/hooks/useTranslation";
-
-import Container from "@/components/ui/Container";
-import SectionTitle from "@/components/ui/SectionTitle";
-import GlassCard from "@/components/ui/GlassCard";
+import { motion } from "framer-motion";
 
 import {
   Brain,
@@ -16,140 +11,150 @@ import {
   Globe,
 } from "lucide-react";
 
+import { useLang } from "@/components/LangContext";
 
-const containerVariants: Variants = {
-  hidden: {},
+import Container from "@/components/ui/Container";
+import SectionTitle from "@/components/ui/SectionTitle";
+import GlassCard from "@/components/ui/GlassCard";
 
-  show: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-};
+import { cn } from "@/lib/cn";
 
 
-const cardVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 40,
-    scale: 0.96,
+
+const technologies = [
+  {
+    icon: Brain,
+    key: "ai",
   },
 
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
-    },
+  {
+    icon: Shield,
+    key: "cyber",
   },
-};
+
+  {
+    icon: Code2,
+    key: "software",
+  },
+
+  {
+    icon: Cloud,
+    key: "cloud",
+  },
+
+  {
+    icon: Cpu,
+    key: "automation",
+  },
+
+  {
+    icon: Globe,
+    key: "web",
+  },
+];
 
 
-const iconClass =
-  "text-cyan-400 drop-shadow-[0_0_18px_rgba(34,211,238,0.45)]";
+
 
 
 export default function Technology() {
 
-  const { t } = useTranslation();
+
+  const {
+    t,
+    lang,
+  } = useLang();
 
 
-  const technologies = [
-    {
-      icon: Brain,
-      title: t.technology.aiTitle,
-      desc: t.technology.aiDesc,
-    },
 
-    {
-      icon: Shield,
-      title: t.technology.cyberTitle,
-      desc: t.technology.cyberDesc,
-    },
+  const rtl = lang === "fa";
 
-    {
-      icon: Code2,
-      title: t.technology.softwareTitle,
-      desc: t.technology.softwareDesc,
-    },
 
-    {
-      icon: Cloud,
-      title: t.technology.cloudTitle,
-      desc: t.technology.cloudDesc,
-    },
-
-    {
-      icon: Cpu,
-      title: t.technology.automationTitle,
-      desc: t.technology.automationDesc,
-    },
-
-    {
-      icon: Globe,
-      title: t.technology.webTitle,
-      desc: t.technology.webDesc,
-    },
-  ];
 
 
   return (
 
+
     <section
+
       id="technology"
-      className="
-      relative
-      overflow-hidden
-      py-32
-      "
+
+      dir={rtl ? "rtl" : "ltr"}
+
+      className={cn(
+        "relative overflow-hidden py-32",
+        rtl && "text-right"
+      )}
+
     >
 
 
-      {/* Background Glow */}
 
       <div
+
         className="
+        pointer-events-none
         absolute
         left-1/2
         top-1/2
         -z-10
-        h-[500px]
-        w-[500px]
+        h-[420px]
+        w-[420px]
         -translate-x-1/2
         -translate-y-1/2
         rounded-full
         bg-cyan-500/10
-        blur-[140px]
+        blur-[120px]
         "
+
       />
+
+
 
 
       <Container>
 
 
         <SectionTitle
-          badge="TECHNOLOGY"
-          title={t.technology.title ?? "Our Expertise"}
+
+          badge={t.technology.badge}
+
+          title={t.technology.title}
+
           description={t.technology.description}
+
         />
+
+
 
 
 
         <motion.div
 
-          variants={containerVariants}
 
           initial="hidden"
 
+
           whileInView="show"
+
 
           viewport={{
             once:true,
-            margin:"-100px"
+            margin:"-100px",
           }}
+
+
+          variants={{
+            hidden:{},
+
+            show:{
+              transition:{
+                staggerChildren:0.08,
+              },
+            },
+
+          }}
+
 
           className="
           mt-20
@@ -162,100 +167,224 @@ export default function Technology() {
         >
 
 
-          {technologies.map((item)=>{
 
 
-            const Icon = item.icon;
+          {
+            technologies.map((item,index)=>{
 
 
-            return (
+              const Icon = item.icon;
 
-              <motion.article
 
-                key={item.title}
 
-                variants={cardVariants}
+              const title =
+                t.technology[
+                  `${item.key}Title` as keyof typeof t.technology
+                ];
 
-              >
 
-                <GlassCard
 
-                  className="
-                  group
-                  h-full
-                  p-8
-                  transition-all
-                  duration-300
-                  hover:-translate-y-2
-                  hover:border-cyan-400/30
-                  hover:bg-white/[0.06]
-                  "
+              const desc =
+                t.technology[
+                  `${item.key}Desc` as keyof typeof t.technology
+                ];
+
+
+
+
+              return (
+
+
+
+                <motion.article
+
+
+                  key={item.key}
+
+
+                  variants={{
+                    hidden:{
+                      opacity:0,
+                      y:35,
+                    },
+
+
+                    show:{
+                      opacity:1,
+                      y:0,
+
+                      transition:{
+                        duration:0.5,
+                        ease:"easeOut",
+                      },
+
+                    },
+
+                  }}
+
+
+                  whileHover={{
+                    y:-8,
+                  }}
+
 
                 >
 
 
-                  <Icon
-
-                    size={46}
-
-                    className={iconClass}
-
-                  />
 
 
-                  <h3
+                  <GlassCard
+
 
                     className="
-                    mt-8
-                    text-2xl
-                    font-bold
-                    text-white
-                    transition
-                    group-hover:text-cyan-300
+                    group
+                    relative
+                    h-full
+                    overflow-hidden
+                    p-8
+                    transition-all
+                    duration-300
+                    hover:border-cyan-400/40
+                    hover:bg-white/[0.07]
                     "
 
                   >
 
-                    {item.title}
-
-                  </h3>
 
 
 
-                  <p
+                    <span
 
-                    className="
-                    mt-5
-                    leading-8
-                    text-zinc-400
-                    "
+                      className="
+                      absolute
+                      right-6
+                      top-4
+                      text-6xl
+                      font-black
+                      text-white/5
+                      "
 
-                  >
+                    >
 
-                    {item.desc}
+                      0{index + 1}
 
-                  </p>
-
-
-                </GlassCard>
-
-
-              </motion.article>
-
-            );
+                    </span>
 
 
-          })}
+
+
+
+                    <div
+
+
+                      className="
+                      flex
+                      h-16
+                      w-16
+                      items-center
+                      justify-center
+                      rounded-2xl
+                      border
+                      border-cyan-400/20
+                      bg-cyan-400/10
+                      "
+
+                    >
+
+
+                      <Icon
+
+                        size={34}
+
+                        className="
+                        text-cyan-300
+                        "
+
+                      />
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <h3
+
+
+                      className="
+                      mt-7
+                      text-2xl
+                      font-bold
+                      text-white
+                      transition
+                      group-hover:text-cyan-300
+                      "
+
+                    >
+
+                      {title}
+
+                    </h3>
+
+
+
+
+
+
+                    <p
+
+
+                      className="
+                      mt-4
+                      leading-7
+                      text-zinc-400
+                      "
+
+                    >
+
+                      {desc}
+
+                    </p>
+
+
+
+
+
+                  </GlassCard>
+
+
+
+
+                </motion.article>
+
+
+              );
+
+
+            })
+
+          }
+
+
 
 
         </motion.div>
 
 
+
+
       </Container>
+
+
 
 
     </section>
 
+
   );
+
 
 }

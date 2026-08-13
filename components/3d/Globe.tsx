@@ -3,12 +3,13 @@
 import dynamic from "next/dynamic";
 
 
+
 const Scene = dynamic(
   () => import("./Scene"),
   {
-    ssr:false,
+    ssr: false,
 
-    loading:()=>(
+    loading: () => (
       <div
         className="
         flex
@@ -17,169 +18,160 @@ const Scene = dynamic(
         items-center
         justify-center
         rounded-full
+
         border
-        border-cyan-400/20
-        bg-cyan-400/5
+        border-cyan-400/15
+
+        bg-cyan-400/[0.03]
+
         animate-pulse
         "
       >
-        <span
-          className="
-          font-mono
-          text-xs
-          tracking-[0.35em]
-          uppercase
-          text-cyan-400/70
-          "
-        >
-          Initializing Core...
-        </span>
+        <div className="text-center">
 
+          <span
+            className="
+            block
+            font-mono
+            text-[10px]
+            uppercase
+            tracking-[0.3em]
+            text-cyan-400/70
+            "
+          >
+            ANOX CORE
+          </span>
+
+          <span
+            className="
+            mt-2
+            block
+            text-[9px]
+            tracking-[0.2em]
+            text-zinc-600
+            "
+          >
+            INITIALIZING
+          </span>
+
+        </div>
       </div>
-    )
+    ),
   }
 );
 
 
 
-export default function Globe(){
+export default function Globe() {
 
-return (
+  return (
 
-<div
+    <div
+      role="img"
+      aria-label="ANOX AI Global Intelligence Network"
+      className="
+      relative
+      mx-auto
+      aspect-square
 
-  role="img"
+      w-[280px]
 
-  aria-label="
-  ANOX AI Global Intelligence Network
-  "
+      sm:w-[360px]
 
-  className="
-  relative
-  mx-auto
+      md:w-[420px]
 
-  aspect-square
+      lg:w-[480px]
 
-  w-[320px]
+      xl:w-[520px]
 
-  sm:w-[420px]
+      select-none
 
-  lg:w-[560px]
+      contain-layout
 
-  xl:w-[650px]
+      "
+    >
 
-  select-none
 
-  contain-layout
+      {/* Ambient Glow */}
 
-  will-change-transform
+      <div
+        aria-hidden="true"
+        className="
+        pointer-events-none
+        absolute
+        left-1/2
+        top-1/2
 
-  "
+        h-[260px]
+        w-[260px]
 
->
+        sm:h-[330px]
+        sm:w-[330px]
 
+        lg:h-[420px]
+        lg:w-[420px]
 
-{/* MAIN GLOW */}
+        -translate-x-1/2
+        -translate-y-1/2
 
-<div
+        rounded-full
 
-className="
-absolute
-left-1/2
-top-1/2
+        bg-cyan-400/[0.07]
 
-h-[280px]
+        blur-[90px]
+        "
+      />
 
-w-[280px]
 
-sm:h-[450px]
 
-sm:w-[450px]
+      {/* Subtle Core Light */}
 
-lg:h-[600px]
+      <div
+        aria-hidden="true"
+        className="
+        pointer-events-none
+        absolute
+        left-1/2
+        top-1/2
 
-lg:w-[600px]
+        h-[160px]
+        w-[160px]
 
--translate-x-1/2
--translate-y-1/2
+        sm:h-[220px]
+        sm:w-[220px]
 
-rounded-full
+        lg:h-[280px]
+        lg:w-[280px]
 
-bg-cyan-400/10
+        -translate-x-1/2
+        -translate-y-1/2
 
-blur-[100px]
+        rounded-full
 
-pointer-events-none
+        bg-cyan-300/[0.05]
 
-"
+        blur-[60px]
+        "
+      />
 
-/>
 
 
+      {/* Three.js Scene */}
 
-{/* CORE GLOW */}
+      <div
+        className="
+        relative
+        z-10
+        h-full
+        w-full
+        "
+      >
+        <Scene />
+      </div>
 
-<div
 
-className="
-absolute
+    </div>
 
-left-1/2
-top-1/2
-
-h-[180px]
-
-w-[180px]
-
-sm:h-[300px]
-
-sm:w-[300px]
-
-lg:h-[420px]
-
-lg:w-[420px]
-
--translate-x-1/2
--translate-y-1/2
-
-rounded-full
-
-bg-cyan-300/10
-
-blur-[70px]
-
-pointer-events-none
-
-"
-
-/>
-
-
-
-{/* 3D */}
-
-<div
-
-className="
-relative
-z-10
-
-h-full
-
-w-full
-
-"
-
->
-
-<Scene />
-
-</div>
-
-
-
-</div>
-
-);
+  );
 
 }

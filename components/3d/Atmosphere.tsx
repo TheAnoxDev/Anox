@@ -7,20 +7,20 @@ import * as THREE from "three";
 export default function Atmosphere(){
 
 
-return(
+return (
 
 <>
 
 
-<mesh scale={1.08}>
+<mesh scale={1.05}>
 
 
 <sphereGeometry
 
 args={[
-1.42,
-96,
-96
+1.4,
+32,
+32
 ]}
 
 />
@@ -36,6 +36,8 @@ opacity={0.08}
 
 side={THREE.BackSide}
 
+depthWrite={false}
+
 />
 
 
@@ -43,15 +45,15 @@ side={THREE.BackSide}
 
 
 
-<mesh scale={1.18}>
+<mesh scale={1.12}>
 
 
 <sphereGeometry
 
 args={[
-1.42,
-64,
-64
+1.4,
+24,
+24
 ]}
 
 />
@@ -59,16 +61,15 @@ args={[
 
 <meshBasicMaterial
 
-
-color="#00d9ff"
+color="#00e5ff"
 
 transparent
 
-opacity={0.035}
-
+opacity={0.03}
 
 side={THREE.BackSide}
 
+depthWrite={false}
 
 />
 
@@ -76,8 +77,11 @@ side={THREE.BackSide}
 </mesh>
 
 
+
 </>
 
-)
+
+);
+
 
 }

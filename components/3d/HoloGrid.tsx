@@ -1,128 +1,74 @@
 "use client";
 
-import { Line } from "@react-three/drei";
+import dynamic from "next/dynamic";
 
 
-const rings = [
-  1.55,
-  1.72,
-  1.89
-];
+const Scene = dynamic(
+  () => import("./Scene"),
+  {
+    ssr:false,
+    loading:()=>(
+      <div
+        className="
+        flex
+        h-full
+        w-full
+        items-center
+        justify-center
+        text-cyan-400
+        "
+      >
+        Loading...
+      </div>
+    )
+  }
+);
 
 
-export default function HoloGrid() {
+export default function HeroGlobe(){
+
+return(
+
+<div
+
+className="
+relative
+mx-auto
+h-[420px]
+w-[420px]
+
+sm:h-[500px]
+sm:w-[500px]
+
+lg:h-[650px]
+lg:w-[650px]
+
+"
+
+>
 
 
-  return (
+{/* Glow */}
 
-    <>
+<div
 
-      {rings.map((r, i) => (
+className="
+absolute
+inset-0
+rounded-full
+bg-cyan-400/10
+blur-[120px]
+"
 
-        <group
-          key={i}
-          rotation={[
-            i * 0.55,
-            i * 0.85,
-            i * 0.35
-          ]}
-        >
-
-          <mesh>
-
-            <torusGeometry
-              args={[
-                r,
-                0.008,
-                24,
-                160
-              ]}
-            />
-
-            <meshBasicMaterial
-
-              color="#22d3ee"
-
-              transparent
-
-              opacity={0.45}
-
-            />
-
-          </mesh>
-
-        </group>
-
-      ))}
-
-
-
-      {Array.from({
-        length: 12
-      }).map((_, index) => {
-
-
-        const angle =
-          (index / 12) * Math.PI * 2;
-
-
-        const x =
-          Math.cos(angle) * 1.55;
-
-
-        const z =
-          Math.sin(angle) * 1.55;
+/>
 
 
 
-        const points: [
-          number,
-          number,
-          number
-        ][] = [
-
-          [
-            x,
-            -1.45,
-            z
-          ],
-
-          [
-            x,
-            1.45,
-            z
-          ]
-
-        ];
+<Scene />
 
 
+</div>
 
-        return (
-
-          <Line
-
-            key={index}
-
-            points={points}
-
-            color="#22d3ee"
-
-            transparent
-
-            opacity={0.28}
-
-            lineWidth={1}
-
-          />
-
-        );
-
-      })}
-
-
-
-    </>
-
-  );
+)
 
 }

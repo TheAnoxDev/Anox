@@ -2,257 +2,91 @@
 
 import { Canvas } from "@react-three/fiber";
 import {
-  EffectComposer,
-  Bloom,
-  Noise,
-  Vignette,
-} from "@react-three/postprocessing";
-
-import {
   OrbitControls,
-  Sparkles,
+  Stars,
 } from "@react-three/drei";
 
-import Stars from "./Stars";
+import {
+  EffectComposer,
+  Bloom,
+} from "@react-three/postprocessing";
 
 import Earth from "./Earth";
 
 
 
 export default function Scene() {
-
-
-return (
-
-<Canvas
-
-dpr={[1,1.75]}
-
-camera={{
-position:[0,0,5],
-fov:45
-}}
-
-gl={{
-antialias:true,
-alpha:true,
-powerPreference:"high-performance"
-}}
-
->
-
-
-
-
-
-{/* Space Background */}
-
-
-<color
-
-attach="background"
-
-args={[
-"#04070b"
-]}
-
-/>
-
-
-
-
-
-{/* Lighting */}
-
-
-<ambientLight
-
-intensity={0.15}
-
-/>
-
-
-
-<directionalLight
-
-position={[
-4,
-5,
-5
-]}
-
-intensity={1.8}
-
-/>
-
-
-
-<pointLight
-
-position={[
-0,
-0,
-4
-]}
-
-intensity={12}
-
-distance={8}
-
-color="#22d3ee"
-
-/>
-
-
-
-<pointLight
-
-position={[
--4,
--2,
--5
-]}
-
-intensity={5}
-
-color="#0066ff"
-
-/>
-
-
-
-
-
-{/* Stars */}
-
-
-<Stars />
-
-
-
-
-{/* Cyber Particles */}
-
-
-<Sparkles
-
-count={250}
-
-size={2}
-
-scale={[
-12,
-12,
-12
-]}
-
-speed={0.25}
-
-color="#22d3ee"
-
-/>
-
-
-
-
-
-
-
-{/* Main Globe */}
-
-
-<group
-
-rotation={[
-0.15,
-0.4,
-0
-]}
-
->
-
-<Earth />
-
-</group>
-
-
-
-
-
-
-
-{/* Cinematic Effects */}
-
-
-<EffectComposer>
-
-
-<Bloom
-
-intensity={1.35}
-
-luminanceThreshold={0.25}
-
-luminanceSmoothing={0.8}
-
-/>
-
-
-
-<Noise
-
-opacity={0.025}
-
-/>
-
-
-
-<Vignette
-
-eskil={false}
-
-offset={0.25}
-
-darkness={0.8}
-
-/>
-
-
-
-</EffectComposer>
-
-
-
-
-
-
-
-{/* Controls */}
-
-
-<OrbitControls
-
-enableZoom={false}
-
-enablePan={false}
-
-enableRotate={true}
-
-autoRotate
-
-autoRotateSpeed={0.25}
-
-minPolarAngle={1.1}
-
-maxPolarAngle={2.1}
-
-/>
-
-
-
-</Canvas>
-
-
-);
-
+  return (
+    <Canvas
+      dpr={[0.8, 1]}
+      gl={{
+        antialias: false,
+        alpha: true,
+        powerPreference: "high-performance",
+      }}
+      camera={{
+        position: [0, 0, 5],
+        fov: 45,
+        near: 0.1,
+        far: 100,
+      }}
+      frameloop="always"
+    >
+
+      {/* Lighting */}
+
+      <ambientLight
+        intensity={0.35}
+      />
+
+      <directionalLight
+        position={[3, 3, 4]}
+        intensity={0.8}
+      />
+
+
+      {/* Background Stars */}
+
+      <Stars
+        count={160}
+        radius={40}
+        depth={25}
+        factor={1.5}
+        saturation={0}
+        fade
+        speed={0.15}
+      />
+
+
+      {/* Earth */}
+
+      <Earth />
+
+
+      {/* Lightweight Bloom */}
+
+      <EffectComposer
+        multisampling={0}
+      >
+        <Bloom
+          intensity={0.45}
+          luminanceThreshold={0.85}
+          luminanceSmoothing={0.25}
+          mipmapBlur
+        />
+      </EffectComposer>
+
+
+      {/* Controls */}
+
+      <OrbitControls
+        enableZoom={false}
+        enablePan={false}
+        enableRotate={false}
+        autoRotate
+        autoRotateSpeed={0.25}
+      />
+
+    </Canvas>
+  );
 }

@@ -11,12 +11,9 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 
-import { useTranslation } from "@/hooks/useTranslation";
+import { useLang } from "@/components/LangContext";
+import { cn } from "@/lib/cn";
 
-
-/* ======================================================
-   TYPES
-====================================================== */
 
 type Project = {
   id: string;
@@ -28,676 +25,856 @@ type Project = {
 
 
 
-
-/* ======================================================
-   ANIMATION
-====================================================== */
-
 const containerAnimation: Variants = {
-  hidden: {},
 
-  show: {
-    transition: {
-      staggerChildren: 0.12,
+  hidden:{},
+
+  show:{
+    transition:{
+      staggerChildren:0.12,
     },
   },
+
 };
+
 
 
 const cardAnimation: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 40,
+
+  hidden:{
+    opacity:0,
+    y:40,
   },
 
-  show: {
-    opacity: 1,
-    y: 0,
 
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
+  show:{
+    opacity:1,
+    y:0,
+
+    transition:{
+      duration:.6,
+      ease:[0.16,1,0.3,1],
     },
   },
+
 };
 
-/* ======================================================
-   COMPONENT
-====================================================== */
 
-export default function Projects() {
 
-  const { t } = useTranslation();
 
+export default function Projects(){
 
-  const [selected, setSelected] =
-    useState<Project | null>(null);
 
+const {
+  t,
+  lang
+}=useLang();
 
 
-  /* =========================
-      PROJECT DATA
-  ========================= */
 
-  const projects = useMemo<Project[]>(
-    () => [
-      {
-        id: "intelligence",
+const rtl = lang==="fa";
 
-        title:
-          t.projects.intelligence.title,
 
-        desc:
-          t.projects.intelligence.desc,
 
-        image:
-          "/images/projects/anox-intelligence.jpg",
+const [selected,setSelected]
+=
+useState<Project|null>(null);
 
-        tags: [
-          "AI",
-          "Next.js",
-          "Machine Learning",
-        ],
-      },
 
 
-      {
-        id: "shield",
 
-        title:
-          t.projects.shield.title,
 
-        desc:
-          t.projects.shield.desc,
+const projects =
+useMemo<Project[]>(()=>[
 
-        image:
-          "/images/projects/anox-shield.jpg",
 
-        tags: [
-          "Security",
-          "Cloud",
-          "Zero Trust",
-        ],
-      },
+{
+id:"intelligence",
 
+title:
+t.projects.intelligence.title,
 
-      {
-        id: "future",
+desc:
+t.projects.intelligence.desc,
 
-        title:
-          t.projects.future.title,
+image:
+"/images/projects/anox-intelligence.jpg",
 
-        desc:
-          t.projects.future.desc,
+tags:[
+"AI",
+"Next.js",
+"Machine Learning"
+],
 
-        image:
-          "/images/projects/anox-future-systems.jpg",
+},
 
-        tags: [
-          "AI",
-          "IoT",
-          "Robotics",
-        ],
-      },
 
-    ],
-    [t]
-  );
 
+{
+id:"shield",
 
+title:
+t.projects.shield.title,
 
-  /* =========================
-      ESC CLOSE + SCROLL LOCK
-  ========================= */
+desc:
+t.projects.shield.desc,
 
-  useEffect(() => {
+image:
+"/images/projects/anox-shield.jpg",
 
-    if (!selected)
-      return;
+tags:[
+"Security",
+"Cloud",
+"Zero Trust"
+],
 
+},
 
-    const close = (e: KeyboardEvent) => {
 
-      if (e.key === "Escape")
-        setSelected(null);
 
-    };
 
+{
+id:"future",
 
-    document.addEventListener(
-      "keydown",
-      close
-    );
+title:
+t.projects.future.title,
 
+desc:
+t.projects.future.desc,
 
-    document.body.style.overflow =
-      "hidden";
+image:
+"/images/projects/anox-future-systems.jpg",
 
+tags:[
+"AI",
+"IoT",
+"Robotics"
+],
 
-    return () => {
+},
 
-      document.removeEventListener(
-        "keydown",
-        close
-      );
 
 
-      document.body.style.overflow =
-        "";
+],[t]);
 
-    };
 
 
-  }, [selected]);
 
 
 
-  const closeModal = useCallback(() => {
+useEffect(()=>{
 
-    setSelected(null);
 
-  }, []);
+if(!selected)
+return;
 
 
 
-  return (
+const close=(e:KeyboardEvent)=>{
 
-    <section
-      id="projects"
-      className="
-      relative
-      overflow-hidden
-      py-32
-      "
-    >
+if(e.key==="Escape")
+setSelected(null);
 
+};
 
-      {/* =========================
-          BACKGROUND
-      ========================= */}
 
-      <div
-        className="
-        absolute
-        inset-0
-        -z-10
-        "
-      >
 
-        <div
-          className="
-          absolute
-          left-20
-          top-20
-          h-72
-          w-72
-          rounded-full
-          bg-cyan-500/10
-          blur-3xl
-          "
-        />
+document.addEventListener(
+"keydown",
+close
+);
 
 
-        <div
-          className="
-          absolute
-          right-20
-          bottom-20
-          h-72
-          w-72
-          rounded-full
-          bg-violet-500/10
-          blur-3xl
-          "
-        />
 
-      </div>
+document.body.style.overflow="hidden";
 
 
 
-      {/* =========================
-          TITLE
-      ========================= */}
+return()=>{
 
-      <motion.div
 
-        initial={{
-          opacity:0,
-          y:30
-        }}
+document.removeEventListener(
+"keydown",
+close
+);
 
-        whileInView={{
-          opacity:1,
-          y:0
-        }}
 
-        viewport={{
-          once:true
-        }}
 
-        transition={{
-          duration:.6
-        }}
+document.body.style.overflow="";
 
-        className="
-        mx-auto
-        mb-16
-        max-w-3xl
-        px-6
-        text-center
-        "
+};
 
-      >
 
-        <h2
-          className="
-          text-4xl
-          font-black
-          text-white
-          sm:text-5xl
-          "
-        >
+},[selected]);
 
-          {t.projects.title}
 
-        </h2>
 
 
-        <p
-          className="
-          mt-4
-          text-zinc-400
-          "
-        >
 
-          {t.projects.subtitle}
 
-        </p>
+const closeModal =
+useCallback(()=>{
 
-      </motion.div>
+setSelected(null);
 
+},[]);
 
 
 
 
-      {/* =========================
-          GRID
-      ========================= */}
 
 
-      <motion.div
+return(
 
-        variants={containerAnimation}
 
-        initial="hidden"
+<section
 
-        whileInView="show"
+id="projects"
 
-        viewport={{
-          once:true,
-          margin:"-100px"
-        }}
+dir={
+rtl
+?
+"rtl"
+:
+"ltr"
+}
 
-        className="
-        mx-auto
-        grid
-        max-w-7xl
-        gap-10
-        px-6
-        lg:grid-cols-3
-        "
 
-      >
+className={cn(
 
+"relative overflow-hidden py-32",
 
-        {projects.map((project)=> (
+rtl && "text-right"
 
-          <motion.article
+)}
 
-            key={project.id}
+>
 
-            variants={cardAnimation}
 
-            onClick={() =>
-              setSelected(project)
-            }
 
-            whileHover={{
-              y:-8
-            }}
 
-            className="
-            group
-            cursor-pointer
-            overflow-hidden
-            rounded-3xl
-            border
-            border-white/10
-            bg-white/[0.03]
-            backdrop-blur-xl
-            transition
-            "
+<div
 
-          >
+className="
+absolute
+inset-0
+-z-10
+"
 
+>
 
-            {/* IMAGE */}
 
-            <div
-              className="
-              relative
-              h-64
-              overflow-hidden
-              "
-            >
+<div
 
-              <Image
+className="
+absolute
+left-20
+top-20
+h-72
+w-72
+rounded-full
+bg-cyan-500/10
+blur-3xl
+"
 
-                src={project.image}
+/>
 
-                alt={project.title}
 
-                fill
 
-                sizes="
-                (max-width:768px) 100vw,
-                33vw
-                "
+<div
 
-                className="
-                object-cover
-                transition
-                duration-700
-                group-hover:scale-110
-                "
+className="
+absolute
+right-20
+bottom-20
+h-72
+w-72
+rounded-full
+bg-violet-500/10
+blur-3xl
+"
 
-              />
+/>
 
 
-              <div
-                className="
-                absolute
-                inset-0
-                bg-gradient-to-t
-                from-black
-                via-black/30
-                to-transparent
-                "
-              />
 
-            </div>
+</div>
 
 
 
 
-            {/* CONTENT */}
 
-            <div
-              className="
-              p-6
-              "
-            >
 
-              <div
-                className="
-                flex
-                flex-wrap
-                gap-2
-                "
-              >
 
-                {project.tags.map(tag=>(
 
-                  <span
+<motion.div
 
-                    key={tag}
 
-                    className="
-                    rounded-full
-                    bg-cyan-500/10
-                    px-3
-                    py-1
-                    text-xs
-                    text-cyan-300
-                    "
+initial={{
+opacity:0,
+y:30
+}}
 
-                  >
 
-                    {tag}
+whileInView={{
+opacity:1,
+y:0
+}}
 
-                  </span>
 
-                ))}
+viewport={{
+once:true
+}}
 
-              </div>
 
+transition={{
+duration:.6
+}}
 
 
-              <h3
-                className="
-                mt-5
-                text-2xl
-                font-bold
-                text-white
-                "
-              >
 
-                {project.title}
+className="
+mx-auto
+mb-16
+max-w-3xl
+px-6
+text-center
+"
 
-              </h3>
 
+>
 
-              <p
-                className="
-                mt-3
-                text-sm
-                leading-6
-                text-zinc-400
-                "
-              >
 
-                {project.desc}
 
-              </p>
+<h2
 
+className="
+text-4xl
+font-black
+text-white
+sm:text-5xl
+"
 
-            </div>
+>
 
+{t.projects.title}
 
-          </motion.article>
+</h2>
 
-        ))}
 
 
-      </motion.div>
 
+<p
 
+className="
+mt-4
+text-zinc-400
+"
 
+>
 
+{t.projects.subtitle}
 
+</p>
 
-      {/* =========================
-          MODAL
-      ========================= */}
 
+</motion.div>
 
-      <AnimatePresence>
 
 
-        {selected && (
 
-          <motion.div
 
-            className="
-            fixed
-            inset-0
-            z-50
-            flex
-            items-center
-            justify-center
-            p-6
-            "
 
-            initial={{
-              opacity:0
-            }}
 
-            animate={{
-              opacity:1
-            }}
 
-            exit={{
-              opacity:0
-            }}
 
-          >
+<motion.div
 
 
-            <button
+variants={containerAnimation}
 
-              aria-label="Close"
 
-              onClick={closeModal}
+initial="hidden"
 
-              className="
-              absolute
-              inset-0
-              bg-black/80
-              backdrop-blur-xl
-              "
 
-            />
+whileInView="show"
 
 
+viewport={{
+once:true,
+margin:"-100px"
+}}
 
-            <motion.div
 
-              initial={{
-                scale:.85,
-                opacity:0
-              }}
+className="
+mx-auto
+grid
+max-w-7xl
+gap-10
+px-6
+lg:grid-cols-3
+"
 
-              animate={{
-                scale:1,
-                opacity:1
-              }}
+>
 
-              exit={{
-                scale:.85,
-                opacity:0
-              }}
 
-              className="
-              relative
-              z-10
-              max-h-[90vh]
-              w-full
-              max-w-5xl
-              overflow-hidden
-              rounded-3xl
-              border
-              border-white/10
-              bg-[#080b12]
-              "
+{
+projects.map(project=>(
 
-            >
 
+<motion.article
 
-              <div
-                className="
-                relative
-                h-80
-                "
-              >
 
-                <Image
+key={project.id}
 
-                  src={selected.image}
 
-                  alt={selected.title}
+variants={cardAnimation}
 
-                  fill
 
-                  className="
-                  object-cover
-                  "
 
-                />
+onClick={()=>setSelected(project)}
 
-              </div>
 
 
+whileHover={{
+y:-8
+}}
 
-              <div
-                className="
-                p-8
-                "
-              >
 
-                <h2
-                  className="
-                  text-3xl
-                  font-black
-                  text-white
-                  "
-                >
 
-                  {selected.title}
+className="
+group
+cursor-pointer
+overflow-hidden
+rounded-3xl
+border
+border-white/10
+bg-white/[0.03]
+backdrop-blur-xl
+transition
+"
 
-                </h2>
+>
 
 
-                <p
-                  className="
-                  mt-4
-                  text-zinc-400
-                  "
-                >
 
-                  {selected.desc}
+<div
 
-                </p>
+className="
+relative
+h-64
+overflow-hidden
+"
 
+>
 
 
-                <button
 
-                  onClick={closeModal}
+<Image
 
-                  className="
-                  mt-8
-                  rounded-xl
-                  bg-cyan-500
-                  px-6
-                  py-3
-                  font-bold
-                  text-black
-                  transition
-                  hover:bg-cyan-400
-                  "
+src={project.image}
 
-                >
+alt={project.title}
 
-                  {t.projects.close}
+fill
 
-                </button>
+sizes="
+(max-width:768px) 100vw,
+33vw
+"
 
 
-              </div>
+className="
+object-cover
+transition
+duration-700
+group-hover:scale-110
+"
 
+/>
 
-            </motion.div>
 
 
-          </motion.div>
+<div
 
-        )}
+className="
+absolute
+inset-0
+bg-gradient-to-t
+from-black
+via-black/30
+to-transparent
+"
 
+/>
 
-      </AnimatePresence>
 
+</div>
 
-    </section>
 
-  );
+
+
+
+
+
+<div
+
+className="
+p-6
+"
+
+>
+
+
+
+<div
+
+className="
+flex
+flex-wrap
+gap-2
+"
+
+>
+
+{
+project.tags.map(tag=>(
+
+
+<span
+
+key={tag}
+
+className="
+rounded-full
+bg-cyan-500/10
+px-3
+py-1
+text-xs
+text-cyan-300
+"
+
+>
+
+{tag}
+
+</span>
+
+
+))
+}
+
+
+</div>
+
+
+
+
+
+
+
+<h3
+
+className="
+mt-5
+text-2xl
+font-bold
+text-white
+"
+
+>
+
+{project.title}
+
+</h3>
+
+
+
+
+
+
+<p
+
+className="
+mt-3
+text-sm
+leading-6
+text-zinc-400
+"
+
+>
+
+{project.desc}
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+</motion.article>
+
+
+
+))
+}
+
+
+
+</motion.div>
+
+
+
+
+
+
+
+
+
+<AnimatePresence>
+
+
+{
+selected && (
+
+
+<motion.div
+
+
+initial={{
+opacity:0
+}}
+
+
+animate={{
+opacity:1
+}}
+
+
+exit={{
+opacity:0
+}}
+
+
+
+onClick={closeModal}
+
+
+className="
+fixed
+inset-0
+z-50
+flex
+items-center
+justify-center
+p-6
+"
+
+>
+
+
+<div
+
+className="
+absolute
+inset-0
+bg-black/80
+backdrop-blur-xl
+"
+
+/>
+
+
+
+
+
+
+<motion.div
+
+
+onClick={(e)=>
+e.stopPropagation()
+}
+
+
+
+initial={{
+scale:.85,
+opacity:0
+}}
+
+
+
+animate={{
+scale:1,
+opacity:1
+}}
+
+
+
+exit={{
+scale:.85,
+opacity:0
+}}
+
+
+
+className="
+relative
+z-10
+max-h-[90vh]
+w-full
+max-w-5xl
+overflow-hidden
+rounded-3xl
+border
+border-white/10
+bg-[#080b12]
+"
+
+>
+
+
+
+<div
+
+className="
+relative
+h-80
+"
+
+>
+
+
+<Image
+
+
+src={selected.image}
+
+
+alt={selected.title}
+
+
+fill
+
+
+className="
+object-cover
+"
+
+
+/>
+
+
+
+</div>
+
+
+
+
+
+
+<div
+
+className="
+p-8
+"
+
+>
+
+
+<h2
+
+className="
+text-3xl
+font-black
+text-white
+"
+
+>
+
+{selected.title}
+
+</h2>
+
+
+
+
+<p
+
+className="
+mt-4
+text-zinc-400
+"
+
+>
+
+{selected.desc}
+
+</p>
+
+
+
+
+
+
+<button
+
+
+onClick={closeModal}
+
+
+className="
+mt-8
+rounded-xl
+bg-cyan-500
+px-6
+py-3
+font-bold
+text-black
+transition
+hover:bg-cyan-400
+"
+
+>
+
+{t.projects.close}
+
+</button>
+
+
+
+</div>
+
+
+
+
+</motion.div>
+
+
+
+</motion.div>
+
+
+)
+}
+
+
+</AnimatePresence>
+
+
+
+
+
+</section>
+
+
+
+);
+
+
 }

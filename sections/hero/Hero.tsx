@@ -1,277 +1,135 @@
 "use client";
 
+
 import dynamic from "next/dynamic";
+import Link from "next/link";
+
+
 import Container from "@/components/ui/Container";
 import { cn } from "@/lib/cn";
+
+
+import { useLang } from "@/components/LangContext";
+import { useTranslation } from "@/hooks/useTranslation";
 
 
 
 const HeroGlobe = dynamic(
   () => import("@/components/3d/Globe"),
   {
-    ssr: false,
+    ssr:false,
 
-    loading: () => (
-
+    loading:()=>(
       <div
-
         className="
         flex
-        flex-col
+        aspect-square
+        w-[280px]
         items-center
         justify-center
-
         rounded-full
-
         border
         border-cyan-400/20
-
         bg-cyan-400/5
-
         animate-pulse
 
-        w-[320px]
-        h-[320px]
-
-        sm:w-[420px]
-        sm:h-[420px]
-
-        lg:w-[520px]
-        lg:h-[520px]
+        sm:w-[380px]
+        lg:w-[460px]
         "
-
       >
 
-        <span
+        <div className="text-center">
 
-          className="
-          font-mono
-          text-xs
-          tracking-[0.35em]
-          text-cyan-400/80
-          "
-
-        >
-
-          BOOTING ANOX CORE
-
-        </span>
+          <p
+            className="
+            font-mono
+            text-xs
+            tracking-[0.35em]
+            text-cyan-400
+            "
+          >
+            ANOX CORE
+          </p>
 
 
-        <span
+          <p
+            className="
+            mt-3
+            text-[10px]
+            tracking-widest
+            text-zinc-500
+            "
+          >
+            AI NETWORK INITIALIZING
+          </p>
 
-          className="
-          mt-3
-          text-[10px]
-          tracking-widest
-          text-zinc-500
-          "
-
-        >
-
-          ESTABLISHING AI NETWORK
-
-        </span>
-
+        </div>
 
       </div>
-
     )
   }
 );
 
 
 
+export default function Hero(){
 
 
-interface HeroProps {
+const {lang}=useLang();
 
-  locale?: "en" | "fa";
-
-}
-
-
+const {t}=useTranslation();
 
 
 
-export default function Hero({
+const rtl = lang==="fa";
 
-  locale="en"
-
-}:HeroProps){
-
-
-const rtl = locale==="fa";
-
-
-
-const content = {
-
-en:{
-
-badge:"Autonomous AI & Cybersecurity",
-
-title:"ANOX",
-
-subtitle:"Next-Gen Enterprise",
-
-highlight:"Security Intelligence",
-
-description:
-"ANOX engineers autonomous AI systems and enterprise cybersecurity platforms designed for resilient digital infrastructure.",
-
-
-primary:"Explore Platform",
-
-secondary:"Security Architecture",
-
-
-stats:[
-
-["Zero-Trust","Core Principle"],
-
-["Autonomous","AI Engine"],
-
-["Real-Time","Security Processing"]
-
-]
-
-
-},
-
-
-
-fa:{
-
-badge:"هوش مصنوعی خودمختار و امنیت سایبری",
-
-title:"ANOX",
-
-subtitle:"سازمان نسل بعدی",
-
-highlight:"هوش امنیت سایبری",
-
-description:
-"ANOX سیستم‌های هوش مصنوعی خودمختار و پلتفرم‌های امنیت سایبری سازمانی را برای زیرساخت‌های دیجیتال مقاوم مهندسی می‌کند.",
-
-
-primary:"بررسی پلتفرم",
-
-secondary:"معماری امنیت",
-
-
-stats:[
-
-["اعتماد صفر","اصل بنیادین"],
-
-["خودمختار","موتور هوش مصنوعی"],
-
-["در لحظه","پردازش امنیتی"]
-
-]
-
-
-}
-
-
-}[locale];
-
-
+const prefix=`/${lang}`;
 
 
 
 return (
 
-
 <section
 
-dir={rtl?"rtl":"ltr"}
+id="hero"
 
-className={cn(
+dir={rtl ? "rtl":"ltr"}
 
-"relative isolate overflow-hidden",
-
-"min-h-[100dvh]",
-
-"flex items-center",
-
-"bg-[#04070b]",
-
-"py-24 lg:py-32"
-
-)}
+className="
+relative
+isolate
+flex
+min-h-screen
+items-center
+overflow-hidden
+py-24
+"
 
 >
 
 
-
-
-{/* Background Grid */}
+{/* Background Glow */}
 
 <div
 
 aria-hidden
 
 className="
-
-absolute
-
-inset-0
-
-opacity-[0.035]
-
--z-10
-
-[background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)]
-
-[background-size:4rem_4rem]
-
-"
-
-/>
-
-
-
-
-
-{/* AI Glow */}
-
-<div
-
-aria-hidden
-
-className="
-
 pointer-events-none
-
 absolute
-
 left-1/2
-
 top-1/2
-
--translate-x-1/2
-
--translate-y-1/2
-
-w-[700px]
-
-h-[700px]
-
-rounded-full
-
-bg-cyan-500/10
-
-blur-[120px]
-
 -z-10
-
+h-[550px]
+w-[550px]
+-translate-x-1/2
+-translate-y-1/2
+rounded-full
+bg-cyan-400/10
+blur-[120px]
 "
 
 />
-
-
-
 
 
 
@@ -281,64 +139,44 @@ blur-[120px]
 <div
 
 className="
-
 grid
-
-grid-cols-1
+items-center
+gap-14
 
 lg:grid-cols-[1fr_auto]
 
-items-center
-
-gap-16
-
-xl:gap-24
-
 "
 
 >
 
 
-
-
-{/* TEXT */}
+{/* Content */}
 
 
 <div
 
-className="
-
-max-w-3xl
-
-animate-[fadeUp_.8s_ease-out]
-
-"
+className={cn(
+"max-w-3xl",
+rtl && "text-right"
+)}
 
 >
 
 
+{/* Badge */}
+
 <div
 
 className="
-
 inline-flex
-
 items-center
-
 gap-3
-
 rounded-full
-
 border
-
 border-cyan-400/20
-
 bg-white/[0.03]
-
 px-4
-
 py-2
-
 "
 
 >
@@ -346,17 +184,11 @@ py-2
 <span
 
 className="
-
-w-2
-
 h-2
-
+w-2
 rounded-full
-
 bg-cyan-400
-
 animate-pulse
-
 "
 
 />
@@ -365,20 +197,15 @@ animate-pulse
 <span
 
 className="
-
 text-xs
-
-uppercase
-
-tracking-[0.3em]
-
+font-medium
+tracking-[0.25em]
 text-cyan-300
-
 "
 
 >
 
-{content.badge}
+{t.hero.badge}
 
 </span>
 
@@ -389,87 +216,68 @@ text-cyan-300
 
 
 
+{/* Title */}
 
 <h1
 
 className="
-
 mt-8
 
-text-5xl
-
-sm:text-7xl
-
-lg:text-[88px]
-
+text-4xl
 font-black
 
-leading-[0.9]
+leading-[1.05]
 
-tracking-tight
+tracking-[-0.04em]
 
-"
+sm:text-6xl
 
->
-
-
-<span
-
-className="
-
-block
-
-text-white
+lg:text-[72px]
 
 "
 
 >
 
-{content.title}
+
+<span className="block text-white">
+
+{t.hero.title}
 
 </span>
 
 
-
 <span
 
 className="
-
+mt-4
 block
-
-text-3xl
-
-sm:text-5xl
-
+text-2xl
+font-bold
 text-zinc-200
 
+sm:text-4xl
 "
 
 >
 
-{content.subtitle}
+{t.hero.subtitle}
 
 </span>
-
-
 
 
 <span
 
 className="
-
+mt-3
 block
-
 text-cyan-400
-
 "
 
 >
 
-{content.highlight}
+{t.hero.highlight}
 
 </span>
-
 
 
 </h1>
@@ -478,29 +286,22 @@ text-cyan-400
 
 
 
-
-
 <p
 
 className="
-
 mt-7
-
 max-w-xl
-
-text-lg
-
-sm:text-xl
-
-leading-relaxed
-
+text-base
+leading-8
 text-zinc-400
+
+sm:text-lg
 
 "
 
 >
 
-{content.description}
+{t.hero.description}
 
 </p>
 
@@ -510,95 +311,71 @@ text-zinc-400
 
 
 
-{/* CTA */}
+{/* Buttons */}
 
 
 <div
 
 className="
-
 mt-9
-
 flex
-
 flex-wrap
-
 gap-4
-
 "
 
 >
 
 
-<a
+<Link
 
-href="/platform"
+href={`${prefix}/platform`}
 
 className="
-
 rounded-xl
-
-bg-cyan-500
-
+bg-cyan-400
 px-7
-
 py-3.5
-
 font-bold
-
 text-black
-
 transition
-
-hover:bg-cyan-400
-
-hover:shadow-[0_0_30px_rgba(6,182,212,.35)]
-
+hover:bg-cyan-300
+hover:shadow-[0_0_30px_rgba(34,211,238,.35)]
 "
 
 >
 
-{content.primary}
+{t.hero.primary}
 
-</a>
-
-
+</Link>
 
 
-<a
 
-href="/architecture"
+
+<Link
+
+href={`${prefix}/architecture`}
 
 className="
-
 rounded-xl
-
 border
-
-border-white/15
-
+border-white/10
 bg-white/[0.03]
-
 px-7
-
 py-3.5
-
 font-semibold
-
 text-white
-
 transition
 
+hover:border-cyan-400/30
 hover:bg-white/10
 
 "
 
 >
 
-{content.secondary}
+{t.hero.secondary}
 
-</a>
-
+</Link>
 
 
 </div>
@@ -612,19 +389,12 @@ hover:bg-white/10
 
 {/* Stats */}
 
-
 <div
 
 className="
-
 mt-12
-
 grid
-
-grid-cols-1
-
-sm:grid-cols-3
-
+grid-cols-3
 gap-4
 
 "
@@ -632,25 +402,21 @@ gap-4
 >
 
 
-{content.stats.map(([value,label])=>(
+{
+t.hero.stats.map((stat,index)=>(
 
 
 <div
 
-key={value}
+key={index}
 
 className="
-
-rounded-xl
-
+rounded-2xl
 border
-
 border-white/10
-
-bg-white/[0.02]
-
+bg-white/[0.03]
 p-4
-
+backdrop-blur-sm
 "
 
 >
@@ -659,55 +425,49 @@ p-4
 <div
 
 className="
-
-text-2xl
-
+text-xl
 font-black
-
 text-cyan-400
-
+sm:text-2xl
 "
 
 >
 
-{value}
+{stat[0]}
 
 </div>
 
 
-<div
+
+<p
 
 className="
-
 mt-1
-
-text-[11px]
-
+text-[10px]
 uppercase
-
 tracking-widest
-
 text-zinc-500
-
 "
 
 >
 
-{label}
+{stat[1]}
 
-</div>
-
-
-
-</div>
-
-
-))}
+</p>
 
 
 </div>
 
 
+))
+
+}
+
+
+</div>
+
+
+
 
 </div>
 
@@ -717,35 +477,27 @@ text-zinc-500
 
 
 
-
-{/* GLOBE */}
+{/* Globe */}
 
 
 <div
 
 className="
-
 flex
-
 justify-center
-
-animate-[fadeIn_1.2s_ease-out]
-
 "
 
 >
-
 
 <HeroGlobe/>
 
-
 </div>
 
 
 
 
-
 </div>
+
 
 
 </Container>
@@ -753,8 +505,6 @@ animate-[fadeIn_1.2s_ease-out]
 
 </section>
 
-
 );
-
 
 }

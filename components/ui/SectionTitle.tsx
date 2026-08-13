@@ -1,57 +1,97 @@
 import Heading from "./Heading";
+import { cn } from "@/lib/cn";
 
 interface SectionTitleProps {
-  badge: string;
-  title: string;
-  description?: string;
+  badge:string;
+  title:string;
+  description?:string;
+  align?: "left"|"center"|"right";
 }
+
 
 export default function SectionTitle({
   badge,
   title,
   description,
-}: SectionTitleProps) {
-  return (
-    <div className="max-w-3xl">
+  align="left"
+}:SectionTitleProps){
 
-      <span
-        className="
-          inline-flex
-          items-center
-          rounded-full
-          border
-          border-cyan-400/20
-          bg-cyan-400/10
-          px-4
-          py-2
-          text-xs
-          font-semibold
-          uppercase
-          tracking-[0.35em]
-          text-cyan-400
-        "
-      >
-        {badge}
-      </span>
+return (
 
-      <Heading className="mt-6">
-        {title}
-      </Heading>
+<div
+className={cn(
+"max-w-4xl",
+align==="center" && "mx-auto text-center",
+align==="right" && "ml-auto text-right"
+)}
+>
 
-      {description && (
-        <p
-          className="
-            mt-7
-            text-base
-            md:text-xl
-            leading-8
-            text-zinc-400
-          "
-        >
-          {description}
-        </p>
-      )}
 
-    </div>
-  );
+<div
+className="
+inline-flex
+items-center
+gap-2
+rounded-full
+border
+border-cyan-400/20
+bg-cyan-400/10
+px-4
+py-2
+text-xs
+font-bold
+uppercase
+tracking-[0.3em]
+text-cyan-300
+"
+>
+
+<span
+className="
+h-2
+w-2
+rounded-full
+bg-cyan-400
+animate-pulse
+"
+/>
+
+{badge}
+
+</div>
+
+
+
+<Heading className="mt-7">
+
+{title}
+
+</Heading>
+
+
+
+{
+description && (
+
+<p
+className={cn(
+"mt-6 max-w-2xl text-lg leading-8 text-zinc-400",
+align==="center" && "mx-auto"
+)}
+>
+
+{description}
+
+</p>
+
+)
+}
+
+
+
+</div>
+
+
+);
+
 }

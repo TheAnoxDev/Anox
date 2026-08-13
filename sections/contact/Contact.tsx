@@ -1,496 +1,595 @@
 "use client";
 
-import { useTranslation } from "@/hooks/useTranslation";
 import { motion } from "framer-motion";
 import { useForm, ValidationError } from "@formspree/react";
+import { Mail, MapPin } from "lucide-react";
+
+import { useLang } from "@/components/LangContext";
 
 import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
 import GlassCard from "@/components/ui/GlassCard";
 import Button from "@/components/ui/Button";
 
-import {
-  Mail,
-  MapPin,
-} from "lucide-react";
+import { cn } from "@/lib/cn";
 
 
 export default function Contact() {
 
-  const [state, handleSubmit] = useForm("xgojlpjq");
 
-  const { t } = useTranslation();
+  const [state, handleSubmit] =
+    useForm("xgojlpjq");
+
+
+  const {
+    lang,
+    t
+  } = useLang();
+
+
+
+  const rtl = lang === "fa";
+
 
 
   return (
 
-<section
-id="contact"
-className="
-relative
-overflow-hidden
-py-32
-"
->
+    <section
 
+      id="contact"
 
-<Container>
+      dir={rtl ? "rtl" : "ltr"}
 
+      className="
+      relative
+      overflow-hidden
+      py-32
+      "
 
-<SectionTitle
+    >
 
-badge={t.contact.badge}
 
-title={t.contact.title}
+      <Container>
 
-description={t.contact.description}
 
-/>
 
+        <div
 
+          className={
+            cn(
+              rtl && "text-right"
+            )
+          }
 
-<motion.div
+        >
 
-initial={{
-opacity:0,
-y:40
-}}
 
-whileInView={{
-opacity:1,
-y:0
-}}
+          <SectionTitle
 
-viewport={{
-once:true,
-amount:.2
-}}
+            badge={t.contact.badge}
 
-transition={{
-duration:.7
-}}
+            title={t.contact.title}
 
-className="mt-20"
+            description={t.contact.description}
 
->
+          />
 
 
-<GlassCard
+        </div>
 
-className="
-p-8
-lg:p-12
-hover:border-cyan-400/30
-transition
-"
 
->
 
 
-<form
 
-onSubmit={handleSubmit}
+        <motion.div
 
->
 
+          initial={{
+            opacity:0,
+            y:40
+          }}
 
-<div
 
-className="
-grid
-gap-12
-lg:grid-cols-2
-"
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
 
->
 
+          viewport={{
+            once:true,
+            amount:.2
+          }}
 
 
-{/* INFO */}
+          transition={{
+            duration:.7
+          }}
 
-<div>
 
+          className="mt-20"
 
-<h3
 
-className="
-text-3xl
-font-bold
-text-white
-"
+        >
 
->
 
-{t.contact.conversation}
 
-</h3>
+          <GlassCard
 
+            className="
+            p-8
+            transition
+            hover:border-cyan-400/30
+            lg:p-12
+            "
 
+          >
 
-<p
 
-className="
-mt-6
-leading-8
-text-zinc-400
-"
 
->
+            <form
 
-{t.contact.conversationDescription}
+              onSubmit={handleSubmit}
 
-</p>
+              className="
+              grid
+              gap-12
+              lg:grid-cols-2
+              "
 
+            >
 
 
 
-<div
 
-className="
-mt-10
-space-y-6
-"
+              {/* INFO */}
 
->
 
+              <div>
 
-<div
 
-className="
-flex
-items-center
-gap-4
-"
+                <h3
 
->
+                  className="
+                  text-3xl
+                  font-bold
+                  text-white
+                  "
 
-<div
+                >
 
-className="
-rounded-xl
-bg-cyan-400/10
-p-3
-text-cyan-400
-"
+                  {t.contact.conversation}
 
->
 
-<Mail size={22}/>
+                </h3>
 
-</div>
 
 
-<div>
 
-<p className="text-sm text-zinc-500">
+                <p
 
-{t.contact.email}
+                  className="
+                  mt-6
+                  leading-8
+                  text-zinc-400
+                  "
 
-</p>
+                >
 
+                  {t.contact.conversationDescription}
 
-<p className="text-white">
 
-anoxdev@gmail.com
+                </p>
 
-</p>
 
 
-</div>
 
 
-</div>
+                <div
 
+                  className="
+                  mt-10
+                  space-y-6
+                  "
 
+                >
 
 
-<div
 
-className="
-flex
-items-center
-gap-4
-"
 
->
+                  <div
 
-<div
+                    className="
+                    flex
+                    items-center
+                    gap-4
+                    "
 
-className="
-rounded-xl
-bg-cyan-400/10
-p-3
-text-cyan-400
-"
+                  >
 
->
 
-<MapPin size={22}/>
+                    <div
 
-</div>
+                      className="
+                      rounded-xl
+                      bg-cyan-400/10
+                      p-3
+                      text-cyan-400
+                      "
 
+                    >
 
-<div>
+                      <Mail size={22}/>
 
-<p className="text-sm text-zinc-500">
+                    </div>
 
-{t.contact.location}
 
-</p>
 
+                    <div>
 
-<p className="text-white">
 
-{t.contact.locationValue}
+                      <p
 
-</p>
+                        className="
+                        text-sm
+                        text-zinc-500
+                        "
 
+                      >
 
-</div>
+                        {t.contact.email}
 
 
-</div>
+                      </p>
 
 
-</div>
 
+                      <a
 
+                        href="mailto:anoxdev@gmail.com"
 
-</div>
+                        className="
+                        text-white
+                        transition
+                        hover:text-cyan-400
+                        "
 
+                      >
 
+                        anoxdev@gmail.com
 
 
+                      </a>
 
-{/* FORM */}
 
+                    </div>
 
-<div
 
-className="
-space-y-5
-"
+                  </div>
 
->
 
 
-<input
 
-name="name"
 
-type="text"
 
-required
+                  <div
 
-placeholder={t.contact.namePlaceholder}
+                    className="
+                    flex
+                    items-center
+                    gap-4
+                    "
 
-className="
-w-full
-rounded-2xl
-border
-border-white/10
-bg-white/5
-px-6
-py-4
-text-white
-outline-none
-transition
-focus:border-cyan-400
-"
+                  >
 
-/>
 
+                    <div
 
+                      className="
+                      rounded-xl
+                      bg-cyan-400/10
+                      p-3
+                      text-cyan-400
+                      "
 
-<input
+                    >
 
-name="email"
+                      <MapPin size={22}/>
 
-type="email"
 
-required
+                    </div>
 
-placeholder={t.contact.emailPlaceholder}
 
-className="
-w-full
-rounded-2xl
-border
-border-white/10
-bg-white/5
-px-6
-py-4
-text-white
-outline-none
-transition
-focus:border-cyan-400
-"
 
-/>
+                    <div>
 
 
+                      <p
 
-<ValidationError
+                        className="
+                        text-sm
+                        text-zinc-500
+                        "
 
-prefix="Email"
+                      >
 
-field="email"
+                        {t.contact.location}
 
-errors={state.errors}
 
-/>
+                      </p>
 
 
 
+                      <p className="text-white">
 
-<textarea
+                        {t.contact.locationValue}
 
 
-name="message"
+                      </p>
 
-required
 
-rows={6}
+                    </div>
 
-placeholder={t.contact.messagePlaceholder}
 
-className="
-w-full
-resize-none
-rounded-2xl
-border
-border-white/10
-bg-white/5
-px-6
-py-4
-text-white
-outline-none
-transition
-focus:border-cyan-400
-"
+                  </div>
 
-/>
 
 
+                </div>
 
-<ValidationError
 
-prefix="Message"
+              </div>
 
-field="message"
 
-errors={state.errors}
 
-/>
 
 
 
 
 
-<Button
+              {/* FORM */}
 
-type="submit"
 
-disabled={state.submitting}
 
-className="
-w-full
-"
+              <div
 
->
+                className="
+                space-y-5
+                "
 
+              >
 
-{
-state.submitting
 
-?
 
-t.contact.sending
 
-:
 
-t.contact.send
+                <input
 
-}
 
+                  name="name"
 
-</Button>
 
+                  type="text"
 
 
+                  required
 
-{
-state.succeeded &&
 
-<motion.p
+                  placeholder={
+                    t.contact.namePlaceholder
+                  }
 
-initial={{
-opacity:0,
-y:10
-}}
 
-animate={{
-opacity:1,
-y:0
-}}
 
-className="
-text-center
-text-green-400
-"
+                  className="
+                  w-full
+                  rounded-2xl
+                  border
+                  border-white/10
+                  bg-white/5
+                  px-6
+                  py-4
+                  text-white
+                  outline-none
+                  transition
+                  focus:border-cyan-400
+                  "
 
->
+                />
 
-{t.contact.success}
 
-</motion.p>
 
-}
 
 
 
-</div>
 
+                <input
 
 
-</div>
+                  name="email"
 
 
-</form>
+                  type="email"
 
 
-</GlassCard>
+                  required
 
 
+                  placeholder={
+                    t.contact.emailPlaceholder
+                  }
 
-</motion.div>
 
 
+                  className="
+                  w-full
+                  rounded-2xl
+                  border
+                  border-white/10
+                  bg-white/5
+                  px-6
+                  py-4
+                  text-white
+                  outline-none
+                  transition
+                  focus:border-cyan-400
+                  "
 
+                />
 
 
-<div
 
-className="
-pointer-events-none
-absolute
-bottom-0
-left-1/2
-h-[450px]
-w-[450px]
--translate-x-1/2
-rounded-full
-bg-cyan-400/10
-blur-[150px]
-"
 
-/>
 
 
-</Container>
 
 
-</section>
+                <textarea
+
+
+                  name="message"
+
+
+                  required
+
+
+                  rows={6}
+
+
+
+                  placeholder={
+                    t.contact.messagePlaceholder
+                  }
+
+
+
+                  className="
+                  w-full
+                  rounded-2xl
+                  border
+                  border-white/10
+                  bg-white/5
+                  px-6
+                  py-4
+                  text-white
+                  outline-none
+                  transition
+                  focus:border-cyan-400
+                  "
+
+                />
+
+
+
+
+
+
+
+                <ValidationError
+
+                  prefix="Email"
+
+                  field="email"
+
+                  errors={state.errors}
+
+                />
+
+
+
+
+
+
+
+                <Button
+
+                  type="submit"
+
+                  disabled={state.submitting}
+
+                >
+
+
+                  {
+                    state.submitting
+
+                    ?
+
+                    t.contact.sending
+
+                    :
+
+                    t.contact.send
+
+                  }
+
+
+                </Button>
+
+
+
+
+
+
+
+                {
+                  state.succeeded && (
+
+
+                    <p
+
+                      className="
+                      text-green-400
+                      "
+
+                    >
+
+                      {t.contact.success}
+
+
+                    </p>
+
+
+                  )
+                }
+
+
+
+
+
+
+              </div>
+
+
+
+
+
+            </form>
+
+
+
+
+
+          </GlassCard>
+
+
+
+
+
+        </motion.div>
+
+
+
+
+
+      </Container>
+
+
+
+    </section>
+
 
   );
+
+
 }
