@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 
 import Link from "next/link";
@@ -98,6 +98,12 @@ lang==="fa";
 
 
 const links = useMemo(()=>[
+
+{
+id:"hero" as SectionId,
+name:t.nav.home,
+href:`${prefix}#hero`
+},
 
 
 {
@@ -496,7 +502,7 @@ hover:bg-white/5
 >
 
 
-Login
+{t.nav.login}
 
 
 </Link>
@@ -526,7 +532,7 @@ hover:scale-105
 >
 
 
-Register
+{t.nav.register}
 
 
 </Link>
@@ -596,7 +602,11 @@ setOpen(!open)
 }
 
 
-aria-label="Toggle menu"
+aria-label={open ? "Close menu" : "Open menu"}
+
+aria-expanded={open}
+
+aria-controls="mobile-navigation"
 
 
 className="
@@ -790,7 +800,7 @@ text-center
 >
 
 
-Login
+{t.nav.login}
 
 
 </Link>
@@ -816,7 +826,7 @@ text-black
 >
 
 
-Register
+{t.nav.register}
 
 
 </Link>
@@ -891,3 +901,4 @@ lang==="en"
 
 
 }
+

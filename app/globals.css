@@ -869,3 +869,38 @@ letter-spacing:
 
 
 }
+/* =====================================================
+   POLISH + ACCESSIBILITY
+===================================================== */
+
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+section[id] {
+  scroll-margin-top: 88px;
+}
+
+button:disabled,
+a[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+@media (hover: none) {
+  .anox-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 640px) {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  section {
+    scroll-margin-top: 76px;
+  }
+}

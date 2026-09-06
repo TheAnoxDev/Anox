@@ -1,4 +1,4 @@
-import type {
+﻿import type {
   Metadata,
   Viewport
 } from "next";
@@ -164,7 +164,7 @@ export const metadata:Metadata = {
 
   metadataBase:
   new URL(
-    "https://anox-three.vercel.app"
+    "https://anox-five.vercel.app"
   ),
 
 
@@ -270,7 +270,7 @@ export const metadata:Metadata = {
 
 
     url:
-    "https://anox-three.vercel.app",
+    "https://anox-five.vercel.app",
 
 
 
@@ -294,7 +294,7 @@ export const metadata:Metadata = {
 
       {
         url:
-        "/og-image.png",
+        "/opengraph-image",
 
         width:
         1200,
@@ -336,7 +336,7 @@ export const metadata:Metadata = {
 
 
     images:[
-      "/og-image.png"
+      "/opengraph-image"
     ],
 
 
@@ -485,3 +485,4 @@ ${vazirmatn.variable}
 
 
 }
+
