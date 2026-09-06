@@ -1,7 +1,7 @@
 export interface Translation {
 
 
-  lang: "en" | "fa";
+  lang: "en" | "fa" | "ar" | "ru" | "es" | "zh";
 
 
 

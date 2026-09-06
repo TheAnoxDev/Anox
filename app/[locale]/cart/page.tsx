@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 
 import Link from "next/link";
+import { useLang } from "@/components/LangContext";
 
 
 
@@ -105,6 +106,9 @@ new Event(CART_EVENT)
 
 
 export default function CartPage(){
+
+const { lang } = useLang();
+const prefix = `/${lang}`;
 
 
 
@@ -436,7 +440,7 @@ Explore ANOX products and services.
 
 <Link
 
-href="/shop"
+href={`${prefix}/shop`}
 
 className="
 mt-8

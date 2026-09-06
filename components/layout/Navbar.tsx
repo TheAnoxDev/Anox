@@ -29,9 +29,8 @@ import clsx from "clsx";
 import Logo from "./Logo";
 
 
-import {
-  useLang
-} from "@/components/LangContext";
+import { useLang, LOCALES, type Locale } from "@/components/LangContext";
+import { isRTL } from "@/locales/registry";
 
 
 import {
@@ -88,8 +87,7 @@ const prefix =
 
 
 
-const rtl =
-lang==="fa";
+const rtl = isRTL(lang);
 
 
 
@@ -293,34 +291,9 @@ observer.disconnect();
 
 
 
-function changeLanguage(){
-
-
-const next =
-lang==="en"
-?
-"fa"
-:
-"en";
-
-
-
-setLang(next);
-
-
-
-document.documentElement.dir =
-next==="fa"
-?
-"rtl"
-:
-"ltr";
-
-
-
-setOpen(false);
-
-
+function changeLanguage(next: Locale){
+  setLang(next);
+  setOpen(false);
 }
 
 
@@ -546,7 +519,7 @@ hover:scale-105
 
 <button
 
-onClick={changeLanguage}
+onClick={() => changeLanguage(LOCALES[(LOCALES.indexOf(lang) + 1) % LOCALES.length])}
 
 aria-label="Change language"
 
@@ -843,7 +816,7 @@ text-black
 
 <button
 
-onClick={changeLanguage}
+onClick={() => changeLanguage(LOCALES[(LOCALES.indexOf(lang) + 1) % LOCALES.length])}
 
 className="
 mt-5

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useLang } from "@/components/LangContext";
 
 import {
   ShieldCheck,
@@ -115,6 +116,9 @@ text:
 
 
 export default function PrivacyPage(){
+
+const { lang } = useLang();
+const prefix = `/${lang}`;
 
 
 return (
@@ -450,7 +454,7 @@ ANOX is committed to building secure technology while respecting user privacy an
 
 <Link
 
-href="/contact"
+href={`${prefix}/contact`}
 
 className="
 mt-8

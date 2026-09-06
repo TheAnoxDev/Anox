@@ -1,16 +1,16 @@
 import type { MetadataRoute } from "next";
 
-const baseUrl = "https://anox-five.vercel.app";
-const locales = ["en", "fa"] as const;
-const routes = ["", "/architecture", "/platform", "/shop", "/contact", "/privacy", "/terms"];
+const base = "https://anox-five.vercel.app";
+const locales = ["en", "fa", "ar", "ru", "es", "zh"];
+const pages = ["", "/architecture", "/platform", "/shop", "/cart", "/contact", "/dashboard", "/privacy", "/terms", "/login", "/register"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return locales.flatMap((locale) =>
-    routes.map((route) => ({
-      url: `${baseUrl}/${locale}${route}`,
+    pages.map((page) => ({
+      url: `${base}/${locale}${page}`,
       lastModified: new Date(),
-      changeFrequency: route === "" ? "weekly" : "monthly",
-      priority: route === "" ? 1 : 0.7,
+      changeFrequency: "weekly" as const,
+      priority: page === "" ? 1 : 0.7,
     }))
   );
 }

@@ -9,6 +9,7 @@ import {
 } from "next-auth/react";
 
 import Link from "next/link";
+import { useLang } from "@/components/LangContext";
 
 import {
   motion
@@ -35,6 +36,9 @@ import {
 
 
 export default function LoginPage(){
+
+const { lang } = useLang();
+const prefix = `/${lang}`;
 
 
 const [email,setEmail] = useState("");
@@ -91,7 +95,7 @@ throw new Error(
 
 
 
-window.location.href="/dashboard";
+window.location.href=`${prefix}/dashboard`;
 
 
 
@@ -134,7 +138,7 @@ setOauthLoading(provider);
 await signIn(
 provider,
 {
-callbackUrl:"/dashboard"
+callbackUrl:`${prefix}/dashboard`
 }
 );
 
@@ -589,7 +593,7 @@ justify-end
 
 <Link
 
-href="/forgot-password"
+href={`${prefix}/forgot-password`}
 
 className="
 text-sm
@@ -880,7 +884,7 @@ Don&apos;t have an account?
 
 <Link
 
-href="/register"
+href={`${prefix}/register`}
 
 className="
 font-semibold

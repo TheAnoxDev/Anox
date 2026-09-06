@@ -5,6 +5,10 @@ import type { NextRequest } from "next/server";
 const locales = [
   "fa",
   "en",
+  "ar",
+  "ru",
+  "es",
+  "zh",
 ];
 
 

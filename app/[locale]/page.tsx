@@ -1,7 +1,5 @@
 import dynamic from "next/dynamic";
 
-import Navbar from "@/components/layout/Navbar";
-
 import Hero from "@/sections/hero/Hero";
 
 const About = dynamic(
@@ -28,10 +26,6 @@ const Contact = dynamic(
   () => import("@/sections/contact/Contact")
 );
 
-const Footer = dynamic(
-  () => import("@/sections/footer/Footer")
-);
-
 
 
 
@@ -42,8 +36,6 @@ export default function Home(){
 return (
 
 <>
-
-<Navbar />
 
 
 <main
@@ -162,7 +154,6 @@ opacity-[0.035]
 
 
 
-<Footer />
 
 
 </>

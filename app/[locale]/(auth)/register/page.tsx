@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useLang } from "@/components/LangContext";
 import { useRouter } from "next/navigation";
 
 import { motion } from "framer-motion";
@@ -28,6 +29,9 @@ import { register } from "@/services/auth";
 
 
 export default function RegisterPage(){
+
+const { lang } = useLang();
+const prefix = `/${lang}`;
 
 
 const router = useRouter();
@@ -119,7 +123,7 @@ password
 });
 
 
-router.push("/login");
+router.push(`${prefix}/login`);
 
 
 }
@@ -997,7 +1001,7 @@ onClick={()=>
 signIn(
 "github",
 {
-callbackUrl:"/dashboard"
+callbackUrl:`${prefix}/dashboard`
 }
 )
 }
@@ -1038,7 +1042,7 @@ onClick={()=>
 signIn(
 "google",
 {
-callbackUrl:"/dashboard"
+callbackUrl:`${prefix}/dashboard`
 }
 )
 }

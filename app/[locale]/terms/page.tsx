@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useLang } from "@/components/LangContext";
 
 import {
   FileText,
@@ -20,6 +21,9 @@ import {
 
 
 export default function TermsPage(){
+
+const { lang } = useLang();
+const prefix = `/${lang}`;
 
 
 
@@ -451,7 +455,7 @@ and accept these Terms of Service.
 
 <Link
 
-href="/contact"
+href={`${prefix}/contact`}
 
 className="
 mt-8
