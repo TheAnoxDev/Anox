@@ -1,10 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { register } from "@/services/auth";
-
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import { motion } from "framer-motion";
 
 import {
@@ -12,8 +11,20 @@ import {
   Lock,
   Eye,
   EyeOff,
-  User
+  User,
+  ShieldCheck,
+  ArrowRight,
 } from "lucide-react";
+
+import {
+  FaGithub,
+  FaGoogle,
+} from "react-icons/fa";
+
+import { signIn } from "next-auth/react";
+
+import { register } from "@/services/auth";
+
 
 
 export default function RegisterPage(){
@@ -22,12 +33,18 @@ export default function RegisterPage(){
 const router = useRouter();
 
 
-const [showPassword,setShowPassword] = useState(false);
-
-
 const [name,setName] = useState("");
 const [email,setEmail] = useState("");
+
 const [password,setPassword] = useState("");
+const [confirmPassword,setConfirmPassword] = useState("");
+
+
+const [showPassword,setShowPassword] = useState(false);
+const [showConfirm,setShowConfirm] = useState(false);
+
+
+const [terms,setTerms] = useState(false);
 
 
 const [loading,setLoading] = useState(false);
@@ -36,16 +53,57 @@ const [error,setError] = useState("");
 
 
 
-const handleRegister = async(
+
+const passwordStrength =
+[
+password.length >= 8,
+/[A-Z]/.test(password),
+/[0-9]/.test(password),
+/[^A-Za-z0-9]/.test(password)
+
+].filter(Boolean).length;
+
+
+
+
+
+
+async function handleRegister(
 e:React.FormEvent
-)=>{
+){
 
 
 e.preventDefault();
 
+setError("");
+
+
+
+if(!terms){
+
+setError(
+"Please accept the terms and conditions."
+);
+
+return;
+
+}
+
+
+
+if(password !== confirmPassword){
+
+setError(
+"Passwords do not match."
+);
+
+return;
+
+}
+
+
 
 setLoading(true);
-setError("");
 
 
 
@@ -53,41 +111,43 @@ try{
 
 
 await register({
+
 name,
 email,
-password,
+password
+
 });
-
-
-setName("");
-setEmail("");
-setPassword("");
 
 
 router.push("/login");
 
 
+}
 
-}catch(err){
+catch(err){
 
 
 setError(
+
 err instanceof Error
-? err.message
-: "Register failed"
+?
+err.message
+:
+"Registration failed"
+
 );
 
 
+}
 
-}finally{
+finally{
 
 setLoading(false);
 
 }
 
 
-};
-
+}
 
 
 
@@ -95,7 +155,9 @@ setLoading(false);
 
 return (
 
+
 <main
+
 className="
 relative
 flex
@@ -103,48 +165,36 @@ min-h-screen
 items-center
 justify-center
 overflow-hidden
-bg-[#03070d]
+bg-[#02060b]
 px-6
+text-white
 "
+
 >
 
 
-
-{/* Background */}
-
 <div
+
 className="
 absolute
 inset-0
-bg-[radial-gradient(circle_at_center,rgba(0,217,255,.15),transparent_45%)]
+bg-[radial-gradient(circle_at_center,rgba(0,230,255,.18),transparent_45%)]
 "
+
 />
 
 
+
 <div
+
 className="
 absolute
 inset-0
-opacity-[0.05]
+opacity-[0.04]
 [background-image:linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)]
-[background-size:40px_40px]
+[background-size:45px_45px]
 "
-/>
 
-
-
-<div
-className="
-absolute
-top-[-200px]
-left-1/2
-h-[600px]
-w-[600px]
--translate-x-1/2
-rounded-full
-bg-cyan-400/10
-blur-[160px]
-"
 />
 
 
@@ -153,17 +203,20 @@ blur-[160px]
 
 <motion.div
 
+
 initial={{
 opacity:0,
-y:30,
+y:40,
 scale:.96
 }}
+
 
 animate={{
 opacity:1,
 y:0,
 scale:1
 }}
+
 
 transition={{
 duration:.6
@@ -172,15 +225,14 @@ duration:.6
 
 className="
 relative
-z-10
 w-full
 max-w-md
-rounded-[36px]
+rounded-[40px]
 border
 border-white/10
 bg-black/40
 p-8
-shadow-[0_0_80px_rgba(0,217,255,.12)]
+shadow-[0_0_100px_rgba(0,230,255,.15)]
 backdrop-blur-3xl
 "
 
@@ -189,10 +241,9 @@ backdrop-blur-3xl
 
 
 
-{/* Logo */}
-
 
 <div
+
 className="
 mx-auto
 flex
@@ -204,21 +255,22 @@ rounded-3xl
 border
 border-cyan-400/30
 bg-cyan-400/10
-shadow-[0_0_50px_rgba(0,217,255,.35)]
+shadow-[0_0_50px_rgba(0,230,255,.35)]
 "
+
 >
 
-
 <span
+
 className="
 text-4xl
 font-black
 text-cyan-300
 "
+
 >
 A
 </span>
-
 
 </div>
 
@@ -227,15 +279,16 @@ A
 
 
 
+
 <h1
+
 className="
 mt-8
 text-center
 text-4xl
 font-black
-tracking-tight
-text-white
 "
+
 >
 
 Create ANOX Account
@@ -246,17 +299,20 @@ Create ANOX Account
 
 
 <p
+
 className="
 mt-3
 text-center
 text-sm
 text-zinc-400
 "
+
 >
 
 Join the next generation AI ecosystem.
 
 </p>
+
 
 
 
@@ -278,7 +334,8 @@ space-y-5
 
 
 
-{/* Name */}
+
+{/* NAME */}
 
 
 <div>
@@ -292,9 +349,10 @@ text-sm
 text-zinc-300
 "
 >
-Full Name
-</label>
 
+Full Name
+
+</label>
 
 
 <div
@@ -305,7 +363,9 @@ relative
 
 
 <User
+
 size={18}
+
 className="
 absolute
 left-4
@@ -313,23 +373,23 @@ top-1/2
 -translate-y-1/2
 text-cyan-400
 "
+
 />
 
 
 
 <input
 
-value={name}
-
-onChange={(e)=>
-setName(e.target.value)
-}
-
 required
 
-type="text"
+value={name}
 
-placeholder=""
+onChange={
+e=>setName(e.target.value)
+}
+
+
+placeholder="Your name"
 
 
 className="
@@ -341,9 +401,7 @@ bg-white/[0.03]
 py-3
 pl-12
 pr-4
-text-white
 outline-none
-transition
 focus:border-cyan-400
 "
 
@@ -360,31 +418,36 @@ focus:border-cyan-400
 
 
 
-{/* Email */}
 
+
+
+{/* EMAIL */}
 
 
 <div>
 
 
 <label
+
 className="
 mb-2
 block
 text-sm
 text-zinc-300
 "
+
 >
 Email Address
 </label>
-
 
 
 <div className="relative">
 
 
 <Mail
+
 size={18}
+
 className="
 absolute
 left-4
@@ -392,22 +455,25 @@ top-1/2
 -translate-y-1/2
 text-cyan-400
 "
+
 />
 
 
+
 <input
-
-value={email}
-
-onChange={(e)=>
-setEmail(e.target.value)
-}
 
 required
 
 type="email"
 
-placeholder=""
+value={email}
+
+onChange={
+e=>setEmail(e.target.value)
+}
+
+
+placeholder="you@example.com"
 
 
 className="
@@ -419,9 +485,7 @@ bg-white/[0.03]
 py-3
 pl-12
 pr-4
-text-white
 outline-none
-transition
 focus:border-cyan-400
 "
 
@@ -440,7 +504,9 @@ focus:border-cyan-400
 
 
 
-{/* Password */}
+
+
+{/* PASSWORD */}
 
 
 
@@ -448,12 +514,14 @@ focus:border-cyan-400
 
 
 <label
+
 className="
 mb-2
 block
 text-sm
 text-zinc-300
 "
+
 >
 Password
 </label>
@@ -464,7 +532,9 @@ Password
 
 
 <Lock
+
 size={18}
+
 className="
 absolute
 left-4
@@ -472,22 +542,20 @@ top-1/2
 -translate-y-1/2
 text-cyan-400
 "
+
 />
 
 
 
 <input
 
+required
 
 value={password}
 
-
-onChange={(e)=>
-setPassword(e.target.value)
+onChange={
+e=>setPassword(e.target.value)
 }
-
-
-required
 
 
 type={
@@ -499,8 +567,7 @@ showPassword
 }
 
 
-placeholder=""
-
+placeholder="••••••••"
 
 
 className="
@@ -512,13 +579,9 @@ bg-white/[0.03]
 py-3
 pl-12
 pr-12
-text-white
 outline-none
-transition
 focus:border-cyan-400
 "
-
-
 
 />
 
@@ -540,19 +603,211 @@ right-4
 top-1/2
 -translate-y-1/2
 text-zinc-400
-hover:text-cyan-400
 "
 
 >
 
 {
+
 showPassword
+
 ?
+
 <EyeOff size={18}/>
+
 :
+
 <Eye size={18}/>
+
 }
 
+</button>
+
+
+
+</div>
+
+
+
+
+
+<div
+
+className="
+mt-3
+flex
+gap-1
+"
+
+>
+
+{
+
+[1,2,3,4].map(i=>(
+
+
+<div
+
+key={i}
+
+className={`
+h-1
+flex-1
+rounded-full
+
+${
+passwordStrength >= i
+?
+"bg-cyan-400"
+:
+"bg-white/10"
+}
+
+`}
+
+/>
+
+
+))
+
+}
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{/* CONFIRM PASSWORD */}
+
+
+
+<div>
+
+
+<label
+
+className="
+mb-2
+block
+text-sm
+text-zinc-300
+"
+
+>
+
+Confirm Password
+
+</label>
+
+
+
+
+<div className="relative">
+
+
+<Lock
+
+size={18}
+
+className="
+absolute
+left-4
+top-1/2
+-translate-y-1/2
+text-cyan-400
+"
+
+/>
+
+
+
+<input
+
+
+required
+
+
+value={confirmPassword}
+
+
+onChange={
+e=>setConfirmPassword(e.target.value)
+}
+
+
+type={
+showConfirm
+?
+"text"
+:
+"password"
+}
+
+
+
+placeholder="Repeat password"
+
+
+
+className="
+w-full
+rounded-xl
+border
+border-white/10
+bg-white/[0.03]
+py-3
+pl-12
+pr-12
+outline-none
+focus:border-cyan-400
+"
+
+/>
+
+
+
+
+
+<button
+
+type="button"
+
+onClick={()=>
+setShowConfirm(!showConfirm)
+}
+
+className="
+absolute
+right-4
+top-1/2
+-translate-y-1/2
+text-zinc-400
+"
+
+>
+
+{
+
+showConfirm
+
+?
+
+<EyeOff size={18}/>
+
+:
+
+<Eye size={18}/>
+
+}
 
 </button>
 
@@ -569,17 +824,56 @@ showPassword
 
 
 
+<label
+
+className="
+flex
+items-center
+gap-3
+text-sm
+text-zinc-400
+"
+
+>
+
+<input
+
+type="checkbox"
+
+checked={terms}
+
+onChange={
+e=>setTerms(e.target.checked)
+}
+
+/>
+
+
+I agree to ANOX Terms & Privacy
+
+
+</label>
+
+
+
+
+
+
+
 {
 error &&
 
 <p
+
 className="
-text-center
 text-sm
 text-red-400
 "
+
 >
+
 {error}
+
 </p>
 
 }
@@ -589,54 +883,194 @@ text-red-400
 
 
 
-
-<motion.button
-
-whileHover={{
-scale:1.02
-}}
-
-whileTap={{
-scale:.98
-}}
+<button
 
 
 disabled={loading}
 
 
-type="submit"
-
-
 className="
+flex
 w-full
+items-center
+justify-center
+gap-2
 rounded-xl
-bg-gradient-to-r
-from-cyan-400
-to-cyan-500
-py-3.5
+bg-cyan-400
+py-4
 font-bold
 text-black
-shadow-[0_0_35px_rgba(0,217,255,.35)]
+transition
+hover:bg-cyan-300
+disabled:opacity-50
 "
 
 >
 
+
 {
+
 loading
+
 ?
-"Creating..."
+
+"Creating Account..."
+
 :
-"Create Account"
+
+<>
+
+Create Account
+
+<ArrowRight size={18}/>
+
+</>
+
 }
 
 
-</motion.button>
+
+</button>
 
 
 
 
 
 </form>
+
+
+
+
+
+
+
+
+
+<div
+
+className="
+my-8
+flex
+items-center
+gap-4
+"
+
+>
+
+
+<div className="h-px flex-1 bg-white/10"/>
+
+<span className="text-xs text-zinc-500">
+OR
+</span>
+
+<div className="h-px flex-1 bg-white/10"/>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div
+
+className="
+grid
+grid-cols-2
+gap-3
+"
+
+>
+
+
+
+<button
+
+type="button"
+
+onClick={()=>
+signIn(
+"github",
+{
+callbackUrl:"/dashboard"
+}
+)
+}
+
+
+className="
+flex
+items-center
+justify-center
+gap-2
+rounded-xl
+border
+border-white/10
+bg-white/5
+py-3
+hover:bg-white/10
+"
+
+>
+
+<FaGithub/>
+
+GitHub
+
+</button>
+
+
+
+
+
+
+
+<button
+
+type="button"
+
+onClick={()=>
+signIn(
+"google",
+{
+callbackUrl:"/dashboard"
+}
+)
+}
+
+
+className="
+flex
+items-center
+justify-center
+gap-2
+rounded-xl
+border
+border-white/10
+bg-white/5
+py-3
+hover:bg-white/10
+"
+
+>
+
+<FaGoogle/>
+
+Google
+
+</button>
+
+
+
+</div>
+
+
+
 
 
 
@@ -654,7 +1088,6 @@ text-zinc-400
 
 >
 
-
 Already have an account?
 
 
@@ -668,7 +1101,6 @@ href="/login"
 className="
 font-semibold
 text-cyan-400
-hover:text-cyan-300
 "
 
 >
@@ -684,21 +1116,31 @@ Sign In
 
 
 
-<p
+
+<div
 
 className="
 mt-6
-text-center
+flex
+justify-center
+items-center
+gap-2
 text-[10px]
-tracking-[0.35em]
+tracking-[.3em]
 text-zinc-600
 "
 
 >
 
-SECURED BY ANOX IDENTITY SYSTEM
 
-</p>
+<ShieldCheck size={14}/>
+
+SECURED BY ANOX IDENTITY
+
+
+</div>
+
+
 
 
 
@@ -710,6 +1152,5 @@ SECURED BY ANOX IDENTITY SYSTEM
 
 
 );
-
 
 }

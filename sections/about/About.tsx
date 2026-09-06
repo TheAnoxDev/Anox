@@ -1,20 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-
 import {
   Rocket,
   Globe2,
   Brain,
   Shield,
   Code2,
-  Cpu,
-  Sparkles,
 } from "lucide-react";
 
 
 import { useLang } from "@/components/LangContext";
 import { useTranslation } from "@/hooks/useTranslation";
+
 
 import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -24,84 +22,119 @@ import { cn } from "@/lib/cn";
 
 
 
+
+
 const cards = [
   {
     icon: Rocket,
-    key: "vision",
+    key:"vision",
   },
   {
     icon: Globe2,
-    key: "mission",
+    key:"mission",
   },
-];
+] as const;
+
+
 
 
 
 const features = [
   {
-    icon: Brain,
-    key: "ai",
+    icon:Brain,
+    key:"ai",
   },
   {
-    icon: Shield,
-    key: "cyber",
+    icon:Shield,
+    key:"cyber",
   },
   {
-    icon: Code2,
-    key: "software",
+    icon:Code2,
+    key:"software",
   },
-];
+] as const;
+
+
+
+
 
 
 
 export default function About(){
 
 
-  const {lang} = useLang();
+const {lang}=useLang();
 
-  const {t}=useTranslation();
+const {t}=useTranslation();
 
 
-  const rtl = lang==="fa";
+const rtl =
+lang==="fa";
+
 
 
 
 return (
 
+
 <section
+
 id="about"
-dir={rtl ? "rtl":"ltr"}
+
+data-section
+
+dir={
+rtl
+?
+"rtl"
+:
+"ltr"
+}
 
 className="
 relative
 overflow-hidden
-py-32
+py-24
+md:py-32
 "
+
+
 >
 
 
-
-{/* Background */}
-
 <div
+
+aria-hidden
+
 className="
+pointer-events-none
 absolute
 inset-0
--z-20
-bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_40%)]
+bg-[radial-gradient(circle_at_top,rgba(34,211,238,.12),transparent_40%)]
 "
+
 />
 
 
+
+
 <div
+
+aria-hidden
+
 className="
+pointer-events-none
 absolute
 inset-0
--z-30
-bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)]
+hidden
+opacity-[0.03]
+md:block
+bg-[linear-gradient(rgba(255,255,255,.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.03)_1px,transparent_1px)]
 bg-[size:60px_60px]
 "
+
 />
+
 
 
 
@@ -110,9 +143,16 @@ bg-[size:60px_60px]
 <Container>
 
 
-<div className={cn(
-rtl && "text-right"
-)}>
+<div
+
+className={
+cn(
+rtl &&
+"text-right"
+)
+}
+
+>
 
 
 <SectionTitle
@@ -133,15 +173,13 @@ description={t.about.description}
 
 
 
-{/* Stats */}
-
 <div
 
 className="
-mt-16
+mt-14
 grid
 grid-cols-2
-gap-5
+gap-4
 md:grid-cols-4
 "
 
@@ -172,8 +210,8 @@ text="Scalable Future"
 />
 
 
-
 </div>
+
 
 
 
@@ -183,47 +221,76 @@ text="Scalable Future"
 <div
 
 className="
-mt-20
+mt-16
 grid
-gap-8
+gap-6
 lg:grid-cols-2
 "
 
 >
 
 
-
 {
-cards.map((card,index)=>{
+
+cards.map(
+(card,index)=>{
 
 
-const Icon=card.icon;
+const Icon =
+card.icon;
+
+
+
+const title =
+card.key==="vision"
+?
+t.about.visionTitle
+:
+t.about.missionTitle;
+
+
+
+const text =
+card.key==="vision"
+?
+t.about.visionDescription
+:
+t.about.missionDescription;
+
+
 
 
 return (
 
-<motion.div
+
+<motion.article
 
 key={card.key}
 
+
 initial={{
 opacity:0,
-y:30
+y:20
 }}
+
 
 whileInView={{
 opacity:1,
 y:0
 }}
 
+
 viewport={{
-once:true
+once:true,
+amount:.2
 }}
 
+
 transition={{
-duration:.6,
-delay:index*.15
+duration:.5,
+delay:index*.08
 }}
+
 
 >
 
@@ -234,13 +301,18 @@ className="
 group
 relative
 overflow-hidden
-p-10
+p-8
+md:p-10
 "
+
 
 >
 
 
 <div
+
+aria-hidden
+
 className="
 absolute
 right-0
@@ -251,7 +323,11 @@ rounded-full
 bg-cyan-400/10
 blur-3xl
 "
+
+
 />
+
+
 
 
 
@@ -266,15 +342,19 @@ justify-center
 rounded-2xl
 bg-cyan-400/10
 text-cyan-400
-transition
-group-hover:scale-110
 "
+
 
 >
 
-<Icon size={34}/>
+
+<Icon
+size={32}
+/>
+
 
 </div>
+
 
 
 
@@ -282,25 +362,18 @@ group-hover:scale-110
 <h3
 
 className="
-mt-8
-text-3xl
+mt-7
+text-2xl
 font-black
-text-white
 "
+
 
 >
 
-
-{
-card.key==="vision"
-?
-t.about.visionTitle
-:
-t.about.missionTitle
-}
-
+{title}
 
 </h3>
+
 
 
 
@@ -308,22 +381,18 @@ t.about.missionTitle
 <p
 
 className="
-mt-5
+mt-4
 leading-8
 text-zinc-400
 "
 
+
 >
 
-{
-card.key==="vision"
-?
-t.about.visionDescription
-:
-t.about.missionDescription
-}
+{text}
 
 </p>
+
 
 
 
@@ -331,14 +400,18 @@ t.about.missionDescription
 </GlassCard>
 
 
-</motion.div>
+</motion.article>
 
 
 )
 
-})
+}
+
+)
+
 
 }
+
 
 
 </div>
@@ -350,14 +423,12 @@ t.about.missionDescription
 
 
 
-{/* Features */}
-
 <div
 
 className="
-mt-12
+mt-10
 grid
-gap-6
+gap-5
 md:grid-cols-3
 "
 
@@ -365,21 +436,32 @@ md:grid-cols-3
 
 
 {
-features.map((item)=>{
+
+features.map(
+(item)=>{
 
 
-const Icon=item.icon;
+const Icon =
+item.icon;
+
+
+const text =
+t.about[item.key];
+
 
 
 return (
 
-<motion.div
+
+<motion.article
 
 key={item.key}
 
+
 whileHover={{
-y:-8
+y:-6
 }}
+
 
 className="
 rounded-3xl
@@ -388,15 +470,15 @@ border-white/10
 bg-white/[0.04]
 p-7
 backdrop-blur-xl
-transition
 "
+
 
 >
 
 
 <Icon
 
-size={32}
+size={30}
 
 className="
 text-cyan-400
@@ -416,23 +498,28 @@ text-zinc-200
 
 >
 
-
 {
-t.about[item.key as keyof typeof t.about]
+typeof text==="string"
+?
+text
+:
+""
 }
-
 
 </p>
 
 
+</motion.article>
 
-</motion.div>
 
 
 )
 
+}
 
-})
+
+)
+
 
 }
 
@@ -446,14 +533,10 @@ t.about[item.key as keyof typeof t.about]
 </Container>
 
 
-
-
-
 </section>
 
 
 );
-
 
 
 }
@@ -464,21 +547,23 @@ t.about[item.key as keyof typeof t.about]
 
 
 
-
 function Stat({
 
 number,
-text
+
+text,
 
 }:{
 
 number:string;
+
 text:string;
 
 }){
 
 
 return (
+
 
 <div
 
@@ -487,10 +572,11 @@ rounded-2xl
 border
 border-white/10
 bg-white/[0.04]
-p-6
+p-5
 text-center
 backdrop-blur-xl
 "
+
 
 >
 
@@ -527,6 +613,7 @@ text-zinc-400
 
 
 </div>
+
 
 );
 

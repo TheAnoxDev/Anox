@@ -1,13 +1,75 @@
 {
   "navbar": {
     "home": "Home",
-    "platform": "Platform",
+    "about": "About",
+    "technology": "Technology",
+    "projects": "Projects",
     "shop": "Shop",
-    "contact": "Contact"
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register"
   },
 
   "hero": {
+    "badge": "NEXT GENERATION TECHNOLOGY",
     "title": "Engineering The Future",
-    "description": "AI, Software and Cybersecurity solutions."
+    "subtitle": "AI, Software & Cybersecurity Solutions",
+    "description": "ANOX develops intelligent systems, secure software and future-ready digital infrastructure.",
+    "primaryButton": "Start Collaboration",
+    "secondaryButton": "Explore Architecture",
+
+    "stats": [
+      {
+        "value": "24/7",
+        "label": "Smart Support"
+      },
+      {
+        "value": "AI",
+        "label": "Artificial Intelligence"
+      },
+      {
+        "value": "100%",
+        "label": "Future Focus"
+      }
+    ]
+  },
+
+  "about": {
+    "title": "About ANOX",
+    "description": "ANOX is a technology company focused on artificial intelligence, cybersecurity, software engineering and cloud infrastructure."
+  },
+
+  "technology": {
+    "title": "Our Expertise",
+    "ai": "Artificial Intelligence",
+    "cyber": "Cyber Security",
+    "software": "Software Engineering",
+    "cloud": "Cloud Infrastructure"
+  },
+
+  "projects": {
+    "title": "Projects",
+    "description": "Explore systems and platforms developed by ANOX."
+  },
+
+  "shop": {
+    "title": "ANOX Store",
+    "description": "Premium AI, cybersecurity and software products.",
+    "buy": "Buy Now"
+  },
+
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "continueGoogle": "Continue with Google",
+    "continueGithub": "Continue with GitHub"
+  },
+
+  "footer": {
+    "copyright": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions"
   }
 }

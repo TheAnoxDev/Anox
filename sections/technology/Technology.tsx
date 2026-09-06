@@ -79,6 +79,8 @@ export default function Technology() {
 
       id="technology"
 
+data-section
+
       dir={rtl ? "rtl" : "ltr"}
 
       className={cn(

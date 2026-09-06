@@ -1,191 +1,323 @@
 "use client";
 
+
 import Link from "next/link";
+
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
+
+import {
+  AnimatePresence,
+  motion,
+} from "framer-motion";
+
+
+import {
+  Menu,
+  X,
+  Globe,
+} from "lucide-react";
+
+
 import clsx from "clsx";
-import { useEffect, useState } from "react";
-import { Menu, X, Globe } from "lucide-react";
+
 
 import Logo from "./Logo";
 
-import { useLang } from "@/components/LangContext";
-import { useTranslation } from "@/hooks/useTranslation";
 
+import {
+  useLang
+} from "@/components/LangContext";
 
-export default function Navbar() {
 
+import {
+  useTranslation
+} from "@/hooks/useTranslation";
 
-  const [open,setOpen] = useState(false);
-  const [scrolled,setScrolled] = useState(false);
-  const [active,setActive] = useState("hero");
 
 
-  const {
-    lang,
-    setLang
-  } = useLang();
 
 
-  const {
-    t
-  } = useTranslation();
+type SectionId =
+  | "hero"
+  | "about"
+  | "technology"
+  | "projects"
+  | "contact";
 
 
 
-  const prefix = `/${lang}`;
 
 
 
-  const rtl = lang === "fa";
+export default function Navbar(){
 
 
 
+const [open,setOpen]=useState(false);
 
 
-  const links = [
+const [scrolled,setScrolled]=useState(false);
 
-    {
-      id:"about",
-      name:t.nav.about,
-      href:`${prefix}#about`
-    },
 
+const [active,setActive]=useState<SectionId>("hero");
 
-    {
-      id:"technology",
-      name:t.nav.technology,
-      href:`${prefix}/platform`
-    },
 
 
-    {
-      id:"projects",
-      name:t.nav.projects,
-      href:`${prefix}/projects`
-    },
+const {
+lang,
+setLang
+}=useLang();
 
 
-  ];
 
+const {
+t
+}=useTranslation();
 
 
 
 
-  useEffect(()=>{
 
+const prefix =
+`/${lang}`;
 
-    const onScroll = ()=>{
 
 
-      setScrolled(
-        window.scrollY > 30
-      );
+const rtl =
+lang==="fa";
 
 
-      const sections=[
-        "hero",
-        "about",
-        "technology",
-        "projects",
-        "contact"
-      ];
 
 
 
-      sections.forEach((id)=>{
 
 
-        const el =
-        document.getElementById(id);
+const links = useMemo(()=>[
 
 
+{
+id:"about" as SectionId,
+name:t.nav.about,
+href:`${prefix}#about`
+},
 
-        if(!el)
-          return;
 
+{
+id:"technology" as SectionId,
+name:t.nav.technology,
+href:`${prefix}/platform`
+},
 
 
-        const top =
-        el.offsetTop - 180;
+{
+id:"projects" as SectionId,
+name:t.nav.projects,
+href:`${prefix}#projects`
+},
 
 
 
-        const bottom =
-        top + el.offsetHeight;
+],[
+prefix,
+t
+]);
 
 
 
-        if(
-          window.scrollY >= top &&
-          window.scrollY < bottom
-        ){
 
-          setActive(id);
 
-        }
 
 
-      });
 
+/*
+========================
+SCROLL + ACTIVE SECTION
+========================
+*/
 
-    };
 
+useEffect(()=>{
 
 
-    onScroll();
+let ticking=false;
 
 
-    window.addEventListener(
-      "scroll",
-      onScroll
-    );
 
+const handleScroll=()=>{
 
 
-    return ()=>{
+if(!ticking){
 
-      window.removeEventListener(
-        "scroll",
-        onScroll
-      );
 
-    };
+requestAnimationFrame(()=>{
 
 
-  },[]);
+setScrolled(
+window.scrollY > 30
+);
 
 
+ticking=false;
 
 
+});
 
 
-  function changeLanguage(){
+ticking=true;
 
 
-    const next =
-    lang==="en"
-    ?
-    "fa"
-    :
-    "en";
+}
 
 
+};
 
-    setLang(next);
 
 
-    document.documentElement.dir =
-    next==="fa"
-    ?
-    "rtl"
-    :
-    "ltr";
 
+window.addEventListener(
+"scroll",
+handleScroll,
+{
+passive:true
+}
+);
 
 
-    setOpen(false);
 
 
-  }
+return()=>{
+
+
+window.removeEventListener(
+"scroll",
+handleScroll
+);
+
+
+};
+
+
+
+},[]);
+
+
+
+
+
+
+
+
+
+useEffect(()=>{
+
+
+
+const sections =
+document.querySelectorAll<HTMLElement>(
+"[data-section]"
+);
+
+
+
+const observer =
+new IntersectionObserver(
+
+
+entries=>{
+
+
+entries.forEach(entry=>{
+
+
+if(entry.isIntersecting){
+
+
+setActive(
+entry.target.id as SectionId
+);
+
+
+}
+
+
+});
+
+
+},
+
+
+{
+rootMargin:"-35% 0px -55% 0px"
+}
+
+
+);
+
+
+
+
+
+sections.forEach(section=>
+observer.observe(section)
+);
+
+
+
+
+
+return()=>{
+
+observer.disconnect();
+
+};
+
+
+},[]);
+
+
+
+
+
+
+
+
+
+function changeLanguage(){
+
+
+const next =
+lang==="en"
+?
+"fa"
+:
+"en";
+
+
+
+setLang(next);
+
+
+
+document.documentElement.dir =
+next==="fa"
+?
+"rtl"
+:
+"ltr";
+
+
+
+setOpen(false);
+
+
+}
+
+
 
 
 
@@ -209,7 +341,10 @@ rtl
 
 className={clsx(
 
-"fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+
+"fixed inset-x-0 top-0 z-50 transition-all duration-500",
+
+
 
 scrolled
 
@@ -221,10 +356,11 @@ scrolled
 
 "bg-transparent"
 
+
 )}
 
->
 
+>
 
 
 
@@ -243,8 +379,8 @@ py-4
 >
 
 
-
 <Logo />
+
 
 
 
@@ -263,9 +399,9 @@ md:flex
 >
 
 
-
 {
-links.map((link)=>(
+
+links.map(link=>(
 
 
 <Link
@@ -277,7 +413,8 @@ href={link.href}
 
 className={clsx(
 
-"rounded-xl px-4 py-2 text-sm font-medium transition-all",
+"rounded-xl px-4 py-2 text-sm font-medium transition",
+
 
 active===link.id
 
@@ -288,6 +425,7 @@ active===link.id
 :
 
 "text-zinc-300 hover:bg-white/5 hover:text-white"
+
 
 )}
 
@@ -309,7 +447,6 @@ active===link.id
 
 
 
-
 <Link
 
 href={`${prefix}/contact`}
@@ -325,7 +462,6 @@ py-2
 text-sm
 font-semibold
 text-cyan-300
-transition
 hover:bg-cyan-400/20
 "
 
@@ -354,9 +490,7 @@ px-4
 py-2
 text-sm
 text-zinc-300
-transition
 hover:bg-white/5
-hover:text-white
 "
 
 >
@@ -403,9 +537,13 @@ Register
 
 
 
+
 <button
 
 onClick={changeLanguage}
+
+aria-label="Change language"
+
 
 className="
 flex
@@ -418,14 +556,13 @@ px-4
 py-2
 text-xs
 text-cyan-300
-transition
 hover:bg-white/5
 "
 
 >
 
 
-<Globe size={14}/>
+<Globe size={15}/>
 
 
 {
@@ -441,6 +578,7 @@ lang==="en"
 
 
 
+
 </nav>
 
 
@@ -453,15 +591,18 @@ lang==="en"
 
 <button
 
+onClick={()=>
+setOpen(!open)
+}
 
-onClick={()=>setOpen(!open)}
+
+aria-label="Toggle menu"
 
 
 className="
 rounded-xl
 p-2
 text-white
-transition
 hover:bg-white/10
 md:hidden
 "
@@ -472,13 +613,19 @@ md:hidden
 {
 open
 ?
+
 <X size={24}/>
+
 :
+
 <Menu size={24}/>
+
 }
 
 
 </button>
+
+
 
 
 
@@ -492,23 +639,54 @@ open
 
 
 
+<AnimatePresence>
+
 
 {
+
 open && (
 
 
-<div
+<motion.div
+
+
+initial={{
+opacity:0,
+height:0
+}}
+
+
+animate={{
+opacity:1,
+height:"auto"
+}}
+
+
+exit={{
+opacity:0,
+height:0
+}}
+
 
 
 className="
+overflow-hidden
 border-t
 border-white/10
 bg-black/90
-p-6
 backdrop-blur-xl
 md:hidden
 "
 
+>
+
+
+<div
+
+className="
+space-y-2
+p-6
+"
 
 >
 
@@ -516,7 +694,7 @@ md:hidden
 
 {
 
-links.map((link)=>(
+links.map(link=>(
 
 
 <Link
@@ -525,7 +703,10 @@ key={link.id}
 
 href={link.href}
 
-onClick={()=>setOpen(false)}
+onClick={()=>
+setOpen(false)
+}
+
 
 className="
 block
@@ -533,7 +714,6 @@ rounded-xl
 px-4
 py-3
 text-zinc-300
-transition
 hover:bg-white/5
 "
 
@@ -548,7 +728,9 @@ hover:bg-white/5
 
 ))
 
+
 }
+
 
 
 
@@ -579,6 +761,8 @@ text-cyan-300
 
 
 
+
+
 <div
 
 className="
@@ -601,7 +785,6 @@ border
 border-white/10
 py-3
 text-center
-text-zinc-300
 "
 
 >
@@ -611,6 +794,7 @@ Login
 
 
 </Link>
+
 
 
 
@@ -638,7 +822,10 @@ Register
 </Link>
 
 
+
 </div>
+
+
 
 
 
@@ -661,6 +848,7 @@ text-cyan-300
 
 <Globe size={15}/>
 
+
 {
 lang==="en"
 ?
@@ -675,13 +863,20 @@ lang==="en"
 
 
 
-
 </div>
+
+
+
+</motion.div>
 
 
 )
 
+
 }
+
+
+</AnimatePresence>
 
 
 
@@ -693,7 +888,6 @@ lang==="en"
 
 
 );
-
 
 
 }

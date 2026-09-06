@@ -1,75 +1,13 @@
 import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import { authOptions } from "@/lib/auth";
 
 
-const handler = NextAuth({
+const handler =
+NextAuth(authOptions);
 
-  providers: [
-
-    CredentialsProvider({
-
-      name: "credentials",
-
-      credentials: {
-
-        email:{
-          label:"Email",
-          type:"email"
-        },
-
-        password:{
-          label:"Password",
-          type:"password"
-        }
-
-      },
-
-
-      async authorize(credentials){
-
-
-        if(
-          credentials?.email === "admin@anox.dev" &&
-          credentials?.password === "123456"
-        ){
-
-          return {
-
-            id:"1",
-            name:"Admin",
-            email:"admin@anox.dev"
-
-          };
-
-        }
-
-
-        return null;
-
-      }
-
-
-    })
-
-  ],
-
-
-  session:{
-    strategy:"jwt"
-  },
-
-
-  pages:{
-
-    signIn:"/login"
-
-  }
-
-
-});
 
 
 export {
-  handler as GET,
-  handler as POST
+handler as GET,
+handler as POST,
 };

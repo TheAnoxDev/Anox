@@ -2,450 +2,511 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+
 import {
   FileText,
+  ShieldCheck,
   UserCheck,
-  Shield,
   Cpu,
-  AlertTriangle,
+  CreditCard,
+  Lock,
   Scale,
+  AlertTriangle,
+  Mail,
 } from "lucide-react";
 
 
-export default function TermsPage() {
 
 
-  const sections = [
 
-    {
-      icon: UserCheck,
-      title: "Account Usage",
-      text:
-        "Users are responsible for maintaining accurate account information and protecting their login credentials."
-    },
+export default function TermsPage(){
 
 
-    {
-      icon: Cpu,
-      title: "Using ANOX Services",
-      text:
-        "ANOX provides software, AI, cybersecurity, and digital services. Users must use these services responsibly."
-    },
 
+const sections=[
 
-    {
-      icon: Shield,
-      title: "Security & Protection",
-      text:
-        "Attempting unauthorized access, abusing systems, or harming infrastructure is strictly prohibited."
-    },
+{
+icon:UserCheck,
+title:"Account Responsibility",
+text:
+"Users are responsible for providing accurate information, maintaining account security, and protecting their authentication credentials."
+},
 
 
-    {
-      icon: FileText,
-      title: "Content Ownership",
-      text:
-        "ANOX products, designs, software, and technologies remain the intellectual property of ANOX."
-    },
+{
+icon:Cpu,
+title:"AI & Technology Usage",
+text:
+"ANOX provides artificial intelligence, software, automation, and digital infrastructure services. Users must use these technologies ethically and legally."
+},
 
 
-    {
-      icon: AlertTriangle,
-      title: "Service Limitations",
-      text:
-        "Services may change, improve, or become temporarily unavailable for maintenance and upgrades."
-    },
+{
+icon:ShieldCheck,
+title:"Security Policy",
+text:
+"Unauthorized access attempts, security abuse, reverse engineering, attacks, or disruption of ANOX infrastructure are strictly prohibited."
+},
 
 
-    {
-      icon: Scale,
-      title: "Legal Agreement",
-      text:
-        "By accessing ANOX, you agree to follow these terms and all applicable laws."
-    },
+{
+icon:CreditCard,
+title:"Payments & Subscriptions",
+text:
+"Paid products and services are provided according to the selected plan. Pricing and subscription features may change in future updates."
+},
 
 
-  ];
+{
+icon:Lock,
+title:"Data Protection",
+text:
+"ANOX respects user privacy and applies appropriate technical measures to protect personal information."
+},
 
 
+{
+icon:AlertTriangle,
+title:"Service Availability",
+text:
+"ANOX may update, modify, suspend, or improve services to maintain performance, reliability, and security."
+},
 
-  return (
 
-    <main
-      className="
-      relative
-      min-h-screen
-      overflow-hidden
-      bg-[#04070b]
-      px-6
-      py-24
-      text-white
-      "
-    >
+{
+icon:Scale,
+title:"Legal Agreement",
+text:
+"By accessing ANOX products and services, you agree to these terms and all applicable regulations."
+},
 
 
-      {/* Background */}
+{
+icon:Mail,
+title:"Contact & Support",
+text:
+"For questions regarding these terms, users can contact the ANOX support team."
+},
 
-      <div
-        className="
-        absolute
-        left-1/2
-        top-0
-        h-[750px]
-        w-[750px]
-        -translate-x-1/2
-        rounded-full
-        bg-cyan-500/10
-        blur-[180px]
-        "
-      />
 
+];
 
 
-      <div
-        className="
-        absolute
-        inset-0
-        opacity-[0.03]
-        [background-image:radial-gradient(white_1px,transparent_1px)]
-        [background-size:24px_24px]
-        "
-      />
 
 
 
+return (
 
-      <motion.div
+<main
+className="
+relative
+min-h-screen
+overflow-hidden
+bg-[#04070b]
+px-6
+py-28
+text-white
+"
+>
 
-        initial={{
-          opacity:0,
-          y:40
-        }}
 
-        animate={{
-          opacity:1,
-          y:0
-        }}
 
-        transition={{
-          duration:.7
-        }}
+<div
+className="
+absolute
+left-1/2
+top-0
+h-[800px]
+w-[800px]
+-translate-x-1/2
+rounded-full
+bg-cyan-400/10
+blur-[180px]
+"
+/>
 
-        className="
-        relative
-        mx-auto
-        max-w-5xl
-        "
-      >
 
 
 
+<div
+className="
+absolute
+inset-0
+opacity-[0.03]
+[background-image:radial-gradient(white_1px,transparent_1px)]
+[background-size:32px_32px]
+"
+/>
 
 
-        {/* Header */}
 
 
-        <div
-          className="
-          text-center
-          "
-        >
 
+<motion.section
 
-          <div
-            className="
-            mx-auto
-            flex
-            h-20
-            w-20
-            items-center
-            justify-center
-            rounded-3xl
-            border
-            border-cyan-400/30
-            bg-cyan-400/10
-            shadow-[0_0_40px_rgba(34,211,238,.25)]
-            "
-          >
+initial={{
+opacity:0,
+y:40
+}}
 
-            <FileText
-              size={40}
-              className="text-cyan-300"
-            />
+animate={{
+opacity:1,
+y:0
+}}
 
-          </div>
+transition={{
+duration:.7
+}}
 
+className="
+relative
+mx-auto
+max-w-6xl
+"
 
+>
 
 
-          <h1
-            className="
-            mt-8
-            text-5xl
-            font-black
-            "
-          >
 
-            Terms of Service
+{/* HEADER */}
 
-          </h1>
 
+<div
+className="
+text-center
+"
+>
 
 
-          <p
-            className="
-            mx-auto
-            mt-4
-            max-w-xl
-            text-zinc-400
-            "
-          >
+<div
+className="
+mx-auto
+flex
+h-24
+w-24
+items-center
+justify-center
+rounded-[32px]
+border
+border-cyan-400/30
+bg-cyan-400/10
+shadow-[0_0_60px_rgba(34,211,238,.25)]
+"
+>
 
-            The rules and conditions for using ANOX products and services.
 
-          </p>
+<FileText
+size={46}
+className="text-cyan-300"
+/>
 
 
-        </div>
+</div>
 
 
 
+<h1
+className="
+mt-10
+text-5xl
+font-black
+md:text-7xl
+"
+>
 
+Terms of Service
 
+</h1>
 
 
-        {/* Sections */}
 
+<p
+className="
+mx-auto
+mt-6
+max-w-3xl
+text-lg
+leading-8
+text-zinc-400
+"
+>
 
-        <div
-          className="
-          mt-16
-          grid
-          gap-6
-          md:grid-cols-2
-          "
-        >
+The rules, responsibilities and agreements
+that define the relationship between ANOX
+and its users.
 
+</p>
 
-          {
-            sections.map((item,index)=>{
 
 
-              const Icon=item.icon;
+<div
+className="
+mt-6
+inline-flex
+rounded-full
+border
+border-white/10
+bg-white/5
+px-5
+py-2
+text-sm
+text-zinc-400
+"
+>
 
+Version 1.0 • Updated August 2026
 
-              return (
+</div>
 
-                <motion.div
 
 
-                  key={index}
+</div>
 
 
-                  initial={{
-                    opacity:0,
-                    y:20
-                  }}
 
 
-                  whileInView={{
-                    opacity:1,
-                    y:0
-                  }}
 
 
-                  transition={{
-                    delay:index*.08
-                  }}
 
 
-                  viewport={{
-                    once:true
-                  }}
 
+{/* CARDS */}
 
-                  className="
-                  rounded-3xl
-                  border
-                  border-white/10
-                  bg-white/5
-                  p-7
-                  backdrop-blur-xl
-                  transition-all
-                  duration-300
-                  hover:border-cyan-400/30
-                  hover:bg-white/[0.08]
-                  "
 
 
-                >
+<div
+className="
+mt-20
+grid
+gap-6
+md:grid-cols-2
+"
+>
 
 
-                  <Icon
+{
+sections.map(
+(item,index)=>{
 
-                    size={28}
 
-                    className="
-                    text-cyan-400
-                    "
+const Icon=item.icon;
 
-                  />
 
+return (
 
+<motion.article
 
-                  <h2
+key={item.title}
 
-                    className="
-                    mt-5
-                    text-xl
-                    font-bold
-                    "
 
-                  >
+initial={{
+opacity:0,
+y:25
+}}
 
-                    {item.title}
+whileInView={{
+opacity:1,
+y:0
+}}
 
-                  </h2>
+viewport={{
+once:true
+}}
 
+transition={{
+delay:index*.06
+}}
 
 
+whileHover={{
+y:-6
+}}
 
-                  <p
 
-                    className="
-                    mt-3
-                    leading-7
-                    text-zinc-400
-                    "
+className="
+rounded-3xl
+border
+border-white/10
+bg-white/5
+p-8
+backdrop-blur-xl
+transition
+hover:border-cyan-400/40
+hover:bg-white/[0.08]
+"
 
-                  >
+>
 
-                    {item.text}
 
-                  </p>
+<Icon
 
+size={32}
 
+className="
+text-cyan-400
+"
 
-                </motion.div>
+/>
 
 
-              )
 
+<h2
+className="
+mt-6
+text-2xl
+font-bold
+"
+>
 
-            })
-          }
+{item.title}
 
+</h2>
 
 
-        </div>
 
 
+<p
+className="
+mt-4
+leading-8
+text-zinc-400
+"
+>
 
+{item.text}
 
+</p>
 
 
 
-        {/* Agreement */}
+</motion.article>
 
 
+)
 
-        <div
+}
 
-          className="
-          mt-12
-          rounded-3xl
-          border
-          border-white/10
-          bg-black/30
-          p-8
-          text-center
-          "
+)
 
-        >
+}
 
 
-          <h3
-            className="
-            text-2xl
-            font-bold
-            "
-          >
 
-            Agreement
+</div>
 
-          </h3>
 
 
 
-          <p
 
-            className="
-            mt-3
-            text-zinc-400
-            leading-7
-            "
 
-          >
 
-            By creating an account or using ANOX services,
-            you acknowledge that you have read and accepted these terms.
 
-          </p>
 
+{/* AGREEMENT */}
 
 
-          <Link
 
-            href="/contact"
+<div
+className="
+mt-16
+rounded-[32px]
+border
+border-cyan-400/20
+bg-cyan-400/5
+p-10
+text-center
+"
+>
 
-            className="
-            mt-6
-            inline-flex
-            rounded-xl
-            bg-cyan-400
-            px-6
-            py-3
-            font-bold
-            text-black
-            transition
-            hover:bg-cyan-300
-            "
 
-          >
+<h2
+className="
+text-3xl
+font-black
+"
+>
 
-            Contact Support
+Accepting These Terms
 
-          </Link>
+</h2>
 
 
+<p
+className="
+mx-auto
+mt-5
+max-w-3xl
+leading-8
+text-zinc-400
+"
+>
 
-        </div>
+Creating an ANOX account, purchasing products,
+or using our platform means you acknowledge
+and accept these Terms of Service.
 
+</p>
 
 
 
-        <p
+<Link
 
-          className="
-          mt-10
-          text-center
-          text-sm
-          text-zinc-600
-          "
+href="/contact"
 
-        >
+className="
+mt-8
+inline-flex
+items-center
+rounded-xl
+bg-cyan-400
+px-8
+py-4
+font-bold
+text-black
+transition
+hover:scale-105
+hover:bg-cyan-300
+"
 
-          Last updated: August 2026
+>
 
-        </p>
+Contact ANOX
 
+</Link>
 
 
 
-      </motion.div>
+</div>
 
 
-    </main>
 
-  );
+
+
+
+<p
+className="
+mt-12
+text-center
+text-sm
+text-zinc-600
+"
+>
+
+© 2026 ANOX Technologies. All rights reserved.
+
+</p>
+
+
+
+
+</motion.section>
+
+
+
+
+</main>
+
+);
+
+
 }

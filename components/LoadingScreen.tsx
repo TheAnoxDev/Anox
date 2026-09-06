@@ -1,76 +1,341 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+
+import {
+  AnimatePresence,
+  motion,
+} from "framer-motion";
+
+
 
 type Props = {
-  loading: boolean;
+  loading:boolean;
 };
 
-export default function LoadingScreen({ loading }: Props) {
-  return (
-    <AnimatePresence>
 
-      {loading && (
 
-        <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#05070B]"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
-        >
 
-          <div className="text-center">
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                textShadow: [
-                  "0 0 0px #22d3ee",
-                  "0 0 25px #22d3ee",
-                  "0 0 12px #22d3ee",
-                ],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "reverse",
-              }}
-              className="text-5xl font-black tracking-[0.45em] text-cyan-400"
-            >
-              ANOX
-            </motion.h1>
+export default function LoadingScreen({
+  loading
+}:Props){
 
-            <motion.p
-              className="mt-6 text-zinc-400 tracking-[0.25em] uppercase text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: .4 }}
-            >
-              Initializing...
-            </motion.p>
 
-            <div className="mt-8 w-72 h-1 rounded-full bg-white/10 overflow-hidden">
 
-              <motion.div
-                className="h-full bg-cyan-400"
-                initial={{ width: 0 }}
-                animate={{ width: "100%" }}
-                transition={{
-                  duration: 2.3,
-                  ease: "easeInOut",
-                }}
-              />
+return (
 
-            </div>
 
-          </div>
+<AnimatePresence mode="wait">
 
-        </motion.div>
 
-      )}
+{
+loading && (
 
-    </AnimatePresence>
-  );
+
+<motion.div
+
+
+initial={{
+opacity:1
+}}
+
+
+exit={{
+opacity:0,
+scale:1.05
+}}
+
+
+transition={{
+duration:.7,
+ease:"easeInOut"
+}}
+
+
+
+className="
+fixed
+inset-0
+z-[9999]
+flex
+items-center
+justify-center
+overflow-hidden
+bg-[#05070b]
+"
+
+>
+
+
+{/* Glow */}
+
+
+<div
+
+className="
+absolute
+left-1/2
+top-1/2
+h-[500px]
+w-[500px]
+-translate-x-1/2
+-translate-y-1/2
+rounded-full
+bg-cyan-400/20
+blur-[140px]
+"
+
+/>
+
+
+
+
+
+{/* Grid */}
+
+
+<div
+
+className="
+absolute
+inset-0
+opacity-[0.04]
+[background-image:linear-gradient(white_1px,transparent_1px),linear-gradient(90deg,white_1px,transparent_1px)]
+[background-size:40px_40px]
+"
+
+/>
+
+
+
+
+
+
+
+
+<div
+
+className="
+relative
+z-10
+text-center
+"
+
+>
+
+
+
+
+<motion.h1
+
+
+initial={{
+opacity:0,
+y:30,
+scale:.9
+}}
+
+
+animate={{
+opacity:1,
+y:0,
+scale:1
+}}
+
+
+transition={{
+duration:.8,
+ease:"easeOut"
+}}
+
+
+
+className="
+text-6xl
+font-black
+tracking-[0.35em]
+text-cyan-400
+"
+
+>
+
+
+ANOX
+
+
+</motion.h1>
+
+
+
+
+
+
+
+
+<motion.p
+
+
+initial={{
+opacity:0
+}}
+
+
+animate={{
+opacity:1
+}}
+
+
+transition={{
+delay:.5
+}}
+
+
+
+className="
+mt-6
+text-sm
+uppercase
+tracking-[0.4em]
+text-zinc-400
+"
+
+>
+
+
+Initializing System
+
+
+</motion.p>
+
+
+
+
+
+
+
+
+
+<div
+
+className="
+mx-auto
+mt-10
+h-1
+w-72
+overflow-hidden
+rounded-full
+bg-white/10
+"
+
+>
+
+
+<motion.div
+
+
+initial={{
+x:"-100%"
+}}
+
+
+animate={{
+x:"100%"
+}}
+
+
+transition={{
+
+duration:1.8,
+
+repeat:Infinity,
+
+ease:"linear"
+
+}}
+
+
+
+className="
+h-full
+w-1/2
+rounded-full
+bg-cyan-400
+shadow-[0_0_20px_#22d3ee]
+"
+
+
+
+
+/>
+
+
+
+</div>
+
+
+
+
+
+
+
+<motion.div
+
+
+initial={{
+opacity:0
+}}
+
+
+animate={{
+opacity:1
+}}
+
+
+transition={{
+delay:1
+}}
+
+
+
+className="
+mt-8
+text-[10px]
+tracking-[0.5em]
+text-zinc-600
+"
+
+>
+
+
+AI • CLOUD • SECURITY • SOFTWARE
+
+
+</motion.div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+</motion.div>
+
+
+)
+
+}
+
+
+
+</AnimatePresence>
+
+
+);
+
+
 }

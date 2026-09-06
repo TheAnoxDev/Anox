@@ -1,13 +1,12 @@
 "use client";
 
-
 import dynamic from "next/dynamic";
 import Link from "next/link";
-
+import { motion } from "framer-motion";
 
 import Container from "@/components/ui/Container";
-import { cn } from "@/lib/cn";
 
+import { cn } from "@/lib/cn";
 
 import { useLang } from "@/components/LangContext";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -17,9 +16,9 @@ import { useTranslation } from "@/hooks/useTranslation";
 const HeroGlobe = dynamic(
   () => import("@/components/3d/Globe"),
   {
-    ssr:false,
+    ssr: false,
 
-    loading:()=>(
+    loading: () => (
       <div
         className="
         flex
@@ -65,411 +64,375 @@ const HeroGlobe = dynamic(
 
         </div>
 
+
       </div>
-    )
+    ),
   }
 );
 
 
 
-export default function Hero(){
 
 
-const {lang}=useLang();
+export default function Hero() {
 
-const {t}=useTranslation();
 
+  const { lang } = useLang();
 
+  const { t } = useTranslation();
 
-const rtl = lang==="fa";
 
-const prefix=`/${lang}`;
+  const rtl = lang === "fa";
 
 
+  const prefix = `/${lang}`;
 
-return (
 
-<section
 
-id="hero"
 
-dir={rtl ? "rtl":"ltr"}
 
-className="
-relative
-isolate
-flex
-min-h-screen
-items-center
-overflow-hidden
-py-24
-"
+  return (
 
->
+    <section
 
+      id="hero"
 
-{/* Background Glow */}
+data-section
 
-<div
+      dir={rtl ? "rtl" : "ltr"}
 
-aria-hidden
+      className="
+      relative
+      isolate
+      flex
+      min-h-screen
+      items-center
+      overflow-hidden
+      py-24
+      "
 
-className="
-pointer-events-none
-absolute
-left-1/2
-top-1/2
--z-10
-h-[550px]
-w-[550px]
--translate-x-1/2
--translate-y-1/2
-rounded-full
-bg-cyan-400/10
-blur-[120px]
-"
+    >
 
-/>
 
 
+      {/* Background */}
 
-<Container>
+      <div
 
+        aria-hidden
 
-<div
+        className="
+        pointer-events-none
+        absolute
+        left-1/2
+        top-1/2
+        -z-10
+        h-[600px]
+        w-[600px]
+        -translate-x-1/2
+        -translate-y-1/2
+        rounded-full
+        bg-cyan-400/10
+        blur-[140px]
+        "
 
-className="
-grid
-items-center
-gap-14
+      />
 
-lg:grid-cols-[1fr_auto]
 
-"
 
->
 
 
-{/* Content */}
+      <Container>
 
 
-<div
+        <div
 
-className={cn(
-"max-w-3xl",
-rtl && "text-right"
-)}
+          className="
+          grid
+          items-center
+          gap-16
 
->
+          lg:grid-cols-[1fr_auto]
 
+          "
 
-{/* Badge */}
+        >
 
-<div
 
-className="
-inline-flex
-items-center
-gap-3
-rounded-full
-border
-border-cyan-400/20
-bg-white/[0.03]
-px-4
-py-2
-"
 
->
+          {/* CONTENT */}
 
-<span
 
-className="
-h-2
-w-2
-rounded-full
-bg-cyan-400
-animate-pulse
-"
+          <motion.div
 
-/>
+            initial={{
+              opacity:0,
+              y:40
+            }}
 
+            animate={{
+              opacity:1,
+              y:0
+            }}
 
-<span
+            transition={{
+              duration:.8
+            }}
 
-className="
-text-xs
-font-medium
-tracking-[0.25em]
-text-cyan-300
-"
+            className={cn(
+              "max-w-4xl",
+              rtl && "text-right"
+            )}
 
->
+          >
 
-{t.hero.badge}
 
-</span>
 
 
-</div>
 
+            {/* Badge */}
 
+            <div
 
+              className="
+              inline-flex
+              items-center
+              gap-3
+              rounded-full
+              border
+              border-cyan-400/20
+              bg-white/[0.03]
+              px-5
+              py-2
+              backdrop-blur-xl
+              "
 
+            >
 
-{/* Title */}
+              <span
 
-<h1
+                className="
+                h-2
+                w-2
+                rounded-full
+                bg-cyan-400
+                animate-pulse
+                "
 
-className="
-mt-8
+              />
 
-text-4xl
-font-black
 
-leading-[1.05]
+              <span
 
-tracking-[-0.04em]
+                className="
+                text-xs
+                font-semibold
+                tracking-[0.25em]
+                text-cyan-300
+                "
 
-sm:text-6xl
+              >
 
-lg:text-[72px]
+                {t.hero.badge}
 
-"
+              </span>
 
->
 
+            </div>
 
-<span className="block text-white">
 
-{t.hero.title}
 
-</span>
 
 
-<span
 
-className="
-mt-4
-block
-text-2xl
-font-bold
-text-zinc-200
 
-sm:text-4xl
-"
 
->
+            {/* TITLE */}
 
-{t.hero.subtitle}
 
-</span>
+            <h1
 
+              className="
+              mt-8
+              text-5xl
+              font-black
+              leading-[1.05]
 
-<span
+              tracking-tight
 
-className="
-mt-3
-block
-text-cyan-400
-"
+              text-white
 
->
+              sm:text-6xl
 
-{t.hero.highlight}
+              lg:text-8xl
 
-</span>
+              "
 
+            >
 
-</h1>
 
+              {t.hero.title}
 
 
 
+              <span
 
-<p
+                className="
+                mt-5
+                block
+                text-2xl
 
-className="
-mt-7
-max-w-xl
-text-base
-leading-8
-text-zinc-400
+                font-bold
 
-sm:text-lg
+                text-zinc-300
 
-"
+                sm:text-4xl
 
->
+                "
 
-{t.hero.description}
+              >
 
-</p>
+                {t.hero.subtitle}
 
+              </span>
 
 
 
 
 
+              <span
 
-{/* Buttons */}
+                className="
+                mt-4
+                block
+                text-cyan-400
+                "
 
+              >
 
-<div
+                {t.hero.highlight}
 
-className="
-mt-9
-flex
-flex-wrap
-gap-4
-"
 
->
+              </span>
 
 
-<Link
 
-href={`${prefix}/platform`}
+            </h1>
 
-className="
-rounded-xl
-bg-cyan-400
-px-7
-py-3.5
-font-bold
-text-black
-transition
-hover:bg-cyan-300
-hover:shadow-[0_0_30px_rgba(34,211,238,.35)]
-"
 
->
 
-{t.hero.primary}
 
-</Link>
 
 
 
 
-<Link
 
-href={`${prefix}/architecture`}
+            <p
 
-className="
-rounded-xl
-border
-border-white/10
-bg-white/[0.03]
-px-7
-py-3.5
-font-semibold
-text-white
-transition
+              className="
+              mt-8
+              max-w-2xl
+              text-lg
+              leading-9
+              text-zinc-400
+              "
 
-hover:border-cyan-400/30
-hover:bg-white/10
+            >
 
-"
+              {t.hero.description}
 
->
 
-{t.hero.secondary}
+            </p>
 
-</Link>
 
 
-</div>
 
 
 
 
 
 
+            {/* BUTTONS */}
 
 
-{/* Stats */}
+            <div
 
-<div
+              className="
+              mt-10
+              flex
+              flex-wrap
+              gap-5
+              "
 
-className="
-mt-12
-grid
-grid-cols-3
-gap-4
+            >
 
-"
 
->
 
+              <Link
 
-{
-t.hero.stats.map((stat,index)=>(
+                href={`${prefix}/platform`}
 
+                className="
+                rounded-xl
+                bg-cyan-400
+                px-8
+                py-4
+                font-black
+                text-black
 
-<div
+                transition
 
-key={index}
+                hover:bg-cyan-300
 
-className="
-rounded-2xl
-border
-border-white/10
-bg-white/[0.03]
-p-4
-backdrop-blur-sm
-"
+                hover:shadow-[0_0_40px_rgba(34,211,238,.4)]
 
->
+                "
 
+              >
 
-<div
+                {t.hero.primary}
 
-className="
-text-xl
-font-black
-text-cyan-400
-sm:text-2xl
-"
 
->
+              </Link>
 
-{stat[0]}
 
-</div>
 
 
 
-<p
 
-className="
-mt-1
-text-[10px]
-uppercase
-tracking-widest
-text-zinc-500
-"
+              <Link
 
->
+                href={`${prefix}/architecture`}
 
-{stat[1]}
+                className="
+                rounded-xl
+                border
+                border-white/10
+                bg-white/5
+                px-8
+                py-4
+                font-bold
+                text-white
 
-</p>
+                backdrop-blur-xl
 
+                transition
 
-</div>
+                hover:border-cyan-400/40
 
+                "
 
-))
+              >
 
-}
+                {t.hero.secondary}
 
 
-</div>
+              </Link>
 
 
 
+            </div>
 
-</div>
 
 
 
@@ -477,34 +440,156 @@ text-zinc-500
 
 
 
-{/* Globe */}
 
+            {/* STATS */}
 
-<div
 
-className="
-flex
-justify-center
-"
 
->
+            <div
 
-<HeroGlobe/>
+              className="
+              mt-14
+              grid
+              grid-cols-3
+              gap-4
+              "
 
-</div>
+            >
 
 
+              {
 
+                t.hero.stats.map(
+                  (stat,index)=>(
 
-</div>
 
+                    <motion.div
 
+                      key={index}
 
-</Container>
+                      whileHover={{
+                        y:-6
+                      }}
 
 
-</section>
+                      className="
+                      rounded-2xl
+                      border
+                      border-white/10
+                      bg-white/[0.03]
+                      p-5
+                      backdrop-blur-xl
+                      "
 
-);
+                    >
+
+
+                      <div
+
+                        className="
+                        text-2xl
+                        font-black
+                        text-cyan-400
+                        "
+
+                      >
+
+                        {stat.value}
+
+
+                      </div>
+
+
+
+                      <p
+
+                        className="
+                        mt-2
+                        text-xs
+                        text-zinc-500
+                        "
+
+                      >
+
+                        {stat.label}
+
+
+                      </p>
+
+
+
+                    </motion.div>
+
+
+                  )
+
+                )
+
+              }
+
+
+
+            </div>
+
+
+
+
+
+          </motion.div>
+
+
+
+
+
+
+
+
+
+          {/* GLOBE */}
+
+
+          <motion.div
+
+            initial={{
+              opacity:0,
+              scale:.8
+            }}
+
+            animate={{
+              opacity:1,
+              scale:1
+            }}
+
+            transition={{
+              duration:1
+            }}
+
+
+            className="
+            flex
+            justify-center
+            "
+
+          >
+
+            <HeroGlobe />
+
+
+          </motion.div>
+
+
+
+
+
+        </div>
+
+
+      </Container>
+
+
+    </section>
+
+
+  );
 
 }

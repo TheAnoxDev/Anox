@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+
 import {
   Brain,
   Shield,
@@ -9,104 +10,182 @@ import {
   Cpu,
   Network,
   Lock,
-  Zap,
   Activity,
+  Server,
+  ArrowRight,
+  Check,
+  Sparkles
 } from "lucide-react";
 
 
-export default function PlatformPage() {
+
+
+export default function PlatformPage(){
+
 
 
 const systems = [
-  {
-    title:"AI Core",
-    desc:"Autonomous intelligence engine for advanced decision systems.",
-    icon:<Brain/>
-  },
-  {
-    title:"Security Layer",
-    desc:"Real-time protection and intelligent threat analysis.",
-    icon:<Shield/>
-  },
-  {
-    title:"Cloud Network",
-    desc:"Scalable infrastructure built for modern applications.",
-    icon:<Cloud/>
-  },
-  {
-    title:"Developer Tools",
-    desc:"Powerful APIs and tools for next generation software.",
-    icon:<Code2/>
-  }
-];
+
+{
+title:"AI Intelligence Core",
+description:
+"Advanced neural systems powering automation, reasoning and intelligent decisions.",
+icon:Brain,
+status:"ONLINE"
+},
 
 
-const stats=[
 {
-name:"AI Models",
-value:"120+",
-icon:<Cpu/>
+title:"Cyber Defense Layer",
+description:
+"Continuous threat detection and intelligent security monitoring.",
+icon:Shield,
+status:"ACTIVE"
 },
+
+
 {
-name:"Security Events",
-value:"99.9%",
-icon:<Lock/>
+title:"Cloud Infrastructure",
+description:
+"Distributed scalable infrastructure designed for global applications.",
+icon:Cloud,
+status:"RUNNING"
 },
+
+
 {
-name:"Network Nodes",
-value:"240+",
-icon:<Network/>
-},
-{
-name:"Processing",
-value:"Realtime",
-icon:<Activity/>
+title:"Developer Ecosystem",
+description:
+"APIs, SDKs and tools for building next generation software.",
+icon:Code2,
+status:"READY"
 }
+
+
 ];
+
+
+
+
+
+
+const metrics=[
+
+{
+title:"AI Models",
+value:"120+",
+icon:Cpu
+},
+
+{
+title:"Network Nodes",
+value:"240+",
+icon:Network
+},
+
+{
+title:"Threat Detection",
+value:"99.99%",
+icon:Lock
+},
+
+{
+title:"System Status",
+value:"ONLINE",
+icon:Activity
+}
+
+];
+
+
+
+
+
+
+
+const layers=[
+
+"Artificial Intelligence",
+
+"Cyber Security",
+
+"Cloud Computing",
+
+"Automation",
+
+"Developer Platform"
+
+];
+
+
+
+
 
 
 
 return (
 
-<main className="
+<main
+
+className="
 relative
 min-h-screen
 overflow-hidden
-bg-[#03070c]
+bg-[#020617]
 text-white
-">
+"
+
+>
+
+
 
 
 {/* Background */}
 
-<div className="
+<div
+
+className="
 absolute
 inset-0
-bg-[radial-gradient(circle_at_top,#00eaff25,transparent_45%)]
-"/>
+bg-[radial-gradient(circle_at_top,#00eaff30,transparent_45%)]
+"
+
+/>
 
 
-<div className="
+<div
+
+className="
 absolute
 inset-0
 opacity-[0.04]
-bg-[radial-gradient(white_1px,transparent_1px)]
-[background-size:24px_24px]
-"/>
+bg-[radial-gradient(#fff_1px,transparent_1px)]
+[background-size:30px_30px]
+"
+
+/>
+
+
+
+
+
+<section
+
+className="
+relative
+mx-auto
+max-w-7xl
+px-6
+py-28
+"
+
+>
 
 
 
 
 {/* HERO */}
 
-
-<section className="
-relative
-mx-auto
-max-w-7xl
-px-6
-py-32
-">
 
 
 <motion.div
@@ -129,11 +208,14 @@ className="
 text-center
 "
 
-
 >
 
 
-<div className="
+
+
+<div
+
+className="
 mx-auto
 flex
 w-fit
@@ -146,11 +228,13 @@ bg-cyan-400/10
 px-5
 py-2
 text-xs
-tracking-widest
+tracking-[0.3em]
 text-cyan-300
-">
+"
 
-<Zap size={15}/>
+>
+
+<Sparkles size={15}/>
 
 ANOX PLATFORM
 
@@ -159,76 +243,110 @@ ANOX PLATFORM
 
 
 
-<h1 className="
-mt-8
+
+
+<h1
+
+className="
+mt-10
 text-5xl
 font-black
 leading-tight
 md:text-7xl
-">
+"
 
+>
 
-Building The
+The Intelligence
 
+<br/>
 
 <span className="
 text-cyan-400
 ">
 
- Intelligent Future
+Infrastructure
 
 </span>
+
+of Tomorrow
 
 
 </h1>
 
 
 
-<p className="
+
+
+
+<p
+
+className="
 mx-auto
 mt-6
 max-w-3xl
 text-lg
 leading-8
 text-zinc-400
-">
+"
 
+>
 
-ANOX combines artificial intelligence,
+ANOX connects artificial intelligence,
 cyber security and cloud infrastructure
-into one unified technology platform.
+into one unified technology ecosystem.
 
 
 </p>
 
 
 
-<div className="
+
+
+
+<div
+
+className="
 mt-10
 flex
 justify-center
 gap-4
-">
+"
+
+>
 
 
-<button className="
+<button
+
+className="
+flex
+items-center
+gap-2
 rounded-xl
 bg-cyan-400
 px-8
 py-4
 font-bold
 text-black
-shadow-[0_0_40px_rgba(34,211,238,.35)]
+shadow-[0_0_50px_rgba(34,211,238,.4)]
 transition
 hover:scale-105
-">
+"
+
+>
 
 Launch Platform
+
+<ArrowRight size={18}/>
 
 </button>
 
 
-<button className="
+
+
+<button
+
+className="
 rounded-xl
 border
 border-white/10
@@ -236,17 +354,19 @@ bg-white/5
 px-8
 py-4
 font-semibold
-text-white
-transition
 hover:bg-white/10
-">
+"
 
-Explore Systems
+>
+
+Explore Technology
 
 </button>
 
 
+
 </div>
+
 
 
 </motion.div>
@@ -255,39 +375,73 @@ Explore Systems
 
 
 
-{/* Core */}
+
+
+
+
+
+{/* AI CORE */}
+
+
+
+
 
 <motion.div
 
 animate={{
-y:[0,-15,0]
+
+rotate:360
+
 }}
 
 transition={{
-duration:5,
-repeat:Infinity
+
+duration:40,
+
+repeat:Infinity,
+
+ease:"linear"
+
 }}
 
 className="
+relative
 mx-auto
-mt-24
+mt-32
 flex
-h-64
-w-64
+h-80
+w-80
 items-center
 justify-center
 rounded-full
 border
 border-cyan-400/30
 bg-cyan-400/10
-shadow-[0_0_120px_rgba(34,211,238,.35)]
+shadow-[0_0_150px_rgba(34,211,238,.35)]
 "
 
 
 >
 
 
-<div className="
+
+<div
+
+className="
+absolute
+inset-10
+rounded-full
+border
+border-cyan-400/20
+"
+
+/>
+
+
+
+<div
+
+className="
 flex
 h-44
 w-44
@@ -297,12 +451,16 @@ rounded-full
 bg-black
 border
 border-cyan-400/40
-">
+"
 
+>
 
 <Brain
+
 size={80}
+
 className="text-cyan-400"
+
 />
 
 
@@ -316,75 +474,104 @@ className="text-cyan-400"
 
 
 
-{/* STATS */}
 
 
-<div className="
-mt-24
-grid
-gap-5
-sm:grid-cols-2
-lg:grid-cols-4
-">
+
+{/* METRICS */}
 
 
-{
-stats.map((item)=>(
 
 <div
 
-key={item.name}
+className="
+mt-28
+grid
+gap-6
+sm:grid-cols-2
+lg:grid-cols-4
+"
+
+>
+
+{
+
+metrics.map(item=>{
+
+
+const Icon=item.icon;
+
+
+return (
+
+
+<div
+
+key={item.title}
 
 className="
-rounded-2xl
+rounded-3xl
 border
 border-white/10
 bg-white/5
-p-6
+p-7
 backdrop-blur-xl
 "
-
 
 >
 
 
-<div className="
-text-cyan-400
-">
+<Icon
 
-{item.icon}
+className="text-cyan-400"
 
-</div>
+/>
 
 
-<p className="
-mt-4
+<p
+
+className="
+mt-5
 text-sm
 text-zinc-400
-">
+"
 
-{item.name}
+>
+
+{item.title}
 
 </p>
 
 
-<h3 className="
+
+<h3
+
+className="
 mt-2
 text-3xl
 font-black
-">
+"
+
+>
 
 {item.value}
 
 </h3>
 
 
+
 </div>
 
-))
+
+)
+
+
+})
+
+
 }
 
 
+
 </div>
 
 
@@ -393,57 +580,100 @@ font-black
 
 
 
-{/* SYSTEMS */}
 
 
-<section className="
+{/* SYSTEM ARCHITECTURE */}
+
+
+
+
+
+<section
+
+className="
 mt-32
-">
+"
+
+>
 
 
-<h2 className="
+<div
+
+className="
 text-center
+"
+
+>
+
+<h2
+
+className="
 text-4xl
 font-black
-">
+"
 
-Core Systems
+>
+
+ANOX Architecture
 
 </h2>
 
 
-<p className="
-mt-3
-text-center
-text-zinc-400
-">
+<p
 
-The foundation behind ANOX technology
+className="
+mt-3
+text-zinc-400
+"
+
+>
+
+The technology layers powering the ecosystem
 
 </p>
 
 
+</div>
 
 
-<div className="
+
+
+
+
+<div
+
+className="
 mt-12
 grid
 gap-6
 md:grid-cols-2
-">
+"
 
+>
 
 {
-systems.map((item,index)=>(
+
+
+systems.map((item)=>{
+
+
+const Icon=item.icon;
+
+
+return (
 
 
 <motion.div
 
-key={item.title}
 
 whileHover={{
-y:-8
+
+y:-10
+
 }}
+
+
+key={item.title}
 
 className="
 rounded-3xl
@@ -458,41 +688,104 @@ backdrop-blur-xl
 >
 
 
-<div className="
-text-cyan-400
-">
 
-{item.icon}
+<div
+
+className="
+flex
+items-center
+justify-between
+"
+
+>
+
+
+<div
+
+className="
+rounded-2xl
+bg-cyan-400/10
+p-4
+"
+
+>
+
+<Icon
+
+className="text-cyan-400"
+
+/>
+
 
 </div>
 
 
-<h3 className="
-mt-6
+
+<span
+
+className="
+text-xs
+text-cyan-300
+"
+
+>
+
+● {item.status}
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+<h3
+
+className="
+mt-7
 text-2xl
 font-bold
-">
+"
+
+>
 
 {item.title}
 
 </h3>
 
 
-<p className="
+
+
+
+<p
+
+className="
 mt-3
 leading-7
 text-zinc-400
-">
+"
 
-{item.desc}
+>
+
+{item.description}
 
 </p>
+
+
 
 
 </motion.div>
 
 
-))
+)
+
+
+})
+
+
 }
 
 
@@ -508,45 +801,194 @@ text-zinc-400
 
 
 
-{/* CTA */}
 
 
-<section className="
+{/* STACK */}
+
+
+
+
+
+<section
+
+className="
 mt-32
-rounded-3xl
+rounded-[40px]
 border
-border-cyan-400/20
-bg-cyan-400/5
+border-white/10
+bg-white/5
 p-10
-text-center
-">
+backdrop-blur-xl
+"
+
+>
 
 
-<h2 className="
-text-4xl
+
+<div
+
+className="
+flex
+items-center
+gap-3
+"
+
+>
+
+<Server className="text-cyan-400"/>
+
+
+<h2
+
+className="
+text-3xl
 font-black
-">
+"
 
-Ready to enter ANOX?
+>
+
+Technology Stack
 
 </h2>
 
 
-<p className="
+</div>
+
+
+
+
+
+<div
+
+className="
+mt-8
+grid
+gap-4
+md:grid-cols-5
+"
+
+>
+
+{
+
+
+layers.map(layer=>(
+
+
+<div
+
+key={layer}
+
+className="
+flex
+items-center
+gap-2
+rounded-xl
+border
+border-white/10
+bg-black/30
+p-4
+text-sm
+"
+
+>
+
+
+<Check
+
+size={16}
+
+className="text-cyan-400"
+
+/>
+
+
+{layer}
+
+
+</div>
+
+
+))
+
+
+}
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+{/* CTA */}
+
+
+
+
+<section
+
+className="
+mt-32
+rounded-[40px]
+border
+border-cyan-400/20
+bg-cyan-400/5
+p-12
+text-center
+"
+
+>
+
+
+
+<h2
+
+className="
+text-4xl
+font-black
+"
+
+>
+
+Build With ANOX
+
+</h2>
+
+
+
+<p
+
+className="
 mx-auto
-mt-4
+mt-5
 max-w-xl
 text-zinc-400
-">
+"
 
-Experience the next generation of AI,
-security and cloud technology.
+>
+
+Create intelligent products using
+our AI, security and cloud ecosystem.
+
 
 </p>
 
 
 
-<button className="
+
+
+<button
+
+className="
 mt-8
 rounded-xl
 bg-cyan-400
@@ -554,23 +996,30 @@ px-10
 py-4
 font-bold
 text-black
-">
+"
+
+>
 
 Start Building
 
 </button>
 
 
-</section>
-
-
-
 
 </section>
+
+
+
+
+
+</section>
+
 
 
 </main>
 
+
 );
+
 
 }

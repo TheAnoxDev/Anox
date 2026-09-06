@@ -1,10 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useLang } from "@/components/LangContext";
 
 export default function Logo() {
+  const { lang } = useLang();
+
   return (
     <Link
-      href="/"
+      href={`/${lang}`}
       className="group inline-flex items-center gap-3"
     >
       <Image

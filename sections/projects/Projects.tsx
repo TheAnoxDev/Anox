@@ -231,6 +231,8 @@ return(
 
 id="projects"
 
+data-section
+
 dir={
 rtl
 ?

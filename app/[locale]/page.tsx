@@ -1,34 +1,173 @@
+import dynamic from "next/dynamic";
+
 import Navbar from "@/components/layout/Navbar";
 
 import Hero from "@/sections/hero/Hero";
-import About from "@/sections/about/About";
-import Technology from "@/sections/technology/Technology";
-import WhyAnox from "@/sections/why-anox/WhyAnox";
-import Services from "@/sections/services/Services";
-import Projects from "@/sections/projects/Projects";
-import Contact from "@/sections/contact/Contact";
-import Footer from "@/sections/footer/Footer";
 
-export default function Home() {
-  return (
-    <>
-      <Navbar />
+const About = dynamic(
+  () => import("@/sections/about/About")
+);
 
-      <Hero />
+const Technology = dynamic(
+  () => import("@/sections/technology/Technology")
+);
 
-      <About />
+const WhyAnox = dynamic(
+  () => import("@/sections/why-anox/WhyAnox")
+);
 
-      <Technology />
+const Services = dynamic(
+  () => import("@/sections/services/Services")
+);
 
-      <WhyAnox />
+const Projects = dynamic(
+  () => import("@/sections/projects/Projects")
+);
 
-      <Services />
+const Contact = dynamic(
+  () => import("@/sections/contact/Contact")
+);
 
-      <Projects />
+const Footer = dynamic(
+  () => import("@/sections/footer/Footer")
+);
 
-      <Contact />
 
-      <Footer />
-    </>
-  );
+
+
+
+export default function Home(){
+
+
+return (
+
+<>
+
+<Navbar />
+
+
+<main
+className="
+relative
+overflow-hidden
+bg-[#05070b]
+"
+>
+
+
+{/* Global Background Glow */}
+
+<div
+className="
+pointer-events-none
+absolute
+left-1/2
+top-0
+h-[900px]
+w-[900px]
+-translate-x-1/2
+rounded-full
+bg-cyan-400/10
+blur-[180px]
+"
+/>
+
+
+
+{/* Grid */}
+
+<div
+className="
+pointer-events-none
+absolute
+inset-0
+opacity-[0.035]
+[background-image:radial-gradient(white_1px,transparent_1px)]
+[background-size:32px_32px]
+"
+/>
+
+
+
+
+
+<section>
+
+<Hero />
+
+</section>
+
+
+
+
+<section>
+
+<About />
+
+</section>
+
+
+
+
+
+<section>
+
+<Technology />
+
+</section>
+
+
+
+
+
+<section>
+
+<WhyAnox />
+
+</section>
+
+
+
+
+
+<section>
+
+<Services />
+
+</section>
+
+
+
+
+
+<section>
+
+<Projects />
+
+</section>
+
+
+
+
+
+<section>
+
+<Contact />
+
+</section>
+
+
+
+</main>
+
+
+
+<Footer />
+
+
+</>
+
+);
+
+
 }

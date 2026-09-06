@@ -3,25 +3,39 @@
 import { useEffect, useState } from "react";
 import LoadingScreen from "./LoadingScreen";
 
+interface AppWrapperProps {
+  children: React.ReactNode;
+}
+
 export default function AppWrapper({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: AppWrapperProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = window.setTimeout(() => {
       setLoading(false);
     }, 2200);
 
-    return () => clearTimeout(timer);
+    return () => {
+      window.clearTimeout(timer);
+    };
   }, []);
 
   return (
     <>
       <LoadingScreen loading={loading} />
-      {!loading && children}
+
+      <div
+        className={
+          loading
+            ? "pointer-events-none invisible"
+            : "visible"
+        }
+        aria-hidden={loading}
+      >
+        {children}
+      </div>
     </>
   );
 }

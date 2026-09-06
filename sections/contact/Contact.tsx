@@ -1,8 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useForm, ValidationError } from "@formspree/react";
-import { Mail, MapPin } from "lucide-react";
+import { useState } from "react";
+import {
+  Mail,
+  MapPin,
+} from "lucide-react";
+
 
 import { useLang } from "@/components/LangContext";
 
@@ -14,331 +18,358 @@ import Button from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 
 
-export default function Contact() {
 
 
-  const [state, handleSubmit] =
-    useForm("xgojlpjq");
 
+export default function Contact(){
 
-  const {
-    lang,
-    t
-  } = useLang();
+const [submitting, setSubmitting] = useState(false);
+const [succeeded, setSucceeded] = useState(false);
+const [error, setError] = useState("");
 
+const {
+lang,
+t
+}=useLang();
 
 
-  const rtl = lang === "fa";
 
+const rtl =
+lang==="fa";
 
+async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+  if (submitting) return;
 
-  return (
+  setSubmitting(true);
+  setSucceeded(false);
+  setError("");
 
-    <section
+  try {
+    const form = event.currentTarget;
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(Object.fromEntries(new FormData(form))),
+    });
+    const result = await response.json();
 
-      id="contact"
+    if (!response.ok) throw new Error(result.message || "Unable to send message.");
+    setSucceeded(true);
+    form.reset();
+  } catch (submitError) {
+    setError(
+      submitError instanceof Error
+        ? submitError.message
+        : "Unable to send message."
+    );
+  } finally {
+    setSubmitting(false);
+  }
+}
 
-      dir={rtl ? "rtl" : "ltr"}
 
-      className="
-      relative
-      overflow-hidden
-      py-32
-      "
 
-    >
+return (
 
 
-      <Container>
+<section
 
+id="contact"
 
+data-section
 
-        <div
+dir={
+rtl
+?
+"rtl"
+:
+"ltr"
+}
 
-          className={
-            cn(
-              rtl && "text-right"
-            )
-          }
 
-        >
+className="
+relative
+overflow-hidden
+py-24
+md:py-32
+"
 
 
-          <SectionTitle
+>
 
-            badge={t.contact.badge}
 
-            title={t.contact.title}
+<Container>
 
-            description={t.contact.description}
 
-          />
 
+<div
 
-        </div>
+className={
+cn(
+rtl &&
+"text-right"
+)
+}
 
+>
 
 
+<SectionTitle
 
+badge={t.contact.badge}
 
-        <motion.div
+title={t.contact.title}
 
+description={t.contact.description}
 
-          initial={{
-            opacity:0,
-            y:40
-          }}
+/>
 
 
-          whileInView={{
-            opacity:1,
-            y:0
-          }}
+</div>
 
 
-          viewport={{
-            once:true,
-            amount:.2
-          }}
 
 
-          transition={{
-            duration:.7
-          }}
 
 
-          className="mt-20"
 
+<motion.div
 
-        >
+initial={{
+opacity:0,
+y:20
+}}
 
 
+whileInView={{
+opacity:1,
+y:0
+}}
 
-          <GlassCard
 
-            className="
-            p-8
-            transition
-            hover:border-cyan-400/30
-            lg:p-12
-            "
+viewport={{
+once:true,
+amount:.2
+}}
 
-          >
 
+transition={{
+duration:.5
+}}
 
 
-            <form
+className="mt-16"
 
-              onSubmit={handleSubmit}
+>
 
-              className="
-              grid
-              gap-12
-              lg:grid-cols-2
-              "
 
-            >
+<GlassCard
 
+className="
+p-6
+md:p-10
+lg:p-12
+"
 
 
+>
 
-              {/* INFO */}
 
+<form
 
-              <div>
+onSubmit={handleSubmit}
 
+className="
+grid
+gap-10
+lg:grid-cols-2
+"
 
-                <h3
 
-                  className="
-                  text-3xl
-                  font-bold
-                  text-white
-                  "
+>
 
-                >
 
-                  {t.contact.conversation}
 
 
-                </h3>
 
 
 
+<div>
 
-                <p
 
-                  className="
-                  mt-6
-                  leading-8
-                  text-zinc-400
-                  "
+<h3
 
-                >
+className="
+text-3xl
+font-black
+"
 
-                  {t.contact.conversationDescription}
+>
 
+{t.contact.conversation}
 
-                </p>
+</h3>
 
 
 
 
+<p
 
-                <div
+className="
+mt-5
+leading-8
+text-zinc-400
+"
 
-                  className="
-                  mt-10
-                  space-y-6
-                  "
+>
 
-                >
+{t.contact.conversationDescription}
 
+</p>
 
 
 
-                  <div
 
-                    className="
-                    flex
-                    items-center
-                    gap-4
-                    "
 
-                  >
 
+<div
 
-                    <div
+className="
+mt-10
+space-y-6
+"
 
-                      className="
-                      rounded-xl
-                      bg-cyan-400/10
-                      p-3
-                      text-cyan-400
-                      "
+>
 
-                    >
 
-                      <Mail size={22}/>
 
-                    </div>
 
 
+<ContactItem
 
-                    <div>
+icon={
+<Mail size={22}/>
+}
 
+title={
+t.contact.email
+}
 
-                      <p
+value="anoxdev@gmail.com"
 
-                        className="
-                        text-sm
-                        text-zinc-500
-                        "
+link="mailto:anoxdev@gmail.com"
 
-                      >
+/>
 
-                        {t.contact.email}
 
 
-                      </p>
 
 
+<ContactItem
 
-                      <a
+icon={
+<MapPin size={22}/>
+}
 
-                        href="mailto:anoxdev@gmail.com"
+title={
+t.contact.location
+}
 
-                        className="
-                        text-white
-                        transition
-                        hover:text-cyan-400
-                        "
+value={
+t.contact.locationValue
+}
 
-                      >
+/>
 
-                        anoxdev@gmail.com
 
 
-                      </a>
 
+</div>
 
-                    </div>
 
 
-                  </div>
+</div>
 
 
 
 
 
 
-                  <div
 
-                    className="
-                    flex
-                    items-center
-                    gap-4
-                    "
 
-                  >
 
+<div
 
-                    <div
+className="
+space-y-5
+"
 
-                      className="
-                      rounded-xl
-                      bg-cyan-400/10
-                      p-3
-                      text-cyan-400
-                      "
+>
 
-                    >
 
-                      <MapPin size={22}/>
 
+<Input
 
-                    </div>
+name="name"
 
+placeholder={
+t.contact.namePlaceholder
+}
 
+/>
 
-                    <div>
 
 
-                      <p
 
-                        className="
-                        text-sm
-                        text-zinc-500
-                        "
+<Input
 
-                      >
+name="email"
 
-                        {t.contact.location}
+type="email"
 
+placeholder={
+t.contact.emailPlaceholder
+}
 
-                      </p>
+/>
 
 
 
-                      <p className="text-white">
 
-                        {t.contact.locationValue}
 
+<textarea
 
-                      </p>
+name="message"
 
+required
 
-                    </div>
+rows={6}
 
+placeholder={
+t.contact.messagePlaceholder
+}
 
-                  </div>
 
+className="
+w-full
+resize-none
+rounded-2xl
+border
+border-white/10
+bg-white/5
+px-6
+py-4
+text-white
+outline-none
+transition
+focus:border-cyan-400
+"
 
+/>
 
-                </div>
 
 
-              </div>
 
 
 
@@ -347,249 +378,273 @@ export default function Contact() {
 
 
 
-              {/* FORM */}
 
+<Button
 
+type="submit"
 
-              <div
+disabled={submitting}
 
-                className="
-                space-y-5
-                "
+>
 
-              >
+{submitting ? t.contact.sending : t.contact.send}
 
 
+</Button>
 
 
 
-                <input
 
 
-                  name="name"
 
 
-                  type="text"
+{
+succeeded &&
 
+<p
 
-                  required
+className="
+text-green-400
+"
 
+>
 
-                  placeholder={
-                    t.contact.namePlaceholder
-                  }
+{
+t.contact.success
+}
 
+</p>
 
+}
 
-                  className="
-                  w-full
-                  rounded-2xl
-                  border
-                  border-white/10
-                  bg-white/5
-                  px-6
-                  py-4
-                  text-white
-                  outline-none
-                  transition
-                  focus:border-cyan-400
-                  "
+{error && (
+  <p className="text-sm text-red-400" role="alert">
+    {error}
+  </p>
+)}
 
-                />
 
 
+</div>
 
 
 
 
 
-                <input
 
+</form>
 
-                  name="email"
 
 
-                  type="email"
 
+</GlassCard>
 
-                  required
 
 
-                  placeholder={
-                    t.contact.emailPlaceholder
-                  }
+</motion.div>
 
 
 
-                  className="
-                  w-full
-                  rounded-2xl
-                  border
-                  border-white/10
-                  bg-white/5
-                  px-6
-                  py-4
-                  text-white
-                  outline-none
-                  transition
-                  focus:border-cyan-400
-                  "
+</Container>
 
-                />
 
+</section>
 
 
+);
 
 
+}
 
 
 
-                <textarea
 
 
-                  name="message"
 
 
-                  required
 
 
-                  rows={6}
+function ContactItem({
 
+icon,
+title,
+value,
+link
 
+}:{
 
-                  placeholder={
-                    t.contact.messagePlaceholder
-                  }
+icon:React.ReactNode;
 
+title:string;
 
+value:string;
 
-                  className="
-                  w-full
-                  rounded-2xl
-                  border
-                  border-white/10
-                  bg-white/5
-                  px-6
-                  py-4
-                  text-white
-                  outline-none
-                  transition
-                  focus:border-cyan-400
-                  "
+link?:string;
 
-                />
+}){
 
 
+return (
 
 
+<div
 
+className="
+flex
+items-center
+gap-4
+"
 
+>
 
-                <ValidationError
 
-                  prefix="Email"
+<div
 
-                  field="email"
+className="
+rounded-xl
+bg-cyan-400/10
+p-3
+text-cyan-400
+"
 
-                  errors={state.errors}
+>
 
-                />
+{icon}
 
+</div>
 
 
 
 
 
+<div>
 
-                <Button
 
-                  type="submit"
+<p
 
-                  disabled={state.submitting}
+className="
+text-sm
+text-zinc-500
+"
 
-                >
+>
 
+{title}
 
-                  {
-                    state.submitting
+</p>
 
-                    ?
 
-                    t.contact.sending
 
-                    :
+{
+link ?
 
-                    t.contact.send
 
-                  }
+<a
 
+href={link}
 
-                </Button>
+className="
+text-white
+transition
+hover:text-cyan-400
+"
 
+>
 
+{value}
 
+</a>
 
 
+:
 
+<p className="text-white">
 
-                {
-                  state.succeeded && (
+{value}
 
+</p>
 
-                    <p
 
-                      className="
-                      text-green-400
-                      "
+}
 
-                    >
 
-                      {t.contact.success}
 
+</div>
 
-                    </p>
 
 
-                  )
-                }
 
+</div>
 
 
+);
 
 
+}
 
-              </div>
 
 
 
 
 
-            </form>
 
+function Input({
 
+name,
 
+type="text",
 
+placeholder
 
-          </GlassCard>
+}:{
 
+name:string;
 
+type?:string;
 
+placeholder:string;
 
+}){
 
-        </motion.div>
 
+return (
 
 
+<input
 
 
-      </Container>
+name={name}
 
 
+type={type}
 
-    </section>
 
+required
 
-  );
+
+placeholder={placeholder}
+
+
+
+className="
+w-full
+rounded-2xl
+border
+border-white/10
+bg-white/5
+px-6
+py-4
+text-white
+outline-none
+transition
+focus:border-cyan-400
+"
+
+
+/>
+
+
+);
 
 
 }

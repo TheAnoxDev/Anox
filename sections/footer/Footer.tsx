@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useMemo } from "react";
 
 import {
   FaGithub,
@@ -14,480 +15,566 @@ import {
 import { ArrowUp } from "lucide-react";
 
 import { useTranslation } from "@/hooks/useTranslation";
+import { useLang } from "@/components/LangContext";
+
 import Container from "@/components/ui/Container";
 import Logo from "@/components/layout/Logo";
 
 import type { Variants } from "framer-motion";
 
 
+
 const footerAnimation: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
+
+  hidden:{
+    opacity:0,
+    y:30,
   },
 
-  show: {
-    opacity: 1,
-    y: 0,
 
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1] as const,
+  show:{
+    opacity:1,
+    y:0,
+
+    transition:{
+      duration:.6,
+      ease:[0.16,1,0.3,1],
     },
+
   },
+
 };
 
 
-export default function Footer() {
-
-  const { t } = useTranslation();
-
-
-  const companyLinks = [
-    {
-      label: t.footer.about,
-      href: "#about",
-    },
-    {
-      label: t.footer.technology,
-      href: "#technology",
-    },
-    {
-      label: t.footer.projects,
-      href: "#projects",
-    },
-  ];
-
-
-  const resourceLinks = [
-    {
-      label: t.footer.contact,
-      href: "#contact",
-    },
-    {
-      label: t.footer.privacy,
-      href: "/privacy",
-    },
-    {
-      label: t.footer.terms,
-      href: "/terms",
-    },
-  ];
 
 
-  const socials = [
-    {
-      label: "GitHub",
-      href: "https://github.com/TheAnoxDev",
-      icon: FaGithub,
-    },
+export default function Footer(){
 
-    {
-      label: "LinkedIn",
-      href: "https://www.linkedin.com/in/anox-dev-34933941b",
-      icon: FaLinkedin,
-    },
 
-    {
-      label: "X",
-      href: "https://x.com/anox_dev",
-      icon: FaXTwitter,
-    },
+const {t}=useTranslation();
+const {lang}=useLang();
+const prefix=`/${lang}`;
 
-    {
-      label: "Telegram",
-      href: "https://t.me/anoxdev",
-      icon: FaTelegram,
-    },
 
-    {
-      label: "Instagram",
-      href: "https://www.instagram.com/anox.dev",
-      icon: FaInstagram,
-    },
-  ];
+const year = 2026;
 
 
 
-  return (
 
-    <footer
-      className="
-      relative
-      overflow-hidden
-      border-t
-      border-white/10
-      py-24
-      "
-    >
+const companyLinks = useMemo(()=>[
 
+{
+label:t.footer.about,
+href:`${prefix}#about`,
+},
 
-      {/* BACKGROUND GLOW */}
+{
+label:t.footer.technology,
+href:`${prefix}#technology`,
+},
 
-      <div
-        className="
-        pointer-events-none
-        absolute
-        bottom-0
-        left-1/2
-        h-[450px]
-        w-[450px]
-        -translate-x-1/2
-        rounded-full
-        bg-cyan-500/10
-        blur-[150px]
-        "
-      />
+{
+label:t.footer.projects,
+href:`${prefix}#projects`,
+},
 
+],[t,prefix]);
 
 
-      <Container>
 
 
-        <motion.div
 
-          variants={footerAnimation}
+const resourceLinks = useMemo(()=>[
 
-          initial="hidden"
+{
+label:t.footer.contact,
+href:`${prefix}#contact`,
+},
 
-          whileInView="show"
+{
+label:t.footer.privacy,
+href:`${prefix}/privacy`,
+},
 
-          viewport={{
-            once:true,
-          }}
+{
+label:t.footer.terms,
+href:`${prefix}/terms`,
+},
 
-          className="
-          grid
-          gap-14
-          lg:grid-cols-4
-          "
+],[t,prefix]);
 
-        >
 
 
-          {/* BRAND */}
 
-          <div>
 
-            <Logo />
+const socials = useMemo(()=>[
 
 
-            <p
-              className="
-              mt-8
-              max-w-sm
-              leading-8
-              text-zinc-400
-              "
-            >
+{
+label:"GitHub",
+href:"https://github.com/TheAnoxDev",
+icon:FaGithub,
+},
 
-              {t.footer.description}
 
-            </p>
+{
+label:"LinkedIn",
+href:"https://www.linkedin.com/in/anox-dev-34933941b",
+icon:FaLinkedin,
+},
 
 
-          </div>
+{
+label:"X",
+href:"https://x.com/anox_dev",
+icon:FaXTwitter,
+},
 
 
+{
+label:"Telegram",
+href:"https://t.me/anoxdev",
+icon:FaTelegram,
+},
 
 
-          {/* COMPANY */}
+{
+label:"Instagram",
+href:"https://instagram.com/anox.dev",
+icon:FaInstagram,
+},
 
-          <div>
 
-            <h3
-              className="
-              text-lg
-              font-bold
-              text-white
-              "
-            >
-              {t.footer.company}
-            </h3>
+],[ ]);
 
 
-            <div
-              className="
-              mt-6
-              flex
-              flex-col
-              gap-4
-              "
-            >
 
-              {
-                companyLinks.map((item)=>(
-                  
-                  <Link
 
-                    key={item.href}
 
-                    href={item.href}
 
-                    className="
-                    text-zinc-400
-                    transition
-                    hover:text-cyan-400
-                    hover:translate-x-1
-                    "
+return (
 
-                  >
+<footer
 
-                    {item.label}
+className="
+relative
+overflow-hidden
+border-t
+border-white/10
+py-24
+"
 
-                  </Link>
+>
 
-                ))
-              }
 
-            </div>
+<div
 
-          </div>
+className="
+pointer-events-none
+absolute
+bottom-0
+left-1/2
+h-[450px]
+w-[450px]
+-translate-x-1/2
+rounded-full
+bg-cyan-500/10
+blur-[150px]
+"
 
+/>
 
 
 
 
-          {/* RESOURCES */}
+<Container>
 
-          <div>
 
-            <h3
-              className="
-              text-lg
-              font-bold
-              text-white
-              "
-            >
+<motion.div
 
-              {t.footer.resources}
 
-            </h3>
+variants={footerAnimation}
 
+initial="hidden"
 
-            <div
-              className="
-              mt-6
-              flex
-              flex-col
-              gap-4
-              "
-            >
+whileInView="show"
 
-              {
-                resourceLinks.map((item)=>(
+viewport={{
+once:true
+}}
 
-                  <Link
 
-                    key={item.href}
+className="
+grid
+gap-14
+lg:grid-cols-4
+"
 
-                    href={item.href}
+>
 
-                    className="
-                    text-zinc-400
-                    transition
-                    hover:text-cyan-400
-                    hover:translate-x-1
-                    "
 
-                  >
 
-                    {item.label}
+<div>
 
-                  </Link>
 
-                ))
-              }
+<Logo />
 
 
-            </div>
+<p
 
+className="
+mt-8
+max-w-sm
+leading-8
+text-zinc-400
+"
 
-          </div>
+>
 
+{t.footer.description}
 
+</p>
 
 
+</div>
 
 
-          {/* SOCIAL */}
 
-          <div>
 
 
-            <h3
-              className="
-              text-lg
-              font-bold
-              text-white
-              "
-            >
 
-              {t.footer.follow}
 
-            </h3>
+<FooterColumn
 
+title={t.footer.company}
 
+items={companyLinks}
 
-            <div
-              className="
-              mt-6
-              flex
-              flex-col
-              gap-4
-              "
-            >
+/>
 
-              {
-                socials.map((item)=>{
 
-                  const Icon = item.icon;
 
 
-                  return (
 
-                    <a
+<FooterColumn
 
-                      key={item.label}
+title={t.footer.resources}
 
-                      href={item.href}
+items={resourceLinks}
 
-                      target="_blank"
+/>
 
-                      rel="noopener noreferrer"
 
-                      className="
-                      group
-                      flex
-                      items-center
-                      gap-3
-                      text-zinc-400
-                      transition
-                      hover:text-cyan-400
-                      "
 
-                    >
 
-                      <Icon
-                        size={20}
-                        className="
-                        transition
-                        group-hover:scale-110
-                        "
-                      />
 
 
-                      <span>
-                        {item.label}
-                      </span>
 
+<div>
 
-                    </a>
 
-                  );
+<h3
 
-                })
-              }
+className="
+text-lg
+font-bold
+text-white
+"
 
+>
 
-            </div>
+{t.footer.follow}
 
+</h3>
 
-          </div>
 
 
-        </motion.div>
 
+<div
 
+className="
+mt-6
+flex
+flex-col
+gap-4
+"
 
+>
 
 
+{
 
-        {/* BOTTOM */}
+socials.map((item)=>{
 
 
-        <div
+const Icon=item.icon;
 
-          className="
-          mt-20
-          flex
-          flex-col
-          items-center
-          justify-between
-          gap-6
-          border-t
-          border-white/10
-          pt-10
-          md:flex-row
-          "
 
-        >
+return (
 
+<a
 
-          <p
-            className="
-            text-sm
-            text-zinc-500
-            "
-          >
+key={item.label}
 
-            © {new Date().getFullYear()} ANOX. {t.footer.copyright}
+href={item.href}
 
-          </p>
+target="_blank"
 
+rel="noopener noreferrer"
 
+aria-label={item.label}
 
 
-          <a
+className="
+group
+flex
+items-center
+gap-3
+text-zinc-400
+transition
+hover:text-cyan-400
+"
 
-            href="#hero"
+>
 
-            className="
-            group
-            flex
-            items-center
-            gap-2
-            rounded-full
-            border
-            border-white/10
-            bg-white/5
-            px-6
-            py-3
-            text-sm
-            text-white
-            backdrop-blur
-            transition-all
-            hover:-translate-y-1
-            hover:border-cyan-400/40
-            hover:text-cyan-400
-            "
 
-          >
+<Icon
 
-            <ArrowUp
-              size={16}
-              className="
-              transition
-              group-hover:-translate-y-1
-              "
-            />
+size={20}
 
+className="
+transition
+group-hover:scale-110
+"
 
-            {t.footer.backToTop}
+/>
 
 
-          </a>
 
+<span>
 
+{item.label}
 
-        </div>
+</span>
 
 
 
-      </Container>
+</a>
 
+);
 
-    </footer>
 
-  );
+})
+
+}
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</motion.div>
+
+
+
+
+
+
+
+
+<div
+
+className="
+mt-20
+flex
+flex-col
+items-center
+justify-between
+gap-6
+border-t
+border-white/10
+pt-10
+md:flex-row
+"
+
+>
+
+
+<p
+
+className="
+text-sm
+text-zinc-500
+"
+
+>
+
+© {year} ANOX. {t.footer.copyright}
+
+</p>
+
+
+
+
+
+<Link
+
+href="#hero"
+
+className="
+group
+flex
+items-center
+gap-2
+rounded-full
+border
+border-white/10
+bg-white/5
+px-6
+py-3
+text-sm
+text-white
+transition
+hover:-translate-y-1
+hover:border-cyan-400/40
+hover:text-cyan-400
+"
+
+>
+
+
+<ArrowUp
+
+size={16}
+
+className="
+transition
+group-hover:-translate-y-1
+"
+
+/>
+
+
+{t.footer.backToTop}
+
+
+</Link>
+
+
+
+</div>
+
+
+
+</Container>
+
+
+</footer>
+
+);
+
+}
+
+
+
+
+
+
+
+
+function FooterColumn({
+
+title,
+
+items
+
+}:{
+
+title:string;
+
+items:{
+label:string;
+href:string;
+}[];
+
+}){
+
+
+return (
+
+<div>
+
+
+<h3
+
+className="
+text-lg
+font-bold
+text-white
+"
+
+>
+
+{title}
+
+</h3>
+
+
+
+<div
+
+className="
+mt-6
+flex
+flex-col
+gap-4
+"
+
+>
+
+
+{
+
+items.map(item=>(
+
+
+<Link
+
+key={item.href}
+
+href={item.href}
+
+className="
+text-zinc-400
+transition
+hover:text-cyan-400
+hover:translate-x-1
+"
+
+>
+
+{item.label}
+
+</Link>
+
+
+))
+
+}
+
+
+
+</div>
+
+
+</div>
+
+);
+
+
 }

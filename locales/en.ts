@@ -1,60 +1,108 @@
-const en = {
-  lang: "en",
-
-  nav: {
-    home: "Home",
-    about: "About",
-    technology: "Technology",
-    projects: "Projects",
-    contact: "Contact",
-  },
+import type { Translation } from "./types";
 
 
-  hero: {
-  badge: "NEXT GENERATION TECHNOLOGY",
-
-  title:
-    "Building Intelligent Systems For The Future",
-
-  subtitle:
-    "Security, Software & Intelligent Infrastructure",
-
-  highlight:
-    "ANOX",
-
-  description:
-    "ANOX develops modern solutions in artificial intelligence, cybersecurity, software engineering and cloud infrastructure.",
+const en: Translation = {
 
 
-  primary:
-    "Start Collaboration",
-
-  secondary:
-    "Explore Architecture",
+lang:"en",
 
 
-  button:
-    "Start Collaboration",
+
+nav:{
 
 
-  stats:[
-    ["24/7","Smart Support"],
-    ["AI","Artificial Intelligence"],
-    ["100%","Future Focus"]
-  ]
+home:"Home",
+
+about:"About",
+
+technology:"Technology",
+
+projects:"Projects",
+
+contact:"Contact",
+
+login:"Login",
+
+register:"Register",
+
+store:"Store",
+
+platform:"Platform",
+
 
 },
 
 
-  about:{
 
 
-badge:
-"ABOUT ANOX",
 
 
-title:
-"About ANOX",
+hero:{
+
+
+badge:"NEXT GENERATION TECHNOLOGY",
+
+
+title:"Building Intelligent Systems For The Future",
+
+
+subtitle:"Security, Software & Intelligent Infrastructure",
+
+
+highlight:"ANOX",
+
+
+description:
+"ANOX develops modern solutions in artificial intelligence, cybersecurity, software engineering and cloud infrastructure.",
+
+
+
+primary:"Start Collaboration",
+
+
+secondary:"Explore Architecture",
+
+
+button:"Start Collaboration",
+
+
+
+stats:[
+
+{
+value:"24/7",
+label:"Smart Support"
+},
+
+{
+value:"AI",
+label:"Artificial Intelligence"
+},
+
+{
+value:"100%",
+label:"Future Focus"
+}
+
+],
+
+
+},
+
+
+
+
+
+
+
+
+about:{
+
+
+badge:"ABOUT ANOX",
+
+
+title:"About ANOX",
 
 
 description:
@@ -62,8 +110,7 @@ description:
 
 
 
-visionTitle:
-"Our Vision",
+visionTitle:"Our Vision",
 
 
 visionDescription:
@@ -71,8 +118,7 @@ visionDescription:
 
 
 
-missionTitle:
-"Our Mission",
+missionTitle:"Our Mission",
 
 
 missionDescription:
@@ -80,465 +126,676 @@ missionDescription:
 
 
 
-ai:
-"Artificial Intelligence Systems",
+ai:"Artificial Intelligence Systems",
 
 
-cyber:
-"Cyber Security & Protection",
+cyber:"Cyber Security & Protection",
 
 
-software:
-"Professional Software Engineering"
-
+software:"Professional Software Engineering",
 
 
 },
 
 
-  technology: {
-
-    badge:
-      "TECHNOLOGY",
-
-    title:
-      "Our Expertise",
-
-    description:
-      "Combining artificial intelligence, cybersecurity, software engineering and cloud infrastructure to build future-ready products.",
 
 
-    aiTitle:
-      "Artificial Intelligence",
-
-    aiDesc:
-      "Building intelligent systems, AI assistants and automation platforms.",
 
 
-    cyberTitle:
-      "Cyber Security",
 
-    cyberDesc:
-      "Security solutions, penetration testing and modern protection systems.",
+technology:{
 
 
-    softwareTitle:
-      "Software Engineering",
-
-    softwareDesc:
-      "High performance applications and scalable digital products.",
+badge:"TECHNOLOGY",
 
 
-    cloudTitle:
-      "Cloud Infrastructure",
+title:"Our Expertise",
 
-    cloudDesc:
-      "Secure cloud architecture and reliable infrastructure solutions.",
-
-
-    automationTitle:
-      "Automation",
-
-    automationDesc:
-      "Smart automation systems improving productivity and efficiency.",
-
-
-    webTitle:
-      "Web Development",
-
-    webDesc:
-      "Modern web applications with powerful user experiences.",
-  },
-
-
-  projects: {
-
-    title:
-      "Projects",
-
-    subtitle:
-      "Explore some of the systems and platforms developed by ANOX.",
-
-
-    close:
-      "Close",
-
-
-    intelligence: {
-
-      title:
-        "ANOX Intelligence",
-
-      desc:
-        "An artificial intelligence platform designed for automation, data processing and intelligent decision making.",
-    },
-
-
-    shield: {
-
-      title:
-        "ANOX Shield",
-
-      desc:
-        "A cybersecurity platform focused on protecting modern digital infrastructures.",
-    },
-
-
-    future: {
-
-      title:
-        "Future Systems",
-
-      desc:
-        "Advanced solutions combining AI, IoT and next generation technologies.",
-    },
-
-  },
-
-
-  services: {
-
-title:
-"Our Services",
 
 description:
-"Engineering secure and intelligent digital systems.",
+"Combining artificial intelligence, cybersecurity, software engineering and cloud infrastructure to build future-ready products.",
 
 
-aiTitle:
-"Artificial Intelligence",
+
+aiTitle:"Artificial Intelligence",
 
 aiDesc:
 "Building intelligent systems, AI assistants and automation platforms.",
 
 
-cyberTitle:
-"Cyber Security",
+
+cyberTitle:"Cyber Security",
 
 cyberDesc:
 "Security solutions, penetration testing and modern protection systems.",
 
 
-softwareTitle:
-"Software Engineering",
+
+softwareTitle:"Software Engineering",
+
+softwareDesc:
+"High performance applications and scalable digital products.",
+
+
+
+cloudTitle:"Cloud Infrastructure",
+
+cloudDesc:
+"Secure cloud architecture and reliable infrastructure solutions.",
+
+
+
+automationTitle:"Automation",
+
+automationDesc:
+"Smart automation systems improving productivity and efficiency.",
+
+
+
+webTitle:"Web Development",
+
+webDesc:
+"Modern web applications with powerful user experiences.",
+
+
+},
+
+
+
+
+
+
+
+architecture:{
+
+
+heroTitle:"ANOX Architecture",
+
+
+heroDescription:
+"A modular architecture designed for artificial intelligence, cybersecurity, cloud infrastructure and next generation software.",
+
+
+
+core:{
+
+
+user:"User Layer",
+
+application:"Application Core",
+
+engine:"AI & Security Engine",
+
+infrastructure:"Cloud Infrastructure",
+
+},
+
+
+
+
+layersTitle:"System Layers",
+
+
+layersDescription:
+"Modular components powering the ANOX ecosystem.",
+
+
+
+
+layers:{
+
+
+user:{
+
+title:"User Layer",
+
+desc:"Interfaces and applications connecting users with the ANOX ecosystem."
+
+},
+
+
+application:{
+
+title:"Application Layer",
+
+desc:"Modern software services built for scalable digital products."
+
+},
+
+
+ai:{
+
+title:"AI Intelligence Layer",
+
+desc:"Machine learning systems powering automation and intelligent decisions."
+
+},
+
+
+security:{
+
+title:"Security Layer",
+
+desc:"Protection, monitoring and intelligent threat detection systems."
+
+},
+
+
+cloud:{
+
+title:"Cloud Infrastructure",
+
+desc:"Distributed computing environments with scalable resources."
+
+},
+
+
+data:{
+
+title:"Data Core",
+
+desc:"High performance storage and data processing systems."
+
+},
+
+
+},
+
+
+
+
+
+stackTitle:"Technology Stack",
+
+
+stack:{
+
+
+ai:"Artificial Intelligence",
+
+cloud:"Cloud Computing",
+
+security:"Cyber Security",
+
+distributed:"Distributed Systems",
+
+automation:"Automation",
+
+data:"Data Engineering",
+
+},
+
+
+
+
+
+securityTitle:"Secure By Design",
+
+
+securityDescription:
+"Every ANOX component is designed with security, scalability and reliability as core principles.",
+
+
+},
+
+
+
+
+
+
+
+projects:{
+
+
+title:"Projects",
+
+
+subtitle:
+"Explore some of the systems and platforms developed by ANOX.",
+
+
+close:"Close",
+
+
+
+intelligence:{
+
+
+title:"ANOX Intelligence",
+
+desc:
+"An artificial intelligence platform designed for automation, data processing and intelligent decision making.",
+
+},
+
+
+
+shield:{
+
+
+title:"ANOX Shield",
+
+desc:
+"A cybersecurity platform focused on protecting modern digital infrastructures.",
+
+},
+
+
+
+future:{
+
+
+title:"Future Systems",
+
+desc:
+"Advanced solutions combining AI, IoT and next generation technologies.",
+
+},
+
+
+},
+
+
+
+
+
+
+
+services:{
+
+
+title:"Our Services",
+
+
+description:
+"Engineering secure and intelligent digital systems.",
+
+
+
+aiTitle:"Artificial Intelligence",
+
+aiDesc:
+"Building intelligent systems, AI assistants and automation platforms.",
+
+
+
+cyberTitle:"Cyber Security",
+
+cyberDesc:
+"Security solutions, penetration testing and modern protection systems.",
+
+
+
+softwareTitle:"Software Engineering",
 
 softwareDesc:
 "High performance web applications and scalable digital products.",
 
 
-cloudTitle:
-"Cloud Infrastructure",
+
+cloudTitle:"Cloud Infrastructure",
 
 cloudDesc:
-"Secure cloud architecture and reliable infrastructure solutions."
+"Secure cloud architecture and reliable infrastructure solutions.",
+
 
 },
 
 
-  why: {
 
-title:
-"Why ANOX?",
+
+
+
+
+why:{
+
+
+title:"Why ANOX?",
+
 
 description:
 "We combine engineering, artificial intelligence and security to create powerful digital experiences.",
 
 
-features: {
+
+features:{
+
 
 technology:{
+
 title:"Advanced Technology",
-text:"Using modern technologies to build intelligent and scalable systems."
+
+text:
+"Using modern technologies to build intelligent and scalable systems."
+
 },
 
 
 security:{
+
 title:"Security First",
-text:"Designing secure architectures with modern cybersecurity principles."
+
+text:
+"Designing secure architectures with modern cybersecurity principles."
+
 },
 
 
 performance:{
+
 title:"High Performance",
-text:"Optimized systems built for speed, reliability and scalability."
+
+text:
+"Optimized systems built for speed, reliability and scalability."
+
 },
 
 
 future:{
-title:"Future Ready",
-text:"Creating solutions prepared for next generation technologies."
-}
 
-}
+title:"Future Ready",
+
+text:
+"Creating solutions prepared for next generation technologies."
 
 },
 
 
-  architecture: {
+},
 
-    heroTitle:
-      "ANOX Architecture",
 
+},
 
-    heroDescription:
-      "A modular architecture designed for artificial intelligence, cybersecurity, cloud infrastructure and next generation software.",
 
 
 
-    core: {
 
-      user:
-        "User Layer",
 
-      application:
-        "Application Core",
 
-      engine:
-        "AI & Security Engine",
+store:{
 
-      infrastructure:
-        "Cloud Infrastructure",
 
-    },
+title:"ANOX Store",
 
 
+description:
+"Premium AI, cybersecurity and software solutions for the future.",
 
-    layersTitle:
-      "System Layers",
 
+buy:"Buy Now",
 
-    layersDescription:
-      "Modular components powering the ANOX ecosystem.",
 
+popular:"MOST POPULAR",
 
 
-    layers: {
+},
 
-      user: {
 
-        title:
-          "User Layer",
 
-        desc:
-          "Interfaces and applications connecting users with the ANOX ecosystem.",
-      },
 
 
-      application: {
 
-        title:
-          "Application Layer",
 
-        desc:
-          "Modern software services built for scalable digital products.",
-      },
+auth:{
 
 
-      ai: {
+loginTitle:"Access ANOX",
 
-        title:
-          "AI Intelligence Layer",
 
-        desc:
-          "Machine learning systems powering automation and intelligent decisions.",
-      },
+registerTitle:"Create ANOX Account",
 
 
-      security: {
+email:"Email",
 
-        title:
-          "Security Layer",
 
-        desc:
-          "Protection, monitoring and intelligent threat detection systems.",
-      },
+password:"Password",
 
 
-      cloud: {
+name:"Full Name",
 
-        title:
-          "Cloud Infrastructure",
 
-        desc:
-          "Distributed computing environments with scalable resources.",
-      },
+login:"Sign In",
 
 
-      data: {
+register:"Create Account",
 
-        title:
-          "Data Core",
 
-        desc:
-          "High performance storage and data processing systems.",
-      },
+forgotPassword:"Forgot Password?",
 
-    },
 
+google:"Continue with Google",
 
 
-    stackTitle:
-      "Technology Stack",
+github:"Continue with GitHub",
 
 
-    stack: {
+},
 
-      ai:
-        "Artificial Intelligence",
 
-      cloud:
-        "Cloud Computing",
 
-      security:
-        "Cyber Security",
 
-      distributed:
-        "Distributed Systems",
 
-      automation:
-        "Automation",
 
-      data:
-        "Data Engineering",
 
-    },
+dashboard:{
 
 
+title:"Dashboard",
 
-    securityTitle:
-      "Secure By Design",
+welcome:"Welcome Back",
 
+profile:"Profile",
 
-    securityDescription:
-      "Every ANOX component is designed with security, scalability and reliability as core principles.",
+settings:"Settings",
 
-  },
+logout:"Logout",
 
 
+},
 
-  contact: {
 
-    badge:
-      "CONTACT",
 
 
-    title:
-      "Get In Touch",
 
 
-    description:
-      "Contact us for collaboration, projects or more information.",
 
+contact:{
 
 
-    conversation:
-      "Start Conversation",
+badge:"CONTACT",
 
 
-    conversationDescription:
-      "Tell us about your idea and let's build something powerful together.",
+title:"Get In Touch",
 
 
+description:
+"Contact us for collaboration, projects or more information.",
 
-    email:
-      "Email",
 
+conversation:"Start Conversation",
 
-    location:
-      "Location",
 
+conversationDescription:
+"Tell us about your idea and let's build something powerful together.",
 
-    locationValue:
-      "Online / Worldwide",
 
+email:"Email",
 
 
-    namePlaceholder:
-      "Your name",
+location:"Location",
 
 
-    emailPlaceholder:
-      "Your email",
+locationValue:"Online / Worldwide",
 
 
-    messagePlaceholder:
-      "Your message",
+namePlaceholder:"Your name",
 
 
+emailPlaceholder:"Your email",
 
-    send:
-      "Send Message",
 
+messagePlaceholder:"Your message",
 
-    sending:
-      "Sending...",
 
+send:"Send Message",
 
-    success:
-      "Your message has been sent successfully.",
 
-  },
+sending:"Sending...",
 
 
+success:
+"Your message has been sent successfully.",
 
-  footer: {
 
-    description:
-      "ANOX creates intelligent and secure systems for the future.",
+},
 
 
-    company:
-      "Company",
 
 
-    resources:
-      "Resources",
 
 
-    links:
-      "Links",
 
+privacy:{
 
-    about:
-      "About Us",
 
+title:"Privacy Policy",
 
-    technology:
-      "Technology",
 
+description:
+"How ANOX collects, protects and manages your information.",
 
-    projects:
-      "Projects",
 
 
-    contact:
-      "Contact",
+sections:{
 
 
-    privacy:
-      "Privacy Policy",
+collect:"Information We Collect",
 
+security:"Data Security",
 
-    terms:
-      "Terms & Conditions",
+usage:"How We Use Data",
 
+cookies:"Cookies & Tracking",
 
-    follow:
-      "Follow Us",
+rights:"Your Rights",
 
+},
 
-    copyright:
-      "All rights reserved.",
 
+updated:"Last updated: August 2026",
 
-    rights:
-      "All rights reserved.",
 
+},
 
-    backToTop:
-      "Back To Top",
 
-  },
+
+
+
+
+
+terms:{
+
+
+title:"Terms & Conditions",
+
+
+description:
+"Rules and conditions for using ANOX services.",
+
+
+acceptance:"Acceptance of Terms",
+
+
+usage:"Service Usage",
+
+
+liability:"Limitation of Liability",
+
+
+updated:"Last updated: August 2026",
+
+
+},
+
+
+
+
+
+
+
+footer:{
+
+
+description:
+"ANOX creates intelligent and secure systems for the future.",
+
+
+company:"Company",
+
+resources:"Resources",
+
+links:"Links",
+
+
+about:"About Us",
+
+technology:"Technology",
+
+projects:"Projects",
+
+contact:"Contact",
+
+
+privacy:"Privacy Policy",
+
+terms:"Terms & Conditions",
+
+
+follow:"Follow Us",
+
+
+copyright:"All rights reserved.",
+
+
+rights:"All rights reserved.",
+
+
+backToTop:"Back To Top",
+
+
+},
+
+
+
+
+
+
+
+common:{
+
+
+loading:"Loading...",
+
+
+close:"Close",
+
+
+next:"Next",
+
+
+previous:"Previous",
+
+
+submit:"Submit",
+
+
+cancel:"Cancel",
+
+
+},
+
+
+
 
 
 };
