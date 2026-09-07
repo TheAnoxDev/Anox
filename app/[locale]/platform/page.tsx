@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { useLang } from "@/components/LangContext";
 
 import {
   Brain,
@@ -22,7 +24,8 @@ import {
 
 export default function PlatformPage(){
 
-
+const { lang } = useLang();
+const prefix = `/${lang}`;
 
 const systems = [
 
@@ -316,8 +319,8 @@ gap-4
 >
 
 
-<button
-
+<Link
+href={`${prefix}/contact`}
 className="
 flex
 items-center
@@ -339,13 +342,13 @@ Launch Platform
 
 <ArrowRight size={18}/>
 
-</button>
+</Link>
 
 
 
 
-<button
-
+<Link
+href={`${prefix}/architecture`}
 className="
 rounded-xl
 border
@@ -361,7 +364,7 @@ hover:bg-white/10
 
 Explore Technology
 
-</button>
+</Link>
 
 
 
@@ -986,10 +989,11 @@ our AI, security and cloud ecosystem.
 
 
 
-<button
-
+<Link
+href={`${prefix}/contact`}
 className="
 mt-8
+inline-flex
 rounded-xl
 bg-cyan-400
 px-10
@@ -1002,7 +1006,7 @@ text-black
 
 Start Building
 
-</button>
+</Link>
 
 
 

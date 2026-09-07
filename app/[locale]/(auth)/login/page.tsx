@@ -593,7 +593,7 @@ justify-end
 
 <Link
 
-href={`${prefix}/forgot-password`}
+href={`${prefix}/contact`}
 
 className="
 text-sm

@@ -1,4 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
+import PageTransition from "@/components/layout/PageTransition";
 import Footer from "@/sections/footer/Footer";
 import LocaleTextBridge from "@/components/LocaleTextBridge";
 import { isLocale, isRTL, LOCALES, type Locale } from "@/locales/registry";
@@ -23,7 +24,7 @@ export default async function LocaleLayout({
     <div lang={locale} dir={dir} className="min-h-screen">
       <Navbar />
       <LocaleTextBridge />
-      <div className="pt-0">{children}</div>
+      <div className="pt-0"><PageTransition>{children}</PageTransition></div>
       <Footer />
     </div>
   );
