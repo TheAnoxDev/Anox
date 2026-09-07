@@ -82,7 +82,7 @@ export default function Hero() {
   const { t } = useTranslation();
 
 
-  const rtl = lang === "fa";
+  const rtl = lang === "fa" || lang === "ar";
 
 
   const prefix = `/${lang}`;

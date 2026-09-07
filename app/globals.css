@@ -79,6 +79,12 @@ canvas{touch-action:none;user-select:none}
 @media(hover:none){.anox-card:hover{transform:none;box-shadow:none}.anox-card:hover::before{opacity:0}}
 @media(max-width:640px){body{font-size:15px}h1{letter-spacing:-.03em}.anox-card{border-radius:20px}::-webkit-scrollbar{width:5px}section{scroll-margin-top:78px}}
 
+/* Final accessibility + motion system */
+:focus-visible{outline:2px solid rgba(34,211,238,.9);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+::selection{background:rgba(34,211,238,.22);color:#fff}
+
 /* Accessible typography system — all six locales */
 html{font-size:16px}
 body{font-size:16px;line-height:1.65;font-family:var(--font-geist),"Segoe UI",Arial,sans-serif}

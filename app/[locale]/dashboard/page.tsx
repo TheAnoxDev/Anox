@@ -96,7 +96,7 @@ export default function DashboardPage() {
 
   const { lang } = useLang();
 
-  const rtl = lang === "fa";
+  const rtl = lang === "fa" || lang === "ar";
 
   const [mobileMenu, setMobileMenu] = useState(false);
 
