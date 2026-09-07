@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
+import ExperienceRail from "@/components/layout/ExperienceRail";
 import PageTransition from "@/components/layout/PageTransition";
 import Footer from "@/sections/footer/Footer";
 import LocaleTextBridge from "@/components/LocaleTextBridge";
@@ -43,6 +44,7 @@ export default async function LocaleLayout({ children, params }: {
     <div lang={locale} dir={dir} className="anox-page min-h-screen">
       <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-cyan-300 focus:px-4 focus:py-3 focus:text-sm focus:font-black focus:text-slate-950">Skip to content</a>
       <Navbar />
+      <ExperienceRail />
       <LocaleTextBridge />
       <div id="main-content" className="pt-0"><PageTransition>{children}</PageTransition></div>
       <Footer />
