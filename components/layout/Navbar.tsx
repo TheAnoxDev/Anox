@@ -37,6 +37,9 @@ export default function Navbar() {
     { id: "about", label: t.nav.about, href: `${prefix}#about` },
     { id: "technology", label: t.nav.technology, href: `${prefix}#technology` },
     { id: "projects", label: t.nav.projects, href: `${prefix}#projects` },
+    { id: "solutions", label: "Solutions", href: `${prefix}/solutions` },
+    { id: "labs", label: "Labs", href: `${prefix}/labs` },
+    { id: "ai", label: "ANOX AI", href: `${prefix}/ai` },
   ], [prefix, t]);
 
   useEffect(() => {
@@ -83,6 +86,7 @@ export default function Navbar() {
             </Link>
           ))}
           <Link href={`${prefix}/platform`} className="rounded-xl px-4 py-2.5 text-sm font-semibold text-zinc-400 hover:text-white">Platform</Link>
+          <Link href={`${prefix}/company`} className="rounded-xl px-4 py-2.5 text-sm font-semibold text-zinc-400 hover:text-white">Company</Link>
           <Link href={`${prefix}/contact`} className="anox-btn-primary ml-2 py-2.5 text-xs">{t.nav.contact}<ArrowUpRight size={14} /></Link>
           <Link href={`${prefix}/login`} className="ml-1 rounded-xl px-4 py-2.5 text-sm font-semibold text-zinc-400 hover:text-white">{t.nav.login}</Link>
         </nav>
@@ -108,6 +112,10 @@ export default function Navbar() {
           <nav aria-label="Mobile navigation" className="mx-auto grid max-w-7xl gap-2">
             {links.map((item) => <Link key={item.id} href={item.href} onClick={() => setOpen(false)} className={`rounded-2xl px-4 py-3 text-sm font-bold ${active === item.id ? "bg-cyan-300/10 text-cyan-300" : "text-zinc-300 hover:bg-white/5"}`}>{item.label}</Link>)}
             <Link href={`${prefix}/platform`} onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-sm font-bold text-zinc-300 hover:bg-white/5">Platform</Link>
+            <Link href={`${prefix}/solutions`} onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-sm font-bold text-zinc-300 hover:bg-white/5">Solutions</Link>
+            <Link href={`${prefix}/labs`} onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-sm font-bold text-zinc-300 hover:bg-white/5">Labs</Link>
+            <Link href={`${prefix}/company`} onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-sm font-bold text-zinc-300 hover:bg-white/5">Company</Link>
+            <Link href={`${prefix}/careers`} onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-sm font-bold text-zinc-300 hover:bg-white/5">Careers</Link>
             <Link href={`${prefix}/contact`} onClick={() => setOpen(false)} className="anox-btn-primary mt-2 w-full">{t.nav.contact}<ArrowUpRight size={15} /></Link>
             <div className="mt-2 grid grid-cols-6 gap-1 rounded-2xl border border-white/10 bg-white/[.025] p-1">{LOCALES.map((locale) => <button key={locale} onClick={() => changeLanguage(locale)} className={`rounded-xl py-2 text-[10px] font-black ${locale === lang ? "bg-cyan-300/10 text-cyan-300" : "text-zinc-500"}`}>{localeNames[locale]}</button>)}</div>
           </nav>

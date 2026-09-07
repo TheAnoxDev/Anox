@@ -35,7 +35,7 @@ t
 
 
 const rtl =
-lang==="fa";
+lang === "fa" || lang === "ar";
 
 async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
   event.preventDefault();
@@ -349,7 +349,7 @@ rows={6}
 placeholder={
 t.contact.messagePlaceholder
 }
-
+aria-label={t.contact.messagePlaceholder}
 
 className="
 w-full

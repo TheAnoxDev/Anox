@@ -15,7 +15,7 @@ export default function AppWrapper({
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setLoading(false);
-    }, 2200);
+    }, 2300);
 
     return () => {
       window.clearTimeout(timer);

@@ -47,7 +47,7 @@ const {
 
 
 
-const rtl = lang==="fa";
+const rtl = lang === "fa" || lang === "ar";
 
 
 

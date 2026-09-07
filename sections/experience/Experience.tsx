@@ -23,7 +23,7 @@ export default function Experience() {
   ];
 
   return (
-    <section id="intelligence" data-section dir={rtl ? "rtl" : "ltr"} className="relative overflow-hidden py-28 sm:py-36">
+    <section id="about" data-section dir={rtl ? "rtl" : "ltr"} className="relative overflow-hidden py-28 sm:py-36">
       <div className="pointer-events-none absolute left-1/2 top-1/3 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-cyan-400/[.07] blur-[150px]" />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: .7, ease }} className="grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-end">

@@ -67,7 +67,7 @@ export default function Technology() {
 
 
 
-  const rtl = lang === "fa";
+  const rtl = ["fa", "ar"].includes(lang);
 
 
 

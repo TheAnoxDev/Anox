@@ -72,7 +72,7 @@ const {
 
 
 
-const rtl = lang==="fa";
+const rtl = lang === "fa" || lang === "ar";
 
 
 
@@ -437,6 +437,10 @@ variants={cardAnimation}
 onClick={()=>setSelected(project)}
 
 
+onKeyDown={(e)=>{ if(e.key === "Enter" || e.key === " "){ e.preventDefault(); setSelected(project); } }}
+
+tabIndex={0}
+role="button"
 
 whileHover={{
 y:-8
@@ -725,6 +729,9 @@ opacity:0
 
 
 
+role="dialog"
+aria-modal="true"
+aria-label={selected.title}
 className="
 relative
 z-10
