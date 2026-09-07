@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, BrainCircuit, Layers3, LockKeyhole, Workflow } from "lucide-react";
 import { useLang } from "@/components/LangContext";
+import { isRTL } from "@/locales/registry";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -12,6 +13,7 @@ export default function Experience() {
   const { lang } = useLang();
   const { t } = useTranslation();
   const p = `/${lang}`;
+  const rtl = isRTL(lang);
 
   const pillars = [
     { icon: BrainCircuit, title: t.about.ai, text: t.technology.aiDesc, href: `${p}/platform` },
@@ -21,7 +23,7 @@ export default function Experience() {
   ];
 
   return (
-    <section id="intelligence" data-section className="relative overflow-hidden py-28 sm:py-36">
+    <section id="intelligence" data-section dir={rtl ? "rtl" : "ltr"} className="relative overflow-hidden py-28 sm:py-36">
       <div className="pointer-events-none absolute left-1/2 top-1/3 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-cyan-400/[.07] blur-[150px]" />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: .7, ease }} className="grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-end">
@@ -38,7 +40,7 @@ export default function Experience() {
               <div className="flex items-center justify-between"><div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-300/15 bg-cyan-300/[.06] text-cyan-300"><Icon size={22} /></div><span className="font-mono text-[10px] tracking-[.2em] text-zinc-700">0{i + 1}</span></div>
               <h3 className="mt-7 text-xl">{title}</h3>
               <p className="mt-3 text-sm leading-7">{text}</p>
-              <Link href={href} className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.16em] text-cyan-300">Explore <ArrowUpRight size={14} className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
+              <Link href={href} aria-label={`${title} — ${t.hero.secondary}`} className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.16em] text-cyan-300">{t.hero.secondary} <ArrowUpRight size={14} className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
             </motion.div>
           ))}
         </div>

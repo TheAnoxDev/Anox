@@ -3,6 +3,8 @@ import dynamic from "next/dynamic";
 import Hero from "@/sections/hero/Hero";
 import ExecutiveRail from "@/components/ExecutiveRail";
 import Experience from "@/sections/experience/Experience";
+import { buildTranslation } from "@/locales/localized";
+import { isLocale } from "@/locales/registry";
 
 const Services = dynamic(() => import("@/sections/services/Services"));
 const Projects = dynamic(() => import("@/sections/projects/Projects"));
@@ -10,7 +12,10 @@ const Technology = dynamic(() => import("@/sections/technology/Technology"));
 const WhyAnox = dynamic(() => import("@/sections/why-anox/WhyAnox"));
 const Contact = dynamic(() => import("@/sections/contact/Contact"));
 
-export default function Home() {
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = buildTranslation(isLocale(locale) ? locale : "en");
+
   return (
     <main className="anox-page relative overflow-hidden bg-[#05070b]">
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-[900px] w-[900px] -translate-x-1/2 rounded-full bg-cyan-400/[.08] blur-[180px]" />
@@ -35,10 +40,10 @@ export default function Home() {
             <div className="relative grid gap-7 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
                 <div className="font-mono text-[10px] font-bold tracking-[.24em] text-cyan-300">ANOX / NEXT MOVE</div>
-                <h2 className="mt-4 max-w-3xl text-3xl sm:text-5xl">Build beyond the obvious<span className="text-cyan-300">.</span></h2>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-zinc-400">Bring us the difficult problem. We turn ambitious ideas into intelligent, secure and scalable digital systems.</p>
+                <h2 className="mt-4 max-w-3xl text-3xl sm:text-5xl">{t.contact.title}<span className="text-cyan-300">.</span></h2>
+                <p className="mt-4 max-w-2xl text-sm leading-7 text-zinc-400">{t.contact.description}</p>
               </div>
-              <a href="#contact" className="anox-btn-primary w-full sm:w-auto">Start a conversation</a>
+              <a href="#contact" className="anox-btn-primary w-full sm:w-auto">{t.contact.send}</a>
             </div>
           </div>
         </div>
