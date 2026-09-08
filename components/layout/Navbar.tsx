@@ -85,7 +85,7 @@ export default function Navbar() {
               {active === item.id && <motion.span layoutId="nav-active" className="absolute inset-x-3 -bottom-1 h-px bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,.8)]" />}
             </Link>
           ))}
-          <Link href={`${prefix}/platform`} className="rounded-xl px-4 py-2.5 text-sm font-semibold text-zinc-400 hover:text-white">Platform</Link>
+          <Link href={`${prefix}/platform`} className="rounded-xl px-4 py-2.5 text-sm font-semibold text-zinc-400 hover:text-white">Platform</Link><Link href={`${prefix}/pricing`} className="rounded-xl px-4 py-2.5 text-sm font-semibold text-zinc-400 hover:text-white">Pricing</Link>
           <Link href={`${prefix}/company`} className="rounded-xl px-4 py-2.5 text-sm font-semibold text-zinc-400 hover:text-white">Company</Link>
           <Link href={`${prefix}/contact`} className="anox-btn-primary ml-2 py-2.5 text-xs">{t.nav.contact}<ArrowUpRight size={14} /></Link>
           <Link href={`${prefix}/login`} className="ml-1 rounded-xl px-4 py-2.5 text-sm font-semibold text-zinc-400 hover:text-white">{t.nav.login}</Link>
@@ -111,7 +111,7 @@ export default function Navbar() {
         {open && <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="border-t border-white/10 bg-[#03060b]/95 px-5 py-5 backdrop-blur-2xl md:hidden">
           <nav aria-label="Mobile navigation" className="mx-auto grid max-w-7xl gap-2">
             {links.map((item) => <Link key={item.id} href={item.href} onClick={() => setOpen(false)} className={`rounded-2xl px-4 py-3 text-sm font-bold ${active === item.id ? "bg-cyan-300/10 text-cyan-300" : "text-zinc-300 hover:bg-white/5"}`}>{item.label}</Link>)}
-            <Link href={`${prefix}/platform`} onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-sm font-bold text-zinc-300 hover:bg-white/5">Platform</Link>
+            <Link href={`${prefix}/platform`} onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-sm font-bold text-zinc-300 hover:bg-white/5">Platform</Link><Link href={`${prefix}/pricing`} onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-sm font-bold text-zinc-300 hover:bg-white/5">Pricing</Link>
             <Link href={`${prefix}/solutions`} onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-sm font-bold text-zinc-300 hover:bg-white/5">Solutions</Link>
             <Link href={`${prefix}/labs`} onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-sm font-bold text-zinc-300 hover:bg-white/5">Labs</Link>
             <Link href={`${prefix}/company`} onClick={() => setOpen(false)} className="rounded-2xl px-4 py-3 text-sm font-bold text-zinc-300 hover:bg-white/5">Company</Link>
